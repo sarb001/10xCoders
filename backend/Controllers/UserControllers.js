@@ -37,7 +37,7 @@ exports.Register = async(req,res) => {
     }
 }
 
-exports.Login = async(req,res) => {
+exports.Login    = async(req,res) => {
     try {
         const {email, password} = req.body;
 
@@ -66,16 +66,42 @@ exports.Login = async(req,res) => {
            })
         }
 
-        res.status(200).json({
+        const token = await user.generateToken();
+        console.log('token generated -',token);
+
+        res.status(200).cookie('token',token, {
+            secure: true,
+            expires : new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+            httpOnly: true,
+            sameSite : 'none'
+        }).json({
             success : true,
-            message : " Logged Successfully ",
-            user
+            user,
+            token
         })
 
     } catch (error) {
         return res.status(500).json({
             success : false,
             message : error.message,  
+        })
+    }
+}
+
+
+exports.Logout = async(req,res) => {
+    try {
+        res.status(200).cookie('token',null, {
+            expires : new Date(Date.now()),
+            httpOnly : true
+        }).json({
+            success : false,
+            message: "Logged Out"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success : false,
+            message : error.message
         })
     }
 }
