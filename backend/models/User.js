@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const UserSchema = new mongoose.Schema({
      name : {
         type : String,
@@ -16,10 +15,10 @@ const UserSchema = new mongoose.Schema({
         required  : [true,"Please Enter a Name "],
         minLength : [6,"Password must be atleast  6 characters"],
      },
-     profilepic :{
-        public_id : String,
-        url : String
-     }
+   //   profilepic :{
+   //      public_id : String,
+   //      url : String
+   //   }
 })
 
 mongoose.models = {}
