@@ -37,10 +37,45 @@ exports.Register = async(req,res) => {
     }
 }
 
-// export const Login = async(req,res) => {
-//     try {
-        
-//     } catch (error) {
-        
-//     }
-// }
+exports.Login = async(req,res) => {
+    try {
+        const {email, password} = req.body;
+
+        if(!email || !password){
+            return res.status(400).json({
+                success : false,
+                message : " Provide All Fields "
+           })
+        }
+
+        const user = await User.findOne({email}).select('+password');
+
+        if(!user){
+            return res.status(400).json({
+                success : false,
+                message : " User Not Found "
+           })
+        }
+
+        const matchpass = await user.matchpassword(user.password,password);
+
+        if(!matchpass){
+            return res.status(400).json({
+                success : false,
+                message : " Password Incorrect "
+           })
+        }
+
+        res.status(200).json({
+            success : true,
+            message : " Logged Successfully ",
+            user
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success : false,
+            message : error.message,  
+        })
+    }
+}

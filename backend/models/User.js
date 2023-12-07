@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
         type : String,
         required  : [true,"Please Enter a Name "],
         minLength : [6,"Password must be atleast  6 characters"],
+        select :false,
      },
    //   profilepic :{
    //      public_id : String,
@@ -30,6 +31,11 @@ UserSchema.pre('save' , async function(next){
     }
     next();
  })  
+
+// match password
+UserSchema.methods.matchpassword = async (hashpassword , password) => {
+   return await bcrypt.compare(password,hashpassword);
+}
 
 
 mongoose.models = {}
