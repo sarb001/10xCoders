@@ -12,7 +12,13 @@ const CourseSchema = new  mongoose.Schema({
     price : {
         type:Number,
         required : [true," Please Enter Price "]
-     }
+     },
+    creator : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "User"
+        }
+    ]
 })
 
 mongoose.models = {}

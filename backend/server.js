@@ -2,13 +2,17 @@ const express = require('express') ;
 const { connectDb } = require('./Database/Db');
 const app = express();
 const dotenv = require('dotenv');
+const  cookieParser = require('cookie-parser');
 
 dotenv.config({path:'../backend/config.env'});
 
 connectDb();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended :true}));
+
+
 
 const  PORT = process.env.PORT;
 
