@@ -1,0 +1,23 @@
+.home-container{
+    display: grid;
+    grid-template-columns: 0.5fr 3fr;
+}
+.left-section{
+    background-color:lightblue;
+    padding: 25%;
+}
+.right-section{
+    background-color:rgb(228, 222, 222);
+    text-align: center;
+}
+.course-list{
+    padding: 5%;
+}
+a{
+     text-decoration: none;
+}
+
+.link{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
