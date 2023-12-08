@@ -38,7 +38,12 @@ exports.CreateCourse = async(req,res) => {
 
 exports.AllCourses = async(req,res) => {
     try {
-        
+        const allcourses = await Course.find({});
+        res.status(200).json({
+            success : true,
+            message : " All Courses Fetched Successfully ",
+            allcourses
+        })
     } catch (error) {
         return res.status(500).json({
             success : false,
