@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended :true}));
 const  PORT = process.env.PORT;
 
 const user = require('./routes/User.js');
-const course = require('./routes/Course.js')
+const course = require('./routes/Course.js');
 
 app.use('/api/v1' , user);
 

@@ -4,8 +4,8 @@ const User = require('../models/User.js')
 exports.isAuthenticated = async(req,res,next) => {
     try {
         const { token } = req.cookies;
-        console.log('cookies -',req.cookies);
-        console.log('token auth -',token);
+        // console.log('cookies -',req.cookies);
+        // console.log('token auth -',token);
         if(!token){
             console.log('token not Present');
             return next();
