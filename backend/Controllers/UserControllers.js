@@ -1,3 +1,4 @@
+const Course = require('../models/Course.js');
 const User = require('../models/User.js');
 
 
@@ -102,6 +103,23 @@ exports.Logout = async(req,res) => {
         return res.status(500).json({
             success : false,
             message : error.message
+        })
+    }
+}
+
+
+exports.LoggedInUserCourses = async(req,res) => {
+    try {
+        const  user = await User.findById(req.user._id);
+
+        // const getcourseId = await Course.find({
+        //      user._id : _id   
+        // })
+        
+    } catch (error) {
+        return res.status(500).json({
+             success  : false,
+             message : error.message
         })
     }
 }

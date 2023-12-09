@@ -19,9 +19,15 @@ const UserSchema = new mongoose.Schema({
         select :false,
      },
    //   profilepic :{
-   //      public_id : String,
-   //      url : String
-   //   }
+   //    public_id : String,
+   //    url : String
+   //   },
+    courselist : [
+         {
+            courseid : { type : mongoose.Schema.Types.ObjectId, ref : "Course" },
+            title : String
+         }
+      ]
 })
 
 //hashing password

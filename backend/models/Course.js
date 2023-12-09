@@ -14,10 +14,10 @@ const CourseSchema = new  mongoose.Schema({
         required : [true," Please Enter Price "]
      },
     creator : 
-        {
+    {
             type : mongoose.Schema.Types.ObjectId,
             ref : "User"
-        }
+    },
 })
 
 mongoose.models = {}
