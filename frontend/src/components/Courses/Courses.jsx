@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from '../Sidebar';
 import  '../../styles/App.css' ;
+import Featured from '../Featured';
 
 const Courses = () => {
   return (
@@ -9,7 +10,7 @@ const Courses = () => {
            <Sidebar />
         </div>
         <div className="right-section">
-           Courses Available Publicly 
+            <Featured />
         </div>
     </div>
   )

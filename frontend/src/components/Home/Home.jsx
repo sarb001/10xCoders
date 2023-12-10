@@ -1,6 +1,7 @@
 import React from 'react'
 import  '../../styles/App.css' ;
 import Sidebar from '../Sidebar';
+import Featured from '../Featured';
 
 const Home = () => {
   return (
@@ -9,7 +10,7 @@ const Home = () => {
             <Sidebar />
         </div>
         <div className="right-section">
-          <span> Featured </span>
+           <Featured />
         </div>
     </div>
   )

@@ -1,6 +1,6 @@
 .container{
     display: grid;
-    grid-template-columns: 0.5fr 3fr;
+    grid-template-columns: 0.7fr 3fr;
 }
 .left-section{
     background-color:lightblue;
@@ -20,4 +20,17 @@ a{
 .link{
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+.courselist{
+     display: grid;
+     grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
+    }
+.course-container{
+        background-color: peru;
+        padding: 4%;
+        border:1px solid black;
+        display:grid;
+        border-radius: 25px;
+        grid-template-rows: 2fr;
+        margin: 5%;
 }
