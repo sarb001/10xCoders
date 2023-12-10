@@ -58,7 +58,6 @@ exports.GetLoggedUserCourse = async(req,res) => {
         
           const loggeduser = req.user._id;
           const user = await User.findById(loggeduser);
-          console.log('user -',user);
 
           // find user in  course which is   equal to creator id 
           const findusers = await Course.find({
@@ -66,12 +65,9 @@ exports.GetLoggedUserCourse = async(req,res) => {
                  $in : user
              }
           })
-          console.log('findusers --',findusers);
 
-          const specficuserid = findusers.map((i) => i._id);
-          console.log('specifc id 1-',specficuserid);
-          const specficusertitle = findusers.map((i) => i.title);
-          console.log('specifc title 2 -',specficusertitle );
+        //   const specficuserid = findusers.map((i) => i._id);
+        //   const specficusertitle = findusers.map((i) => i.title);
 
           user.courselist.push(
             ...findusers.map(course => ({
@@ -79,8 +75,6 @@ exports.GetLoggedUserCourse = async(req,res) => {
                 title: course.title
             }))
           )    
-
-          console.log('course courselist ---'  ,user.courselist);
 
           await user.save();
           return res.status(200).json({
