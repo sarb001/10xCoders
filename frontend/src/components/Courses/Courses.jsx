@@ -1,8 +1,17 @@
 import React from 'react'
+import Sidebar from '../Sidebar';
+import  '../../styles/App.css' ;
 
 const Courses = () => {
   return (
-    <div>Courses</div>
+    <div className="container">
+        <div className="left-section">
+           <Sidebar />
+        </div>
+        <div className="right-section">
+           Courses Available Publicly 
+        </div>
+    </div>
   )
 }
 

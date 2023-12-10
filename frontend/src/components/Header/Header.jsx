@@ -13,7 +13,7 @@ const Header = () => {
            <span>
            <input  type = "text"  placeholder = 'Type here to Search' />
            </span> 
-          <span id = "search"> <SearchIcon /> </span>
+          {/* <span id = "search"> <SearchIcon /> </span> */}
         </div>
         <div className="buttons">
           <button> SignUp </button>
