@@ -6,6 +6,8 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Footer from './components/Footer/Footer';
 import Courses from './components/Courses/Courses';
+import MainCourse from './components/MainCourse';
+import Pricing from './components/Pricing';
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
            <Route path = "/login" element = {<Login />}>  </Route>
            <Route path = "/signup" element = {<Signup />}>  </Route>
            <Route path = "/courses" element = {<Courses />}>  </Route>
+           <Route path = "/pricing" element = {<Pricing />}>  </Route>
+           <Route path = "/course/:id" element = {<MainCourse />}>  </Route>
         </Routes>
       </BrowserRouter>
       <Footer />

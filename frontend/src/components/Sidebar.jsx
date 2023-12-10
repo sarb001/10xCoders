@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import HomeIcon from '@mui/icons-material/Home';
 import SchoolIcon from '@mui/icons-material/School';
+import PaymentsIcon from '@mui/icons-material/Payments';
 
 const Sidebar = () => {
   return (
@@ -18,6 +19,11 @@ const Sidebar = () => {
                 <div className="course link">
                     <span> <SchoolIcon /> </span>
                     <Link to={'/courses'}> Courses </Link>
+                </div>
+
+                <div className="pricing link">
+                    <span> <PaymentsIcon /> </span>
+                    <Link to={'/pricing'}> Pricing </Link>
                 </div>
             </div>
     </div>

@@ -27,10 +27,13 @@ a{
     }
 .course-container{
         background-color: peru;
-        padding: 4%;
         border:1px solid black;
         display:grid;
         border-radius: 25px;
-        grid-template-rows: 2fr;
+        grid-template-rows: 1fr 0.7fr;
         margin: 5%;
+}
+#course-detail{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 }

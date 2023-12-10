@@ -1,27 +1,32 @@
 import React from 'react'
 import '../styles/App.css' ;
+import { Link } from 'react-router-dom' ;
 
 const Featured = () => {
 
     const courses = [
         {
+             "id" : 1,
             "title": "First Course",
             "price" : "6200",
             "poster" : "/public/0-100Cohort.jpeg"
         },
         {
+            "id" : 2,
             "title": "Second Course",
-            "price" : "6200",
+            "price" : "1200",
             "poster" : "/public/0-1 Cohort.jpeg"
         },
         {
+            "id" : 3,
             "title": "Third Course",
-            "price" : "6200",
+            "price" : "3200",
             "poster" : "/public/1-100 cohort.jpeg"
         },
         {
+            "id" : 4,
             "title": "Fourth Course",
-            "price" : "6200",
+            "price" : "8200",
             "poster" : "/public/full-stack.jpg"
         }
     ]
@@ -33,12 +38,19 @@ const Featured = () => {
          <div className = "mainheader">
              <div className="courselist">
                 {courses.map((item) => (
-                    <div className = 'course-container'>  
-                       <span id = "img-container" style = {{width:'100%',height:'50%'}}> 
-                        <img src =  {item.poster}  style = {{width:'100%'}} />
+                    <div className = 'course-container' key = {item.id}>  
+
+                       <span id = "img-container"  style = {{width:'100%',height:'50%'}}> 
+                        <img src =  {item.poster}  style = {{width:'100%',borderRadius:'25px'}} />
                       </span>
-                       <span> {item.title} </span>
-                       <span> {item.price} </span>
+
+                      <span id = "course-detail">
+                        <span> {item.title} </span>
+                        <span> {item.price} </span>
+                        <Link to = {`/course/${item.id}`}>
+                          <button style = {{width:'100%',padding:'3%'}}> View Details </button>
+                        </Link>
+                      </span>
                     </div>
                 ))}
              </div>
