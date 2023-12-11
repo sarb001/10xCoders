@@ -14,7 +14,7 @@ const Header = () => {
           </Link>
         <div className="searchbar">
            <span>
-           <input  type = "text"  placeholder = 'Type here to Search' />
+           <input id = "search" type = "text"  placeholder = 'Type here to Search' />
            </span> 
           {/* <span id = "search"> <SearchIcon /> </span> */}
         </div>

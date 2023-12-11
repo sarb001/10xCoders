@@ -5,6 +5,10 @@ const CourseSchema = new  mongoose.Schema({
         type:String,
         required : [true," Please Enter Course Title "]
     },
+     description : {
+        type:String,
+        required : [true," Please Enter Description "]
+    },
     courseposter: {
         public_id : String,
         url : String
@@ -18,6 +22,28 @@ const CourseSchema = new  mongoose.Schema({
             type : mongoose.Schema.Types.ObjectId,
             ref : "User"
     },
+    lectures : [
+        {
+            title : {
+                type  :String,
+                required : true,
+            },
+            description: {
+                type: String,
+                required: true,
+            },
+            video: {
+                public_id : {
+                    type : String,
+                    required : true
+                },
+                url : {
+                     type  :String,
+                     required : true
+                }
+            }
+        }
+    ]
 })
 
 mongoose.models = {}

@@ -1,5 +1,7 @@
 const Course = require('../models/Course.js');
 const User = require('../models/User.js');
+const cloudinary = require('cloudinary');
+
 
 exports.CreateCourse = async(req,res) => {
     try {
@@ -7,26 +9,41 @@ exports.CreateCourse = async(req,res) => {
             return res.status(401).json({message : " UnAuthorized "});    
           }
 
-           const { title , price , creator } = req.body;
-           if(!title || !price){
+           const { title , price  , description } = req.body;
+           console.log('request course body -',{title,price , description});
+           if(!title || !price || !description){
             return res.status(400).json({
                 success  :  false,
                 message  : " Provide All Fields "
             })
            }
- 
+
+        //     const mycloud = await cloudinary.v2.uploader.upload(req.body.image , {
+        //         folder : "courseposter"
+        //     })
+        //   console.log('mycloud -',mycloud);
+
            const createCourse = await Course.create({
               title,
               price,
-              creator : req?.user._id
+              description,
+              creator : req?.user._id,
+              courseposter : {
+                 public_id : "mycloud.public_id",
+                 url : "mycloud.secure_url",
+                //  public_id : mycloud.public_id,
+                //  url : mycloud.secure_url,
+              }
            });
 
+           console.log('create course -',createCourse);
            res.status(201).json({ success: true,
                 message : " Course Created ",
                 createCourse,
            })
 
     } catch (error) {
+        console.log('errors is-',error);
         return res.status(500).json({
             success : false,
             message: error.message
@@ -86,6 +103,88 @@ exports.GetLoggedUserCourse = async(req,res) => {
         return res.status(500).json({
             success : false,
             message: error.message
+        })
+    }
+}
+
+
+exports.GetFreeVideos = async(req,res) => {
+    try {
+        
+    } catch (error) {
+        return res.status(500).json({
+            success : false,
+            message: error.message
+        })
+    }
+}
+
+exports.RequestCourse = async(req,res) => {
+    try {
+        // const { name ,email ,description } = req.body;
+        // console.log('request course body -',{name,email,description});
+
+        // const course  = await Course.create({
+        //     name,email,description
+        // })
+
+        // const to = process.env.MY_MAIL;
+        // const subject = "Requesting for a course on CourseBundler";
+        // const text = `I am ${name} and my Email is ${email}. \n${course}`;
+
+        // await sendEmail(to, subject, text);
+
+        // res.status(200).json({
+        //     success: true,
+        //     message: "Your Request Has Been Sent.",
+        //   });
+
+
+    } catch (error) {
+        return res.status(500).json({
+        success :false,
+        message : error.message
+        })
+    }
+}
+
+exports.AddLecture = async(req,res) => {
+    try {
+        
+        const { id } = req.params;
+        console.log('course id -',{id});
+
+        const SpecifcCourse = await Course.findById(id);
+        if(!SpecifcCourse){
+            return res.status(404).json({
+                success : false,
+                message : error.message
+            })
+        }
+
+        const { title ,description } = req.body;
+
+        SpecifcCourse.lectures.push({
+                title,
+                description,
+                video : {
+                    public_id : "videpublci_id",
+                    url : "public_id"
+                 }
+         })
+
+        await SpecifcCourse.save();
+
+        res.status(200).json({
+            success : true,
+            message : " Lecture is Added to Course ",
+        })
+
+
+    } catch (error) {
+        return res.status(500).json({
+            success :false,
+            message : error.message
         })
     }
 }

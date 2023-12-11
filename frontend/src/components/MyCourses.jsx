@@ -8,7 +8,7 @@ const MyCourses = () => {
                 <Sidebar />
             </div>
             <div className="right-section">
-                <button> My Course </button>  
+                    <h3> My  All Courses </h3>
             </div>
         </div>
   )

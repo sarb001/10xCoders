@@ -14,7 +14,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
 }
-input{
+#search{
     border-radius: 50px 0px 0px 50px;
     padding: 5%;
 }

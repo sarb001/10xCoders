@@ -19,7 +19,7 @@ a{
 
 .link{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.6fr 1.4fr;
 }
 .courselist{
      display: grid;
@@ -50,4 +50,19 @@ a{
     grid-template-columns: 1fr 1fr;
     justify-content: space-around;
     margin: 2%;
+}
+.form-container{
+    padding: 3%;
+    background-color: darkgoldenrod;
+}
+form{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 25%;
+}
+#send-btn{
+    padding: 3%;
+}
+label{
+    padding: 5%;    
 }
