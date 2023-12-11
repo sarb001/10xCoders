@@ -1,14 +1,18 @@
 const express = require('express');
-const { CreateCourse, AllCourses, GetLoggedUserCourse, RequestCourse, AddLecture } = require('../Controllers/CourseController');
+const { CreateCourse, AllCourses, GetLoggedUserCourse, RequestCourse, AddLecture, DeleteLecture } = require('../Controllers/CourseController');
 const { isAuthenticated } = require('../Middleware/auth');
 
 const router = express.Router();
 
 router.route('/createcourse').post(isAuthenticated,CreateCourse);
 
-// add lectures in  Specifc  Course 
+//  Add lectures in  Specifc  Course 
+//  Update lecture 
 
 router.route('/course/:id').post(isAuthenticated,AddLecture);
+
+// Delete Lectuer 
+router.route('/lecture').delete(isAuthenticated,DeleteLecture);
 
 router.route('/allcourse').get(AllCourses);
 

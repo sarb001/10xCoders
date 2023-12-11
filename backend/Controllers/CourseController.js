@@ -150,8 +150,7 @@ exports.RequestCourse = async(req,res) => {
 
 exports.AddLecture = async(req,res) => {
     try {
-        
-        const { id } = req.params;
+        const { id } = req.params;      // passed in url as /course/34u534u534
         console.log('course id -',{id});
 
         const SpecifcCourse = await Course.findById(id);
@@ -184,6 +183,44 @@ exports.AddLecture = async(req,res) => {
     } catch (error) {
         return res.status(500).json({
             success :false,
+            message : error.message
+        })
+    }
+}
+
+
+exports.DeleteLecture = async(req,res) => {
+    try {
+        const {  courseId , lectureId  } = req.query;
+        
+        const SpecificCourse = await Course.findById(courseId);
+
+        if(!SpecificCourse){
+            return res.status(404).json({message : " Course not Found "});
+        }
+
+        const findlecture =  SpecificCourse.lectures.find((item) => {
+            if(item._id.toString() === lectureId.toString()) return item;
+        })
+
+        if(!findlecture){
+            return res.status(404).json({message : " Lecture not Found "})
+        }
+
+        SpecificCourse.lectures = SpecificCourse.lectures.filter((item) => {
+            if(item._id.toString() !== lectureId.toString()) return item;
+        })
+
+        await SpecificCourse.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Lecture Deleted Successfully Y!",
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success : false,
             message : error.message
         })
     }
