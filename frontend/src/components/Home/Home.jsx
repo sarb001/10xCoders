@@ -11,8 +11,9 @@ const Home = () => {
             <Sidebar />
         </div>
         <div className="right-section">
-           <Featured />
-           <Freevideos />
+           {/* <Featured /> */}
+           <button> Create Course </button>  
+           <h3> Course Whole Template </h3>
         </div>
     </div>
   )

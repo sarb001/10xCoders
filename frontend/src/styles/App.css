@@ -7,8 +7,8 @@
     padding: 25%;
 }
 .right-section{
-    background-color:rgb(228, 222, 222);
     text-align: center;
+  
 }
 .course-list{
     padding: 5%;
@@ -36,4 +36,18 @@ a{
 #course-detail{
     display: grid;
     grid-template-rows: 1fr 1fr;
+}
+.view-detail{
+    width:100%;
+    padding:3%
+}
+#course{
+    padding: 1% 4%;
+    width: 35%;
+}
+.courses-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-around;
+    margin: 2%;
 }

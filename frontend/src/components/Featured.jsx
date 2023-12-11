@@ -9,25 +9,25 @@ const Featured = () => {
              "id" : 1,
             "title": "First Course",
             "price" : "6200",
-            "poster" : "/public/0-100Cohort.jpeg"
+            "poster" : "/0-100Cohort.jpeg"
         },
         {
             "id" : 2,
             "title": "Second Course",
             "price" : "1200",
-            "poster" : "/public/0-1 Cohort.jpeg"
+            "poster" : "/0-1 Cohort.jpeg"
         },
         {
             "id" : 3,
             "title": "Third Course",
             "price" : "3200",
-            "poster" : "/public/1-100 cohort.jpeg"
+            "poster" : "/1-100 cohort.jpeg"
         },
         {
             "id" : 4,
             "title": "Fourth Course",
             "price" : "8200",
-            "poster" : "/public/full-stack.jpg"
+            "poster" : "/full-stack.jpg"
         }
     ]
 
@@ -48,7 +48,7 @@ const Featured = () => {
                         <span> {item.title} </span>
                         <span> {item.price} </span>
                         <Link to = {`/course/${item.id}`}>
-                          <button style = {{width:'100%',padding:'3%'}}> View Details </button>
+                          <button className = "view-detail"> View Details </button>
                         </Link>
                       </span>
                     </div>

@@ -1,13 +1,17 @@
 import React from 'react'
 import './Header.css' ;
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
   return (
+    <>
     <div className="h-container">
-        <div className="img-container" style = {{width:'50%',height:'50%'}}>
-          <img src = "/public/harkirat-face.jpg"  alt= "main-logo" style = {{width:'15%'}} />
-        </div>
+          <Link to = "/">
+          <div className="img-container" style = {{width:'50%',height:'50%'}}>
+              <img src = "/harkirat-face.jpg"  alt= "main-logo" style = {{width:'15%'}} />
+          </div>
+          </Link>
         <div className="searchbar">
            <span>
            <input  type = "text"  placeholder = 'Type here to Search' />
@@ -15,10 +19,11 @@ const Header = () => {
           {/* <span id = "search"> <SearchIcon /> </span> */}
         </div>
         <div className="buttons">
-          <button> SignUp </button>
-          <button> Login  </button>
+          <button id = "signup"> SignUp </button>
+          <button id = "login"> Login  </button>
         </div>
     </div>
+    </>
   )
 }
 
