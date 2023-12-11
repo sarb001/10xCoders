@@ -225,3 +225,32 @@ exports.DeleteLecture = async(req,res) => {
         })
     }
 }
+
+exports.GetCourseLectures =  async(req,res) => {
+    try {
+        const { id } = req.params;
+
+        const findCourse = await Course.findById(id);
+        if(!findCourse){
+            return res.status(404).json({
+                success : false,
+                message : "Course  not Existed"
+            })
+        }
+
+        const AllLectures = findCourse.lectures;
+        console.log('alllectures-',AllLectures);
+
+        res.status(200).json({
+            success : true,
+            message : " All Lectures Fetched ",
+            AllLectures
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success :false,
+            message : error.message
+        })
+    }
+}
