@@ -1,25 +1,35 @@
 const express = require('express');
-const { CreateCourse, AllCourses, GetLoggedUserCourse, RequestCourse, AddLecture, DeleteLecture, GetCourseLectures,  } = require('../Controllers/CourseController');
+const { CreateCourse, AllCourses, GetLoggedUserCourse, RequestCourse, AddLecture, DeleteLecture, GetCourseLectures, DeleteCourse, BuySubscripton,  } = require('../Controllers/CourseController');
 const { isAuthenticated } = require('../Middleware/auth');
 
 const router = express.Router();
 
-router.route('/createcourse').post(isAuthenticated,CreateCourse);
-
-//  Add lectures in  Specifc  Course 
-//  Update lecture 
-
-router.route('/course/:id').post(isAuthenticated,AddLecture);
-
-router.route('/course/:id').get(isAuthenticated,GetCourseLectures);
-
-// Delete Lectuer 
-router.route('/lecture').delete(isAuthenticated,DeleteLecture);
-
 router.route('/allcourse').get(AllCourses);
 
+// Create Course 
+router.route('/createcourse').post(isAuthenticated,CreateCourse);
+
+// Delete 
+router.route('/course/:id').delete(isAuthenticated,DeleteCourse);
+
+
+// Add Lecture
+router.route('/course/:id').post(isAuthenticated,AddLecture);
+
+// Get All Course Lectures 
+router.route('/course/:id').get(isAuthenticated,GetCourseLectures);
+
+// Delete Lecture 
+router.route('/lecture').delete(isAuthenticated,DeleteLecture);
+
+
+// All Logged User Courses Present 
 router.route('/mycourses').get(isAuthenticated, GetLoggedUserCourse);
 
+// Request Course 
 router.route('/requestcourse').post(isAuthenticated, RequestCourse);
+
+
+router.route('/subscribe').get(isAuthenticated, BuySubscripton);
 
 module.exports = router;

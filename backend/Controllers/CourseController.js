@@ -1,6 +1,8 @@
+const Razorpay = require('razorpay');
 const Course = require('../models/Course.js');
 const User = require('../models/User.js');
 const cloudinary = require('cloudinary');
+const { instance } = require('../server.js');
 
 
 exports.CreateCourse = async(req,res) => {
@@ -188,7 +190,6 @@ exports.AddLecture = async(req,res) => {
     }
 }
 
-
 exports.DeleteLecture = async(req,res) => {
     try {
         const {  courseId , lectureId  } = req.query;
@@ -248,6 +249,48 @@ exports.GetCourseLectures =  async(req,res) => {
         })
 
     } catch (error) {
+        return res.status(500).json({
+            success :false,
+            message : error.message
+        })
+    }
+}
+
+exports.DeleteCourse = async(req,res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+exports.BuySubscripton = async(req,res) => {
+    try {
+        const user = await User.findById(req.user._id);
+
+         const instance = new Razorpay({
+            key_id: 'rzp_test_VcpymMeDorzIgC',
+            key_secret :'89WhuftkBjjTUdHQoSJXqxs3'
+         });
+         const subscription =  await instance.subscriptions.create({
+            plan_id: "plan_NBFslY2lGfK3Db",
+            customer_notify: 1,
+            quantity: 5,
+            total_count: 6,
+        })
+        console.log('subscription 11-',subscription);
+        user.subscription.id = subscription.id;
+        user.subscription.status = subscription.status; 
+
+        await user.save();
+        
+        res.status(201).json({
+            success : true,
+            subscription : subscription.id,
+        })
+
+    } catch (error) {
+        console.log('error in sub -',error);
         return res.status(500).json({
             success :false,
             message : error.message
