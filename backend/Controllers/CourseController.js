@@ -3,7 +3,7 @@ const Course = require('../models/Course.js');
 const User = require('../models/User.js');
 const cloudinary = require('cloudinary');
 const { instance } = require('../server.js');
-
+const Payment = require('../models/Payment.js');
 
 exports.CreateCourse = async(req,res) => {
     try {
@@ -108,7 +108,6 @@ exports.GetLoggedUserCourse = async(req,res) => {
         })
     }
 }
-
 
 exports.GetFreeVideos = async(req,res) => {
     try {
@@ -273,7 +272,7 @@ exports.BuySubscripton = async(req,res) => {
             key_secret :'89WhuftkBjjTUdHQoSJXqxs3'
          });
          const subscription =  await instance.subscriptions.create({
-            plan_id: "plan_NBFslY2lGfK3Db",
+            plan_id: "plan_NBcsAkk4NeoBC6",
             customer_notify: 1,
             quantity: 5,
             total_count: 6,
@@ -295,5 +294,89 @@ exports.BuySubscripton = async(req,res) => {
             success :false,
             message : error.message
         })
+    }
+}
+
+exports.PaymentVerification = async(req,res) => {
+    try {
+        const { razorpay_payment_id , razorpay_order_id , razorpay_signature}  = req.body;
+
+        const user = await User.findById(req.user._id);
+        const  subscription_id = user.subscriptions.id;
+
+        const generated_signature = crypto
+        .createHmac('sha256' ,TYpy3bo3TbZtdOPF0-pZOau-aKY)
+        .update(razorpay_payment_id +"|"+subscription_id,"utf-8")
+        .digest("hex");
+
+        const isAuthentic = generated_signature === razorpay_signature;
+        console.log('isAuthentic -',isAuthentic);
+
+        if(!isAuthentic){
+            return res.redirect(`${fronteurl}/paymentfailed`);
+        }
+        await Payment.create({
+            razorpay_signature,
+            razorpay_payment_id,
+            razorpay_subscription_id,
+        });
+        
+        user.subscription.status = "active";
+        await user.save();
+        
+        return res.redirect(`${frontedurl}/paymentsuccess?reference=${razorpay_payment_id}`);
+
+    } catch (error) {
+        return res.status(500).json({
+            success  : false,
+            message  : error.message 
+        })
+    }
+}
+
+exports.GetRazorPayKey = async(req,res) => {
+    res.status(200).json({
+        success :true,
+        key : '768656285376826'
+    })
+}
+
+
+exports.CancelSubscription = async(req,res) => {
+    try {
+        const user = await User.findById(req.user._id);
+
+        const subscriptionId = user.subscription.id;
+        let refund = false;
+
+        await instance.subscription.cancel(subscriptionId);
+        const  payment = await Payment.findOne({
+            razorpay_subscription_id : subscriptionId,
+        })
+        const subscribedTime = Date.now()  - payment.createdAt;
+        const refundTime = 7 * 24 * 60 * 60 * 1000;
+
+            // 7 > 2 (its  now 2 days since i subscribed )
+        if(refundTime > subscribedTime){
+             await instance.payments.refund(payment.razorpay_payment_id);
+             refund = true;
+             // refunding  money now 
+        } 
+
+        await payment.remove();
+        user.subscription.id = undefined;
+        user.subscription.status = undefined;
+        await user.save();
+
+        res.status(200).json({
+            success  : true,
+            message : 
+            refund ? 
+            "  Subs Cancelled , Yes Refunding Money in 7 Days  Now " : 
+            "  Subs  Cancelled ,  Money will be deducted in 3 hrs "
+        })
+
+    } catch (error) {
+        
     }
 }
