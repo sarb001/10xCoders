@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Header.css' ;
 import { Link } from 'react-router-dom';
-
+import { Dialog } from '@mui/material';
+import  Signup from '../Signup/Signup';
+import  Login from '../Login/Login' ;
 
 const Header = () => {
+
+//   const [open,setopen] = useState(false);
+//   const [open1,setopen1] = useState(false);
+
+   // const handleClickOpen1 = () => { setopen1(true) }
+
+   // const handleClickOpen = () => {
+   //    setopen(true);
+   // };
+
+   // const handleClose = () => {setopen(false)}
+   // const handleClose1 = () => {setopen1(false)}
+
   return (
     <>
     <div className="h-container">
@@ -19,9 +34,18 @@ const Header = () => {
           {/* <span id = "search"> <SearchIcon /> </span> */}
         </div>
         <div className="buttons">
-          <button id = "signup"> SignUp </button>
-          <button id = "login"> Login  </button>
+         <Link to = "/signup"> SignUp </Link>
+         <Link to = "/login">  Login </Link>
+          {/* <button id = "signup" onClick = {handleClickOpen}> SignUp </button> */}
+          {/* <button id = "login" onClick={handleClickOpen1}> Login  </button> */}
         </div>
+{/* 
+         <Dialog open = {open} onClose={handleClose}>
+            <Signup  />
+         </Dialog>
+         <Dialog open = {open1} onClose={handleClose1}>
+            <Login  />
+         </Dialog> */}
     </div>
     </>
   )
