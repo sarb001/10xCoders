@@ -10,6 +10,8 @@ import MainCourse from './components/MainCourse';
 import Pricing from './components/Pricing';
 import RequestCourse from './components/RequestCourse';
 import MyCourses from './components/MyCourses';
+import {  ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -27,6 +29,7 @@ function App() {
            <Route path = "/course/:id" element = {<MainCourse />}>  </Route>
         </Routes>
       <Footer />
+      <ToastContainer />
     </>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Dialog, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
 
@@ -9,8 +10,9 @@ const Signup = () => {
   const [password,setPassword] = useState("");
   const [avatar ,setAvatar] = useState("");
 
-  const submitHandler = () => {
-
+  const submitHandler = (e) => {
+    e.preventDefault();
+    toast.success(' Working Now ')
   }
 
   const handleImageChange = () => {
