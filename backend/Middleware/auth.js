@@ -29,4 +29,4 @@ export const authorizeSubscribers = (req, res, next) => {
         success : false,
         message : error.message,
     })
-  };
+};
