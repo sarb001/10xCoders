@@ -7,7 +7,9 @@ const Login = () => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
 
-   const  submitHandler =  () => {}
+   const  submitHandler =  (e) => {
+     e.preventDefault();
+   }
 
   return (
     <div className="login-container" style = {{padding:'5%',display:'flex',justifyContent:'center'}}>
