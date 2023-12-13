@@ -22,10 +22,10 @@ const UserSchema = new mongoose.Schema({
          id : String,
          status : String,
       },
-   //   profilepic :{
-   //    public_id : String,
-   //    url : String
-   //   },
+     profilepic :{
+      public_id : String,
+      url : String
+     },
     courselist : [
          {
             courseid : { type : mongoose.Schema.Types.ObjectId, ref : "Course" },

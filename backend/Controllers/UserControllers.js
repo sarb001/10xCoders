@@ -1,10 +1,10 @@
 const Course = require('../models/Course.js');
 const User = require('../models/User.js');
-
+const cloudinary = require('cloudinary');
 
 exports.Register = async(req,res) => {
     try {
-        const {name,email,password} = req.body;
+        const {name,email,password,profilepic} = req.body;
 
         if(!name|| !email || !password){
             return res.status(400).json({
@@ -22,12 +22,20 @@ exports.Register = async(req,res) => {
             })
         }
 
+        const mycloud = await cloudinary.v2.uploader.upload(profilepic, {
+            folder : "10xcourse-img"
+        })
+
         user  = await User.create({
             name,
             email,
             password,
-            // avatar
+            profilepic : {
+                public_id  : mycloud.public_id,
+                url : mycloud.secure_url,
+            }
         })
+        console.log('user is --',user);
         res.status(201).json({success : true , user });
 
     } catch (error) {
