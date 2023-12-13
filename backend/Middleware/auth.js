@@ -22,3 +22,11 @@ exports.isAuthenticated = async(req,res,next) => {
         })
     }
 }
+
+export const authorizeSubscribers = (req, res, next) => {
+    if (req.user.subscription.status !== "active")
+    return res.status(500).json({
+        success : false,
+        message : error.message,
+    })
+  };

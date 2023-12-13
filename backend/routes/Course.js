@@ -1,6 +1,6 @@
 const express = require('express');
 const { CreateCourse, AllCourses, GetLoggedUserCourse, RequestCourse, AddLecture, DeleteLecture, GetCourseLectures, DeleteCourse, BuySubscripton, PaymentVerification, GetRazorPayKey, CancelSubscription,  } = require('../Controllers/CourseController');
-const { isAuthenticated } = require('../Middleware/auth');
+const { isAuthenticated, authorizeSubscribers } = require('../Middleware/auth');
 
 const router = express.Router();
 
@@ -36,6 +36,9 @@ router.route('/paymentverification').get(isAuthenticated,PaymentVerification);
 
 router.route('/razorpaykey').get(GetRazorPayKey);
 
-router.route('/cancelsubscription').get(isAuthenticated,CancelSubscription);
+
+/// must authorized as subscriber 
+
+router.route('/cancelsubscription').get(isAuthenticated, authorizeSubscribers, CancelSubscription);
 
 module.exports = router;
