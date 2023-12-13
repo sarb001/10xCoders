@@ -15,8 +15,16 @@ const Signup = () => {
     toast.success(' Working Now ')
   }
 
-  const handleImageChange = () => {
+  const handleImageChange = (e) => {
+      const  file =  e.target.files[0];
+      const Reader = new FileReader();
+        Reader.readAsDataURL(file);
 
+        Reader.onload = () => {
+            if(Reader.readyState === 2){
+              setAvatar(Reader.result);
+            }
+        }
   }
 
   return (
@@ -44,7 +52,6 @@ const Signup = () => {
          </Link>
 
         <Button variant='contained' type = "submit" > Sign Up Now </Button>
-
        </form> 
     </div>
   )
