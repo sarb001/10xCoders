@@ -268,11 +268,11 @@ exports.BuySubscripton = async(req,res) => {
         const user = await User.findById(req.user._id);
 
          const instance = new Razorpay({
-            key_id: 'rzp_test_VcpymMeDorzIgC',
-            key_secret :'89WhuftkBjjTUdHQoSJXqxs3'
+            key_id: process.env.RAZORPAY_KEY_ID,
+            key_secret :process.env.RAZORPAY_KEY_SECRET
          });
          const subscription =  await instance.subscriptions.create({
-            plan_id: "plan_NBcsAkk4NeoBC6",
+            plan_id: process.env.RAZORPAY_PLAN_ID,
             customer_notify: 1,
             quantity: 5,
             total_count: 6,
@@ -305,7 +305,7 @@ exports.PaymentVerification = async(req,res) => {
         const  subscription_id = user.subscriptions.id;
 
         const generated_signature = crypto
-        .createHmac('sha256' ,TYpy3bo3TbZtdOPF0-pZOau-aKY)
+        .createHmac('sha256' ,process.env.API_SECRET)
         .update(razorpay_payment_id +"|"+subscription_id,"utf-8")
         .digest("hex");
 
@@ -337,10 +337,9 @@ exports.PaymentVerification = async(req,res) => {
 exports.GetRazorPayKey = async(req,res) => {
     res.status(200).json({
         success :true,
-        key : '768656285376826'
+        key :  process.env.API_KEY
     })
 }
-
 
 exports.CancelSubscription = async(req,res) => {
     try {

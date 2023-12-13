@@ -15,11 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended :true}));
 const  PORT = process.env.PORT;
 
-
 cloudinary.config({
-      cloud_name : 'damnzg3hr',
-      api_key    : '768656285376826',
-      api_secret : 'TYpy3bo3TbZtdOPF0-pZOau-aKY',
+      cloud_name : process.env.CLOUD_NAME,
+      api_key    : process.env.API_KEY,
+      api_secret : process.env.API_SECRET,
 })
 
 
