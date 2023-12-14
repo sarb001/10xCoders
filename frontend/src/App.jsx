@@ -12,6 +12,7 @@ import RequestCourse from './components/RequestCourse';
 import MyCourses from './components/MyCourses';
 import {  ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Logout from './components/Logout/Logout';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
            <Route path = "/" element = {<Home />}>  </Route>
            <Route path = "/login" element = {<Login />}>  </Route>
            <Route path = "/signup" element = {<Signup />}>  </Route>
+           <Route path = "/logout" element = {<Logout />}>  </Route>
            <Route path = "/courses" element = {<Courses />}>  </Route>
            <Route path = "/mycourses" element = {<MyCourses />}>  </Route>
            <Route path = "/pricing" element = {<Pricing />}>  </Route>

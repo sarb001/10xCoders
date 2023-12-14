@@ -38,3 +38,15 @@ export const LoginUser = (email,password) => async(dispatch) => {
         dispatch({type:"LoggedUserFailed"})
     }
 }
+
+export const Logout = () => async(dispatch) => {
+    try {
+        dispatch({type:"LogOutRequest"});
+        const data = await axios.get("/api/v1/logout");
+        console.log('loggedOut Data -',data);
+        toast.success(' LoggedOut Successfully ');
+        dispatch({type:"LogOutSuccess",payload : data.user});
+    } catch (error) {
+        dispatch({type:"LogOutFailed"});
+    }
+}

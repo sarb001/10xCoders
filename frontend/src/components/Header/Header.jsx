@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import './Header.css' ;
 import { Link } from 'react-router-dom';
-import { Dialog } from '@mui/material';
+import { Button, Dialog } from '@mui/material';
 import  Signup from '../Signup/Signup';
 import  Login from '../Login/Login' ;
+import { useDispatch } from 'react-redux';
+import { Logout } from '../../Actions/User';
 
 const Header = () => {
+    const dispatch = useDispatch();
 
 //   const [open,setopen] = useState(false);
 //   const [open1,setopen1] = useState(false);
@@ -18,6 +21,13 @@ const Header = () => {
 
    // const handleClose = () => {setopen(false)}
    // const handleClose1 = () => {setopen1(false)}
+
+     const isLoggedIn = true;
+
+   const logoutHandler = async(e) => {
+      e.preventDefault();
+      await dispatch(Logout());
+   }
 
   return (
     <>
@@ -34,8 +44,14 @@ const Header = () => {
           {/* <span id = "search"> <SearchIcon /> </span> */}
         </div>
         <div className="buttons">
-         <Link to = "/signup"> SignUp </Link>
-         <Link to = "/login">  Login </Link>
+         {!isLoggedIn ? (<>
+                   <Link to = "/signup"> SignUp </Link>
+                   <Link to = "/login">  Login </Link>
+         </>) : 
+         (<>
+           <Button variant='contained' onClick={logoutHandler}>  Logout  </Button>
+         </>)}
+
           {/* <button id = "signup" onClick = {handleClickOpen}> SignUp </button> */}
           {/* <button id = "login" onClick={handleClickOpen1}> Login  </button> */}
         </div>

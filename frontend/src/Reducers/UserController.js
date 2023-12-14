@@ -17,7 +17,7 @@ export const  userReducer = createReducer(initialState,{
     },
 
     LoggedUserRequest : (state,action) => {
-        state.loading = false;
+        state.loading = true;
     },
     LoggedUserSuccess : (state,action) => {
         state.loading = false,
@@ -28,4 +28,15 @@ export const  userReducer = createReducer(initialState,{
         state.error  =  action.payload
     },
 
+    LogOutRequest : (state,action) => {
+        state.loading = false;
+    },
+    LogOutSuccess : (state,action) => {
+        state.loading = false,
+        state.user = null;
+    },
+    LogOutFailed : (state,action) => {
+        state.loading = false,
+        state.error  =  action.payload
+    },
 })
