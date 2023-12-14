@@ -1,7 +1,6 @@
 import { createReducer  } from '@reduxjs/toolkit' ;
 
 const initialState = {
-    loading : false,
 }
 
 export const  userReducer = createReducer(initialState,{
@@ -16,4 +15,17 @@ export const  userReducer = createReducer(initialState,{
         state.loading = false,
         state.error  =  action.payload
     },
+
+    LoggedUserRequest : (state,action) => {
+        state.loading = false;
+    },
+    LoggedUserSuccess : (state,action) => {
+        state.loading = false,
+        state.user = action.payload
+    },
+    LoggedUserFailed : (state,action) => {
+        state.loading = false,
+        state.error  =  action.payload
+    },
+
 })

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Dialog, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { userRegister } from '../../Actions/User';
 
 const Signup = () => {
 
@@ -9,16 +11,20 @@ const Signup = () => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [avatar ,setAvatar] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault();
-    toast.success(' Working Now ')
+    // toast.success(' Working Now ');
+    await dispatch(userRegister(name,email,password,avatar));
+    navigate('/login');
   }
 
   const handleImageChange = (e) => {
       const  file =  e.target.files[0];
       const Reader = new FileReader();
-        Reader.readAsDataURL(file);
+      Reader.readAsDataURL(file);
 
         Reader.onload = () => {
             if(Reader.readyState === 2){

@@ -5,13 +5,16 @@ const dotenv = require('dotenv');
 const  cookieParser = require('cookie-parser');
 const cloudinary = require('cloudinary');
 const Razorpay = require('razorpay');
+const cors = require('cors');
 
 dotenv.config({path:'../backend/config.env'});
 
 connectDb();
 
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({
+      limit : '50mb'
+}));
 app.use(express.urlencoded({extended :true}));
 const  PORT = process.env.PORT;
 
@@ -33,9 +36,9 @@ const course = require('./routes/Course.js');
 app.use('/api/v1' , user);
 app.use('/api/v1' , course);
 
-app.get('/', (req,res) => {
-      res.send(' Backend is Working... ')
-})
+// app.get('/', (req,res) => {
+//       res.send(' Backend is Working... ')
+// })
 
 app.listen(PORT, (req,res)  => {
    console.log(` Server Running onn ${PORT} Broo`);
