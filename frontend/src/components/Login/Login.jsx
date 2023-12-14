@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LoginUser } from '../../Actions/User';
 import { useDispatch } from 'react-redux';
 
@@ -9,10 +9,12 @@ const Login = () => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
    const  submitHandler =  async(e) => {
      e.preventDefault();
-     await  dispatch(LoginUser(email,password))
+     await  dispatch(LoginUser(email,password));
+     navigate('/')
    }
 
   return (

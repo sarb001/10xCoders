@@ -23,7 +23,7 @@ export const LoginUser = (email,password) => async(dispatch) => {
     try {
         dispatch({type:"LoggedUserRequest"})
         
-        const {data} = await axios.get(`/api/v1/login`,
+        const {data} = await axios.post(`/api/v1/login`,
         {email,password},
         {
             headers:{
@@ -31,7 +31,9 @@ export const LoginUser = (email,password) => async(dispatch) => {
             }
         })
         console.log('data login -',{data});
-        dispatch({type:"LoggedUserSuccess",payload : data.user})
+        toast.success(' LoggedIn Successfully ');
+        dispatch({type:"LoggedUserSuccess",payload : data.user});
+
     } catch (error) {
         dispatch({type:"LoggedUserFailed"})
     }

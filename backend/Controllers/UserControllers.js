@@ -56,8 +56,9 @@ exports.Login    = async(req,res) => {
                 message : " Provide All Fields "
            })
         }
-
+        console.log('user request body -',{email,password});
         const user = await User.findOne({email}).select('+password');
+        console.log('user login -',user);
 
         if(!user){
             return res.status(400).json({
@@ -79,7 +80,7 @@ exports.Login    = async(req,res) => {
         console.log('token generated -',token);
 
         res.status(200).cookie('token',token, {
-            // secure: true,
+            secure: true,
             expires : new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
             httpOnly: true,
             sameSite : 'none'
@@ -90,6 +91,7 @@ exports.Login    = async(req,res) => {
         })
 
     } catch (error) {
+        console.log('error in login -',error);
         return res.status(500).json({
             success : false,
             message : error.message,  
