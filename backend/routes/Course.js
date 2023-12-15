@@ -1,5 +1,9 @@
 const express = require('express');
-const { CreateCourse, AllCourses, GetLoggedUserCourse, RequestCourse, AddLecture, DeleteLecture, GetCourseLectures, DeleteCourse, BuySubscripton, PaymentVerification, GetRazorPayKey, CancelSubscription,  } = require('../Controllers/CourseController');
+const { AllCourses, GetLoggedUserCourse, 
+    RequestCourse, AddLecture,
+ DeleteLecture, GetCourseLectures, DeleteCourse, 
+ BuySubscripton, PaymentVerification,
+  GetRazorPayKey, CancelSubscription, Createcourse  } = require('../Controllers/CourseController');
 const { isAuthenticated, authorizeSubscribers } = require('../Middleware/auth');
 
 const router = express.Router();
@@ -7,11 +11,10 @@ const router = express.Router();
 router.route('/allcourse').get(AllCourses);
 
 // Create Course 
-router.route('/createcourse').post(isAuthenticated,CreateCourse);
+router.route('/createcourse').post(isAuthenticated,Createcourse);
 
 // Delete 
 router.route('/course/:id').delete(isAuthenticated,DeleteCourse);
-
 
 // Add Lecture
 router.route('/course/:id').post(isAuthenticated,AddLecture);

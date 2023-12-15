@@ -5,14 +5,15 @@ const cloudinary = require('cloudinary');
 const { instance } = require('../server.js');
 const Payment = require('../models/Payment.js');
 
-exports.CreateCourse = async(req,res) => {
+exports.Createcourse = async(req,res) => {
     try {
           if(!req.user){
             return res.status(401).json({message : " UnAuthorized "});    
           }
 
-           const { title , price  , description } = req.body;
-           console.log('request course body -',{title,price , description});
+           const user = await User.findById(req.user._id);
+
+           const { title , price  , description ,courseposter } = req.body;
            if(!title || !price || !description){
             return res.status(400).json({
                 success  :  false,
@@ -20,29 +21,27 @@ exports.CreateCourse = async(req,res) => {
             })
            }
 
-        //     const mycloud = await cloudinary.v2.uploader.upload(req.body.image , {
-        //         folder : "courseposter"
-        //     })
-        //   console.log('mycloud -',mycloud);
+            const mycloud = await cloudinary.v2.uploader.upload(courseposter, {
+                folder : "courseimages"
+            })
 
-           const createCourse = await Course.create({
+           const course = await Course.create({
               title,
               price,
               description,
               creator : req?.user._id,
               courseposter : {
-                 public_id : "mycloud.public_id",
-                 url : "mycloud.secure_url",
-                //  public_id : mycloud.public_id,
-                //  url : mycloud.secure_url,
+                 public_id : mycloud.public_id,
+                 url : mycloud.secure_url,
               }
            });
 
-           console.log('create course -',createCourse);
-           res.status(201).json({ success: true,
-                message : " Course Created ",
-                createCourse,
-           })
+             user?.courselist.push(course._id);
+             await user.save();
+             res.status(201).json({ success: true,
+                    message : " Course Created ",
+                    course,
+            })
 
     } catch (error) {
         console.log('errors is-',error);

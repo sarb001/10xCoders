@@ -99,7 +99,6 @@ exports.Login    = async(req,res) => {
     }
 }
 
-
 exports.Logout = async(req,res) => {
     try {
         res.status(200).cookie('token',null, {
@@ -116,7 +115,6 @@ exports.Logout = async(req,res) => {
         })
     }
 }
-
 
 exports.LoggedInUserCourses = async(req,res) => {
     try {

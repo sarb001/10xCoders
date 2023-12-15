@@ -22,7 +22,7 @@ const Header = () => {
    // const handleClose = () => {setopen(false)}
    // const handleClose1 = () => {setopen1(false)}
 
-     const isLoggedIn = true;
+     const isLoggedIn = false;
 
    const logoutHandler = async(e) => {
       e.preventDefault();

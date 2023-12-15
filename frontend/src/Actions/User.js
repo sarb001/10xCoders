@@ -50,3 +50,20 @@ export const Logout = () => async(dispatch) => {
         dispatch({type:"LogOutFailed"});
     }
 }
+
+export const CreateCourse = (title,description,price,courseposter) => async(dispatch) => {
+    try {
+        dispatch({type:"GetCourseRequest"})
+        const data = await axios.post('/api/v1/createcourse', 
+        {title,description,price,courseposter},
+        {
+            headers:{
+                'Content-Type' : 'application/json',
+            }
+        })
+        toast.success(' Course Created Successfully ');
+        dispatch({type:"GetCourseSuccess",payload : data.course});
+    } catch (error) {
+        dispatch({type:"GetCourseFailed"})
+    }
+}

@@ -40,3 +40,18 @@ export const  userReducer = createReducer(initialState,{
         state.error  =  action.payload
     },
 })
+
+
+export const CourseReducer = createReducer(initialState,{
+     GetCourseRequest : (state) => {
+        state.loading = true
+     },
+     GetCourseSuccess : (state,action) => {
+         state.loading = false,
+         state.course = action.payload
+     },
+     GetCourseFailed : (state,action) => {
+         state.loading = false,
+         state.error  =  action.payload
+     },
+})
