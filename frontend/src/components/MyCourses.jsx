@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
+import { useDispatch, useSelector }  from 'react-redux' ;
+import { AllLoggedUser } from '../Actions/User';
 
 const MyCourses = () => {
+    const dispatch  = useDispatch();
+    const { users } = useSelector(state => state.user);
+    console.log('users all--',{users});
+    
+    useEffect(() => {
+      dispatch(AllLoggedUser());
+      console.log('mycourses --');
+     },[dispatch])
+
+  
   return (
         <div className="home container">
             <div className="left-section">

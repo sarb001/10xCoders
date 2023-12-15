@@ -126,19 +126,3 @@ exports.Logout = async(req,res) => {
         })
     }
 }
-
-exports.LoggedInUserCourses = async(req,res) => {
-    try {
-        const  user = await User.findById(req.user._id);
-
-        // const getcourseId = await Course.find({
-        //      user._id : _id   
-        // })
-        
-    } catch (error) {
-        return res.status(500).json({
-             success  : false,
-             message : error.message
-        })
-    }
-}

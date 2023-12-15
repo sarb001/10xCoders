@@ -73,32 +73,30 @@ exports.GetLoggedUserCourse = async(req,res) => {
         if(!req.user){
             return res.status(401).json({message : " UnAuthorized "});    
           }
-        
+
           const loggeduser = req.user._id;
           const user = await User.findById(loggeduser);
 
           // find user in  course which is   equal to creator id 
-          const findusers = await Course.find({
+          const users = await Course.find({
              creator : {
                  $in : user
              }
           })
 
-        //   const specficuserid = findusers.map((i) => i._id);
-        //   const specficusertitle = findusers.map((i) => i.title);
 
-          user.courselist.push(
-            ...findusers.map(course => ({
+           user.courselist.push(
+            ...users.map(course => ({
                 courseid :  course._id,
                 title: course.title
             }))
           )    
-
-          await user.save();
-          return res.status(200).json({
-            success :true,
-            findusers 
-          })
+            // console.log("users backend --",users);
+            await user.save();
+            return res.status(200).json({
+                success :true,
+                users
+            })
 
     } catch (error) {
         return res.status(500).json({

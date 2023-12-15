@@ -1,6 +1,7 @@
 import { createReducer  } from '@reduxjs/toolkit' ;
 
 const initialState = {
+    users : [],
 }
 
 export const  userReducer = createReducer(initialState,{
@@ -39,6 +40,20 @@ export const  userReducer = createReducer(initialState,{
         state.loading = false,
         state.error  =  action.payload
     },
+
+    MyCourseRequest : (state) => {
+            state.loading = true
+    }, 
+     MyCourseSuccess : (state,action) => {
+        console.log('before success -',action.payload);
+        state.loading = false,
+        state.users = action.payload
+        console.log('afterr success -',action.payload);
+     },
+      MyCourseFailed : (state,action) => {
+        state.loading = false,
+        state.error  =  action.payload
+     },
 })
 
 
@@ -54,4 +69,5 @@ export const CourseReducer = createReducer(initialState,{
          state.loading = false,
          state.error  =  action.payload
      },
+     
 })
