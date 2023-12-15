@@ -35,10 +35,10 @@ const Home = () => {
     const CourseSubmithandler = async(e) => {
       e.preventDefault();
       await dispatch(CreateCourse(title,description,price,avatar));
+      setAvatar('');
       setTitle('');
       setdescription('');
       setprice('');
-      setAvatar('');
       navigate('/');
     }
   return (

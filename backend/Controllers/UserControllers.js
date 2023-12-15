@@ -22,9 +22,20 @@ exports.Register = async(req,res) => {
             })
         }
 
-        const mycloud = await cloudinary.v2.uploader.upload(profilepic, {
-            folder : "10xcourse-img"
-        })
+        let mycloud;
+
+        if(!profilepic){
+            const profilepic = 'https://www.pngitem.com/pimgs/m/516-5167304_transparent-background-white-user-icon-png-png-download.png';
+             mycloud = await cloudinary.v2.uploader.upload(profilepic ,{
+                 folder: "10xcourse-img"
+             });
+
+        }else{
+
+            mycloud = await cloudinary.v2.uploader.upload(profilepic ,{
+               folder : "10xcourse-img"
+            });
+        }
 
         user  = await User.create({
             name,

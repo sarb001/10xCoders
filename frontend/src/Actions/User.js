@@ -15,6 +15,7 @@ export const userRegister = (name,email,password,profilepic) => async(dispatch) 
         toast.success(' Registered Successfully ');
         dispatch({type:"GetRegisterSuccess",payload : data.user});
     } catch (error) {
+        console.log('singuo actions -',error);
         dispatch({type:"GetRegisterFailed"})
     }
 }

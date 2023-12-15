@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Avatar, Button, Dialog, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userRegister } from '../../Actions/User';
 
 const Signup = () => {
+
+   const { loading } = useSelector((state) => state.user);
 
   const [name,setName] = useState("");
   const [email,setEmail] = useState("");
@@ -17,9 +19,11 @@ const Signup = () => {
   
   const submitHandler = async(e) => {
     e.preventDefault();
-    // toast.success(' Working Now ');
+    if(name == '' || email == '' || password == ''){
+       return toast.error(' Provide all Fields ');
+    }
     await dispatch(userRegister(name,email,password,avatar));
-    navigate('/login');
+    // navigate('/login');
   }
 
   const handleImageChange = (e) => {
@@ -58,7 +62,9 @@ const Signup = () => {
             <Typography> Already Signed Up? Login Now </Typography>
          </Link>
 
-        <Button variant='contained' type = "submit" > Sign Up Now </Button>
+        <Button variant='contained'   
+          disabled = {loading}
+        type = "submit" > Sign Up Now </Button>
        </form> 
     </div>
   )
