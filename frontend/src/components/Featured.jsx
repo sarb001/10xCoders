@@ -1,48 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../styles/App.css' ;
 import { Link } from 'react-router-dom' ;
+import { useDispatch, useSelector } from 'react-redux';
+import { AllCourses } from '../Actions/course';
 
 const Featured = () => {
 
-    const courses = [
-        {
-             "id" : 1,
-            "title": "First Course",
-            "price" : "6200",
-            "poster" : "/0-100Cohort.jpeg"
-        },
-        {
-            "id" : 2,
-            "title": "Second Course",
-            "price" : "1200",
-            "poster" : "/0-1 Cohort.jpeg"
-        },
-        {
-            "id" : 3,
-            "title": "Third Course",
-            "price" : "3200",
-            "poster" : "/1-100 cohort.jpeg"
-        },
-        {
-            "id" : 4,
-            "title": "Fourth Course",
-            "price" : "8200",
-            "poster" : "/full-stack.jpg"
-        }
-    ]
+    const dispatch  = useDispatch();
 
+    const { courses } = useSelector((state)  => state.allusers); 
+    console.log('frontend courses - ',courses);
+
+    useEffect(() => {
+        dispatch(AllCourses());
+    },[dispatch])
 
   return (
      <div className="featured-section">
              <h2> Featured  </h2>
          <div className = "mainheader">
              <div className="courselist">
-                {courses.map((item) => (
-                    <div className = 'course-container' key = {item.id}>  
-
-                       <span id = "img-container"  style = {{width:'100%',height:'50%'}}> 
-                        <img src =  {item.poster}  style = {{width:'100%',borderRadius:'25px'}} />
-                      </span>
+                {courses?.map((item) => (
+                    <div className = 'course-container' key = {item._id}>  
+                        <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
+                        objectFit:'cover',display:'block'
+                        ,borderRadius:'25px'}} />
 
                       <span id = "course-detail">
                         <span> {item.title} </span>
