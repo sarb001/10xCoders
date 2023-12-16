@@ -5,8 +5,8 @@ import Featured from '../Featured';
 import Freevideos from '../Freevideos';
 import { Avatar, Button, Dialog, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { CreateCourse } from '../../Actions/User';
 import { useNavigate } from 'react-router-dom';
+import { CreateCourse } from '../../Actions/course';
 
 const Home = () => {
     const [open,setopen] = useState(false);

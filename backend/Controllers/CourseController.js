@@ -6,59 +6,60 @@ const { instance } = require('../server.js');
 const Payment = require('../models/Payment.js');
 
 exports.Createcourse = async(req,res) => {
-    // try {
-    //       if(!req.user){
-    //         return res.status(401).json({message : " UnAuthorized "});    
-    //       }
+    try {
+          if(!req.user){
+            return res.status(401).json({message : " UnAuthorized "});    
+          }
 
-    //        const user = await User.findById(req.user._id);
+           const user = await User.findById(req.user._id);
 
-    //        const { title , price  , description ,courseposter } = req.body;
-    //        if(!title || !price || !description){
-    //         return res.status(400).json({
-    //             success  :  false,
-    //             message  : " Provide All Fields "
-    //         })
-    //        }
+           const { title , price  , description ,courseposter } = req.body;
+           if(!title || !price || !description){
+            return res.status(400).json({
+                success  :  false,
+                message  : " Provide All Fields "
+            })
+           }
 
-    //         const mycloud = await cloudinary.v2.uploader.upload(courseposter, {
-    //             folder : "courseimages"
-    //         })
+            const mycloud = await cloudinary.v2.uploader.upload(courseposter, {
+                folder : "courseimages"
+            })
 
-    //        const course = await Course.create({
-    //           title,
-    //           price,
-    //           description,
-    //           creator : req?.user._id,
-    //           courseposter : {
-    //              public_id : mycloud.public_id,
-    //              url : mycloud.secure_url,
-    //           }
-    //        });
+           const course = await Course.create({
+              title,
+              price,
+              description,
+              creator : req?.user._id,
+              courseposter : {
+                 public_id : mycloud.public_id,
+                 url : mycloud.secure_url,
+              }
+           });
 
-    //          user?.courselist.push(course._id);
-    //          await user.save();
-    //          res.status(201).json({ success: true,
-    //                 message : " Course Created ",
-    //                 course,
-    //         })
+             user?.courselist.push(course._id);
+             await user.save();
+             res.status(201).json({ 
+                    success: true,
+                    message : " Course Created  ,You can Add Lectures Now ",
+              })
 
-    // } catch (error) {
-    //     console.log('errors is-',error);
-    //     return res.status(500).json({
-    //         success : false,
-    //         message: error.message
-    //     })
-    // }
+    } catch (error) {
+        console.log('errors is-',error);
+        return res.status(500).json({
+            success : false,
+            message: error.message
+        })
+    }
 }
 
 exports.AllCourses    = async(req,res) => {
     try {
-        const allcourses = await Course.find({});
+        const courses = await Course.find({});
+        console.log('all courses- ',courses);
         res.status(200).json({
             success : true,
             message : " All Courses Fetched Successfully ",
-            allcourses
+            courses
         })
     } catch (error) {
         return res.status(500).json({
@@ -78,17 +79,17 @@ exports.GetLoggedUserCourse = async(req,res) => {
           const user = await User.findById(loggeduser);
 
           // find user in  course which is   equal to creator id 
-          const users = await Course.find({
+          const courses = await Course.find({
              creator : {
                  $in : user
              }
           })
 
-            console.log("users backend --",users);
+            console.log("courses backend --",courses);
             await user.save();
             return res.status(200).json({
                 success :true,
-                users
+                courses
             })
 
     } catch (error) {

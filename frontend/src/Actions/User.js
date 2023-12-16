@@ -53,39 +53,3 @@ export const Logout = () => async(dispatch) => {
         dispatch({type:"LogOutFailed" , payload : error.response.data.message });
     }
 }
-
-export const CreateCourse = (title,description,price,courseposter) => async(dispatch) => {
-    try {
-        dispatch({type:"GetCourseRequest"})
-        const data = await axios.post('/api/v1/createcourse', 
-        {title,description,price,courseposter},
-        {
-            headers:{
-                'Content-Type' : 'application/json',
-            }
-        })
-        toast.success(' Course Created Successfully ');
-        dispatch({type:"GetCourseSuccess",payload : data.course});
-    } catch (error) {
-        toast.error(error.response.data.message);
-        dispatch({type:"GetCourseFailed" , payload : error.response.data.message })
-    }
-}
-
-
-export const AllLoggedUser = () => async(dispatch) => {
-    try {
-        dispatch({type:"MyCourseRequest"});
-
-        const data = await axios.get('/api/v1/mycourses',{
-            headers : {
-                'Content-Type' : 'application/json',
-            }
-        })
-         console.log('data logged- ',data);
-        //  toast.success(' Courses Fetched ');
-        dispatch({type:"MyCourseSuccess",payload : data.users });
-    } catch (error) {
-        dispatch({type:"MyCourseFailed" , payload : error.response.data.message });
-    }
-}

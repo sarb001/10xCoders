@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import { useDispatch, useSelector }  from 'react-redux' ;
-import { AllLoggedUser } from '../Actions/User';
+import { MyAllCourses } from '../Actions/course';
 
 const MyCourses = () => {
     const dispatch  = useDispatch();
-    // const usersall = useSelector(state => state.users);
-    // console.log('users all1--',{usersall});
+    const { courses } = useSelector(state => state.allusers);
+    console.log('  myCourses all --', courses );
     
     useEffect(() => {
-      dispatch(AllLoggedUser());
-      console.log('mycourses --');
+      dispatch(MyAllCourses());
      },[dispatch])
 
   

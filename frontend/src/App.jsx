@@ -1,5 +1,5 @@
 
-import { Route , Routes } from 'react-router-dom' ;
+import { BrowserRouter as Router , Route, Routes } from 'react-router-dom' ;
 import Home from './components/Home/Home';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
@@ -15,9 +15,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Logout from './components/Logout/Logout';
 
 function App() {
-
   return (
     <> 
+     <Router>
       <Header />
         <Routes>
            <Route path = "/" element = {<Home />}>  </Route>
@@ -30,6 +30,7 @@ function App() {
            <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
            <Route path = "/course/:id" element = {<MainCourse />}>  </Route>
         </Routes>
+     </Router>
       <Footer />
       <ToastContainer />
     </>
