@@ -5,8 +5,8 @@ import { AllLoggedUser } from '../Actions/User';
 
 const MyCourses = () => {
     const dispatch  = useDispatch();
-    const { users } = useSelector(state => state.user);
-    console.log('users all--',{users});
+    // const usersall = useSelector(state => state.users);
+    // console.log('users all1--',{usersall});
     
     useEffect(() => {
       dispatch(AllLoggedUser());
