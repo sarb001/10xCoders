@@ -53,7 +53,21 @@ export const MyAllCourses = () => async(dispatch) => {
     }
 }
 
+export const CourseLectures = (id) => async(dispatch) => {
+    try {
+        dispatch({type:"CourseLecturesRequest"});
 
+        const {data} = await axios.get(`/api/v1/course/${id}`,{
+            headers : {
+                'Content-Type' : 'application/json'
+            }
+        })
+        console.log('course lectures-',{data});
+        dispatch({type:"CourseLecturesSuccess" , payload : data.Lectures });
+    } catch (error) {
+        dispatch({type:"CourseLecturesFailed"});
+    }
+}
 
 
 

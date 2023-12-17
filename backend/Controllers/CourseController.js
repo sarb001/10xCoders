@@ -235,13 +235,13 @@ exports.GetCourseLectures =  async(req,res) => {
             })
         }
 
-        const AllLectures = findCourse.lectures;
-        console.log('alllectures-',AllLectures);
+        const Lectures = findCourse.lectures;
+        console.log('Lectures-',Lectures);
 
         res.status(200).json({
             success : true,
             message : " All Lectures Fetched ",
-            AllLectures
+            Lectures
         })
 
     } catch (error) {
