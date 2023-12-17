@@ -84,7 +84,36 @@ export const DeleteMyCourse = (id) => async(dispatch) => {
     }
 }
 
+export const AddMyLecture = (id) => async(dispatch) => {
+    try {
+        dispatch({type:"AddLectureRequest"});
+        const { data } = await axios.post(`/api/v1/course/${id}`,{
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        })
+        console.log(' add   Lecture in Course -',{data});
+        dispatch({type:"AddLectureSuccess", payload : data.message });
+    } catch (error) {
+        dispatch({type:"AddLectureFailed"});
+    }
+}
 
+
+export const DeleteMyLecture = () => async(dispatch) => {
+    try {
+        dispatch({type:"DeleteLectureRequest"});
+        const { data } = await axios.delete(`/api/v1/lecture`,{
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        })
+        console.log('delete  data Lecture -',{data});
+        dispatch({type:"DeleteLectureSuccess", payload : data.message });
+    } catch (error) {
+        dispatch({type:"DeleteLectureFailed"});
+    }
+}
 
 
 

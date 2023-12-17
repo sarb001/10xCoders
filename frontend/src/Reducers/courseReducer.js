@@ -15,39 +15,36 @@ export const courseReducer = createReducer({},{
         },
         CreateCourseFailed : (state,action)  => {
              state.loading = false;
-        }
+        },
 })
 
 export const getcourseReducer = createReducer({
     courses: [],Lectures : []
 },{   
-        AllCoursesRequest : (state,action) => {
-            state.loading = true;
-        },
-        AllCoursesSuccess : (state,action) => {
-            console.log('all courses before success -',action.payload);
+            AllCoursesRequest : (state,action) => {
+                state.loading = true;
+            },
+            AllCoursesSuccess : (state,action) => {
+                console.log('all courses before success -',action.payload);
+                state.loading = false;
+                state.courses = action.payload;
+                console.log('all courses after  ssuccess -',action.payload);
+            },
+            AllCoursesFailed : (state,action) => {
             state.loading = false;
-            state.courses = action.payload;
-            console.log('all courses after  ssuccess -',action.payload);
-        },
-        AllCoursesFailed : (state,action) => {
-           state.loading = false;
-       },
-
+          },
        // users
 
-        MyCoursesRequest : (state,action) => {
-            state.loading = true;
-        },
-        MyCoursesSuccess : (state,action) => {
-            console.log('My courses before success -',action.payload);
-            state.loading = false;
-            state.course = action.payload;
-            console.log('My courses after  ssuccess -',action.payload);
-        },
-        MyCoursesFailed : (state,action) => {
-        state.loading = false;
-         },
+            MyCoursesRequest : (state,action) => {
+                state.loading = true;
+            },
+            MyCoursesSuccess : (state,action) => {
+                state.loading = false;
+                state.course = action.payload;
+            },
+            MyCoursesFailed : (state,action) => {
+                state.loading = false;
+            },
 
          //all Lectures of Course
 
@@ -73,5 +70,29 @@ export const getcourseReducer = createReducer({
             },
             DeleteCourseFailed : (state,action) => {
              state.loading = false;
+            },
+
+                // Add Lecture 
+            AddLectureRequest : (state,action)  => {
+                state.loading = true;
+            },
+            AddLectureSuccess : (state,action)  => {
+                state.loading = false;
+                state.message = action.payload;
+            },
+            AddLectureFailed : (state,action)  => {
+                state.loading = false;
+            },
+
+                //Delete Lecture        
+            DeleteLectureRequest : (state,action)  => {
+                state.loading = true;
+            },
+            DeleteLectureSuccess : (state,action)  => {
+                state.loading = false;
+                state.message = action.payload;
+            },
+            DeleteLectureFailed : (state,action)  => {
+                state.loading = false;
             }
 })

@@ -257,7 +257,6 @@ exports.DeleteCourse = async(req,res) => {
        const {id} = req.params;
        
        const course = await Course.findById(id);
-       console.log('course founded  -',course);
        
         if(!course){
              return res.status(404).json({
@@ -267,7 +266,6 @@ exports.DeleteCourse = async(req,res) => {
         }
        await cloudinary.v2.uploader.destroy(course.courseposter.public_id);
         
-       console.log('reached here1');
        // lectures destroy 
        for (let i = 0; i < course.lectures.length; i++) {
           const singleLecture = course.lectures[i];
@@ -275,7 +273,6 @@ exports.DeleteCourse = async(req,res) => {
              resource_type : "video",
           })
         }
-        console.log('reached here22');
          await course.deleteOne();
          res.status(200).json({
             success :true,
