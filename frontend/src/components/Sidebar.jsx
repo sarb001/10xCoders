@@ -6,7 +6,7 @@ import PaymentsIcon from '@mui/icons-material/Payments';
 
 const Sidebar = () => {
 
-   const isLoggedIn = false;  
+   const isLoggedIn = true;  
 
   return (
     <div className="sidebar-container">

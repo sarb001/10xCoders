@@ -47,7 +47,7 @@ export const MyAllCourses = () => async(dispatch) => {
             }
         })
         console.log('mycourses --',data);
-        dispatch({type:"MyCoursesSuccess",payload : data.courses});
+        dispatch({type:"MyCoursesSuccess",payload : data.course});
     } catch (error) {
         dispatch({type:"MyCoursesFailed" ,payload: error.response.data.message});
     }

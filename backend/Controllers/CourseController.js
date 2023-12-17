@@ -80,17 +80,17 @@ exports.GetLoggedUserCourse = async(req,res) => {
           const user = await User.findById(loggeduser);
 
           // find user in  course which is   equal to creator id 
-          const courses = await Course.find({
+          const course = await Course.find({
              creator : {
                  $in : user
              }
           })
 
-            console.log("courses backend --",courses);
+            console.log("mycourses backend --",course);
             await user.save();
             return res.status(200).json({
                 success :true,
-                courses
+                course
             })
 
     } catch (error) {

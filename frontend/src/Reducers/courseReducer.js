@@ -42,7 +42,7 @@ export const getcourseReducer = createReducer({
         MyCoursesSuccess : (state,action) => {
             console.log('My courses before success -',action.payload);
             state.loading = false;
-            state.courses = action.payload;
+            state.course = action.payload;
             console.log('My courses after  ssuccess -',action.payload);
         },
         MyCoursesFailed : (state,action) => {

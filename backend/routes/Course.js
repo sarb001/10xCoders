@@ -28,7 +28,7 @@ router.route('/lecture').delete(isAuthenticated,DeleteLecture);
 
 
 // All Logged User Courses Present 
-router.route('/mycourses').get(GetLoggedUserCourse);
+router.route('/mycourses').get(isAuthenticated  , GetLoggedUserCourse);
 
 // Request Course 
 router.route('/requestcourse').post(isAuthenticated, RequestCourse);

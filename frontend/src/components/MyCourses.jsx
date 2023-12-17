@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 const MyCourses = () => {
     const dispatch  = useDispatch();
-    const { courses } = useSelector(state => state.allusers);
-    console.log('  myCourses all --', courses );
+    const { course } = useSelector(state => state.allusers);
+    console.log('  myCourses all --', course );
     
     useEffect(() => {
       dispatch(MyAllCourses());
@@ -21,7 +21,7 @@ const MyCourses = () => {
             </div>
             <div className="right-section">
                 <h3> My  All Courses </h3>
-                {courses?.map((item) => (
+                {course?.map((item) => (
                     <div className = 'course-container' key = {item._id}>  
 
                        <span id = "img-container"  style = {{width:'100%',height:'50%'}}> 
