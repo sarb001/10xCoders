@@ -72,7 +72,11 @@ export const CourseLectures = (id) => async(dispatch) => {
 export const DeleteMyCourse = (id) => async(dispatch) => {
     try {
         dispatch({type:"DeleteCourseRequest"});
-        const { data } = await axios.delete(`/api/v1/${id}`)
+        const { data } = await axios.delete(`/api/v1/course/${id}`,{
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        })
         console.log('delete  data course -',{data});
         dispatch({type:"DeleteCourseSuccess", payload : data.message });
     } catch (error) {

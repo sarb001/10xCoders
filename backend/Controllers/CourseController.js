@@ -257,23 +257,26 @@ exports.DeleteCourse = async(req,res) => {
        const {id} = req.params;
        
        const course = await Course.findById(id);
+       console.log('course founded  -',course);
+       
         if(!course){
              return res.status(404).json({
                 success : false,
                 message : "Course  not Found"
             })
         }
-       await cloudinary.v2.uploader.destroy(course.poster.public_id);
-
+       await cloudinary.v2.uploader.destroy(course.courseposter.public_id);
+        
+       console.log('reached here1');
        // lectures destroy 
        for (let i = 0; i < course.lectures.length; i++) {
           const singleLecture = course.lectures[i];
-          await cloudinary.v2.uploader.destroy(singleLecture.video.public_id ,{
+          await cloudinary.v2.uploader.destroy(singleLecture?.video.public_id ,{
              resource_type : "video",
           })
         }
-        
-         await course.remove();
+        console.log('reached here22');
+         await course.deleteOne();
          res.status(200).json({
             success :true,
             message : " Course Removed Successfully "
