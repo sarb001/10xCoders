@@ -48,6 +48,7 @@ export const getcourseReducer = createReducer({
         MyCoursesFailed : (state,action) => {
         state.loading = false;
          },
+
          //all Lectures of Course
 
             CourseLecturesRequest : (state,action) => {
@@ -58,6 +59,19 @@ export const getcourseReducer = createReducer({
              state.Lectures = action.payload;
             },
             CourseLecturesFailed : (state,action) => {
+             state.loading = false;
+            },
+
+            // Delete Course
+
+            DeleteCourseRequest : (state,action) => {
+                state.loading = true;
+            },
+            DeleteCourseSuccess : (state,action) => {
+             state.loading = false;
+             state.message = action.payload;
+            },
+            DeleteCourseFailed : (state,action) => {
              state.loading = false;
             }
 })

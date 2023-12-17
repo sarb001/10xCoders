@@ -190,13 +190,13 @@ exports.DeleteLecture = async(req,res) => {
     try {
         const {  courseId , lectureId  } = req.query;
         
-        const SpecificCourse = await Course.findById(courseId);
+        const course = await Course.findById(courseId);
 
-        if(!SpecificCourse){
+        if(!course){
             return res.status(404).json({message : " Course not Found "});
         }
 
-        const findlecture =  SpecificCourse.lectures.find((item) => {
+        const findlecture =  course.lectures.find((item) => {
             if(item._id.toString() === lectureId.toString()) return item;
         })
 
@@ -204,11 +204,11 @@ exports.DeleteLecture = async(req,res) => {
             return res.status(404).json({message : " Lecture not Found "})
         }
 
-        SpecificCourse.lectures = SpecificCourse.lectures.filter((item) => {
+        course.lectures = course.lectures.filter((item) => {
             if(item._id.toString() !== lectureId.toString()) return item;
         })
 
-        await SpecificCourse.save();
+        await course.save();
 
         res.status(200).json({
             success: true,
@@ -254,9 +254,36 @@ exports.GetCourseLectures =  async(req,res) => {
 
 exports.DeleteCourse = async(req,res) => {
     try {
+       const {id} = req.params;
+       
+       const course = await Course.findById(id);
+        if(!course){
+             return res.status(404).json({
+                success : false,
+                message : "Course  not Found"
+            })
+        }
+       await cloudinary.v2.uploader.destroy(course.poster.public_id);
+
+       // lectures destroy 
+       for (let i = 0; i < course.lectures.length; i++) {
+          const singleLecture = course.lectures[i];
+          await cloudinary.v2.uploader.destroy(singleLecture.video.public_id ,{
+             resource_type : "video",
+          })
+        }
         
+         await course.remove();
+         res.status(200).json({
+            success :true,
+            message : " Course Removed Successfully "
+         })
+
     } catch (error) {
-        
+        return res.status(500).json({
+            success :false,
+            message : error.message
+        })
     }
 }
 
