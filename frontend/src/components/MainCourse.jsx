@@ -7,8 +7,7 @@ const MainCourse = () => {
     console.log('params is --',params);
   return (
     <div>
-        MainCourse
-     Course data is -- 
+        <h1> Course Detail  </h1>
     </div>
   )
 }

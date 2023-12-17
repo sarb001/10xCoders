@@ -2,8 +2,9 @@ const Razorpay = require('razorpay');
 const Course = require('../models/Course.js');
 const User = require('../models/User.js');
 const cloudinary = require('cloudinary');
-const { instance } = require('../server.js');
+const instance   = require('../server.js');
 const Payment = require('../models/Payment.js');
+const  getDataUri  = require('../DataUri.js');
 
 exports.Createcourse = async(req,res) => {
     try {
@@ -142,35 +143,40 @@ exports.RequestCourse = async(req,res) => {
 
 exports.AddLecture = async(req,res) => {
     try {
-        const { id } = req.params;      // passed in url as /course/34u534u534
-        console.log('course id -',{id});
+        const { id } = req.params;           // passed in url as /course/34u534u534
+        const { title ,description  } = req.body;
 
-        const SpecifcCourse = await Course.findById(id);
-        if(!SpecifcCourse){
+        const course = await Course.findById(id);
+        if(!course){
             return res.status(404).json({
                 success : false,
                 message : error.message
             })
         }
 
-        const { title ,description } = req.body;
+        const file = req.file;
+        const fileUri = getDataUri(file);
 
-        SpecifcCourse.lectures.push({
+         const mycloud = await cloudinary.v2.uploader.upload(fileUri.content ,{
+            resource_type : "video",
+            folder : 'lecture_videos',
+         })
+
+        course.lectures.push({
                 title,
                 description,
                 video : {
-                    public_id : "videpublci_id",
-                    url : "public_id"
+                    public_id : mycloud.public_id,
+                    url : mycloud.secure_url,
                  }
          })
 
-        await SpecifcCourse.save();
-
+        await course.save();
         res.status(200).json({
             success : true,
-            message : " Lecture is Added to Course ",
+            message : " Lecture Added in Course ",
+            course 
         })
-
 
     } catch (error) {
         return res.status(500).json({

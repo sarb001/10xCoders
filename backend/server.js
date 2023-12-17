@@ -28,10 +28,13 @@ cloudinary.config({
 const user = require('./routes/User.js');
 const course = require('./routes/Course.js');
 
-// export const instance = new Razorpay({
-//       key_id: 'rzp_test_VcpymMeDorzIgC',
-//       key_secret :'89WhuftkBjjTUdHQoSJXqxs3'
-// })
+const instance = new Razorpay({
+      key_id     :"DFEF",
+      key_secret : "DFEF",
+      // key_id: 'rzp_test_VcpymMeDorzIgC',
+      // key_secret :'89WhuftkBjjTUdHQoSJXqxs3'
+});
+module.exports = instance;
 
 app.use('/api/v1' , user);
 app.use('/api/v1' , course);

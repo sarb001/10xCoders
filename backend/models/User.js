@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
+
 const UserSchema = new mongoose.Schema({
      name : {
         type : String,
@@ -50,7 +52,6 @@ UserSchema.methods.matchpassword = async (hashpassword , password) => {
 UserSchema.methods.generateToken = async function(){
    return jwt.sign({_id : this._id}, 'tokensecret')
 }
-
 
 mongoose.models = {}
 

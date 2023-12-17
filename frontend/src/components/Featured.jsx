@@ -29,9 +29,9 @@ const Featured = () => {
                       <span id = "course-detail">
                         <span> {item.title} </span>
                         <span> {item.price} </span>
-                        <Link to = {`/course/${item.id}`}>
-                          <button className = "view-detail"> View Details </button>
-                        </Link>
+                          <Link to = {`/course/${item._id}`}>
+                            <button className = "view-detail"> View Details </button>
+                          </Link>
                       </span>
                     </div>
                 ))}
