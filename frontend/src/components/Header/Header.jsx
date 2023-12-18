@@ -4,25 +4,14 @@ import { Link } from 'react-router-dom';
 import { Button, Dialog } from '@mui/material';
 import  Signup from '../Signup/Signup';
 import  Login from '../Login/Login' ;
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Logout } from '../../Actions/User';
 
 const Header = () => {
     const dispatch = useDispatch();
 
-//   const [open,setopen] = useState(false);
-//   const [open1,setopen1] = useState(false);
-
-   // const handleClickOpen1 = () => { setopen1(true) }
-
-   // const handleClickOpen = () => {
-   //    setopen(true);
-   // };
-
-   // const handleClose = () => {setopen(false)}
-   // const handleClose1 = () => {setopen1(false)}
-
-     const isLoggedIn = false;
+     const { isAuthenticated } = useSelector((state) => state.user);
+     console.log('user existed -',isAuthenticated);
 
    const logoutHandler = async(e) => {
       e.preventDefault();
@@ -43,25 +32,17 @@ const Header = () => {
            </span> 
           {/* <span id = "search"> <SearchIcon /> </span> */}
         </div>
-        <div className="buttons">
-         {!isLoggedIn ? (<>
-                   <Link to = "/signup"> SignUp </Link>
-                   <Link to = "/login">  Login </Link>
-         </>) : 
-         (<>
-           <Button variant='contained' onClick={logoutHandler}>  Logout  </Button>
-         </>)}
 
-          {/* <button id = "signup" onClick = {handleClickOpen}> SignUp </button> */}
-          {/* <button id = "login" onClick={handleClickOpen1}> Login  </button> */}
+        <div className="buttons">
+          {isAuthenticated  == false ? (<>
+            <Link to = "/signup"> SignUp </Link>
+            <Link to = "/login">  Login </Link>
+          </>) : 
+          (<>
+            <Button variant='contained' onClick={logoutHandler}>  Logout  </Button>
+          </>)}
         </div>
-{/* 
-         <Dialog open = {open} onClose={handleClose}>
-            <Signup  />
-         </Dialog>
-         <Dialog open = {open1} onClose={handleClose1}>
-            <Login  />
-         </Dialog> */}
+
     </div>
     </>
   )

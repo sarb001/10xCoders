@@ -10,10 +10,12 @@ export const userReducer = createReducer({},{
      },
      GetRegisterSuccess : (state,action) => {
          state.loading = false,
-         state.user = action.payload
+         state.user = action.payload;
+         state.isAuthenticated = true;
      },
      GetRegisterFailed : (state,action) => {
          state.loading = false,
+         state.isAuthenticated = false;
          state.error  =  action.payload
      },
 
@@ -22,13 +24,13 @@ export const userReducer = createReducer({},{
          state.loading = true;
      },
      LoggedUserSuccess : (state,action) => {
-        console.log('logged  user before -',action.payload);
         state.loading = false,
+        state.isAuthenticated = true;
         state.user = action.payload
-        console.log('logged  user afterr -',action.payload);
      },
      LoggedUserFailed : (state,action) => {
          state.loading = false,
+         state.isAuthenticated = false;
          state.error  =  action.payload
      },
      
@@ -38,10 +40,12 @@ export const userReducer = createReducer({},{
      },
      LogOutSuccess : (state,action) => {
          state.loading = false,
+         state.isAuthenticated = false;
          state.user = null;
      },
      LogOutFailed : (state,action) => {
          state.loading = false,
          state.error  =  action.payload
+         state.isAuthenticated = true;
      },
 })
