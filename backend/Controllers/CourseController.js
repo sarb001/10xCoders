@@ -145,7 +145,7 @@ exports.AddLecture = async(req,res) => {
     try {
         const { id } = req.params;           // passed in url as /course/34u534u534
         const { title ,description  } = req.body;
-        console.log('backend body --',title,description);
+        console.log('backend body 11 --',title,description);
         const course = await Course.findById(id);
 
         if(!course){
@@ -154,8 +154,17 @@ exports.AddLecture = async(req,res) => {
                 message : error.message
             })
         }
+        
 
+        // if(!req.files){
+        //     return res.status(400).json({
+        //         success : false,
+        //         message : "No Files Uploadedddd"
+        //     })
+        //  }
+         
         const file = req.file;
+        console.log('file iss -',file);
         const fileUri = getDataUri(file);
 
          const mycloud = await cloudinary.v2.uploader.upload(fileUri.content ,{
@@ -178,6 +187,7 @@ exports.AddLecture = async(req,res) => {
         res.status(200).json({
             success : true,
             message : " Lecture Added in Course ",
+            course 
         })
         console.log('backend done--');
 

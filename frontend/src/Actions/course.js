@@ -91,8 +91,9 @@ export const AddMyLecture = (id,title,description,video) => async(dispatch) => {
             title,description,video
         },{
             headers: {
-                'Content-Type' : 'application/json'
-            }
+                'Content-Type' : 'application/json',
+            },
+            withCredentials : true,
         })
         console.log(' data in frontend -',{data});
         toast.success(' Lecture Added  ');
@@ -101,6 +102,7 @@ export const AddMyLecture = (id,title,description,video) => async(dispatch) => {
         console.log('error in frontend -',error);
         dispatch({type:"AddLectureFailed", 
         payload : error.response.data.message});
+         toast.error(error.response.data.message);
     }
 }
 

@@ -3,16 +3,15 @@ import { useSelector  ,useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { AddMyLecture, CourseLectures } from '../Actions/course.js' ;
 import '../styles/App.css';
-import { Button } from '@mui/material';
+import { Button, Input } from '@mui/material';
 
 const MainCourse = () => {
 
     const { id } = useParams();
     const dispatch = useDispatch();
-    // console.log('params is --',{ id });       // course id 
 
-    const [title,setTitle] = useState('');
-    const [description,setdescription] = useState('');
+    const  [title,setTitle] = useState('');
+    const  [description,setdescription] = useState('');
     const  [video,setVideo] = useState('');
     const  [videoprev,setVideoprev] = useState('');
 
@@ -29,24 +28,31 @@ const MainCourse = () => {
 
       const changevideoHandler = (e) => {
         const file = e.target.files[0];
+        console.log('file -video',file);
         const reader = new FileReader();
-
+        console.log('file reader- ',reader);
         reader.readAsDataURL(file);
-    
-        reader.onloadend = () => {
-            setVideoprev(reader.result);
-            setVideo(file);
-        };
+          reader.onloadend = () => {
+            if(reader.readyState == 2){
+              setVideoprev(reader.result);
+              setVideo(file);
+            }
+          };
         console.log('video uploaded --');
       }
 
-      const Lecturehandler = async(e) => {
-         e.preventDefault();
-        await dispatch(AddMyLecture(id,title,description,video));
-         setTitle('');
-         setdescription('');
-         setVideo('');
-         setVideoprev('');
+      const Lecturehandler = async(e,id,title,description,video) => {
+            e.preventDefault();
+
+            console.log('title-',title);
+            console.log('description--',description);
+            console.log('video -',video);
+
+            await dispatch(AddMyLecture(id,title,description,video));
+            setTitle('');
+            setdescription('');
+            setVideo('');
+            setVideoprev('');
       }
 
   return (
@@ -75,7 +81,7 @@ const MainCourse = () => {
            </div>
            <div className="section-second" style = {{textAlign:'center'}}>
                 <h3> Add Lectures Now </h3>
-                    <form onSubmit = {Lecturehandler}>
+                    <form onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
                         <span style = {{padding:'4%'}}> Title </span>
                         <input type = "text"  placeholder='Enter title ...' 
                         value = {title}
@@ -87,13 +93,14 @@ const MainCourse = () => {
                         onChange = {(e) => setdescription(e.target.value)}
                         />
                         <span style = {{padding:'4%'}}> Select Video </span>
-                        <input type = "file" accept='video/mp4' onChange={changevideoHandler} />
+                        <input type = "file" accept='video/*' onChange={changevideoHandler} />
 
-                      {videoprev && (
-                        <video controls src = {videoprev} 
-                        controlsList='nodownload'>
-                        </video>
-                      ) }
+                        {videoprev && (
+                          <video controls src = {videoprev} 
+                          controlsList='nodownload'>
+                          </video>
+                        ) }
+
                         <span style = {{padding:'4%'}}>
                           <Button variant = 'contained' 
                           type = "submit" 

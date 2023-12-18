@@ -73,26 +73,26 @@ export const getcourseReducer = createReducer({
             },
 
             //     // Add Lecture 
-            // AddLectureRequest : (state,action)  => {
-            //     state.loading = true;
-            // },
-            // AddLectureSuccess : (state,action)  => {
-            //     state.loading = false;
-            //     state.message = action.payload;
-            // },
-            // AddLectureFailed : (state,action)  => {
-            //     state.loading = false;
-            // },
+            AddLectureRequest : (state,action)  => {
+                state.loading = true;
+            },
+            AddLectureSuccess : (state,action)  => {
+                state.loading = false;
+                state.message = action.payload;
+            },
+            AddLectureFailed : (state,action)  => {
+                state.loading = false;
+            },
 
-            //     //Delete Lecture        
-            // DeleteLectureRequest : (state,action)  => {
-            //     state.loading = true;
-            // },
-            // DeleteLectureSuccess : (state,action)  => {
-            //     state.loading = false;
-            //     state.message = action.payload;
-            // },
-            // DeleteLectureFailed : (state,action)  => {
-            //     state.loading = false;
-            // }
+                //Delete Lecture        
+            DeleteLectureRequest : (state,action)  => {
+                state.loading = true;
+            },
+            DeleteLectureSuccess : (state,action)  => {
+                state.loading = false;
+                state.message = action.payload;
+            },
+            DeleteLectureFailed : (state,action)  => {
+                state.loading = false;
+            }
 })
