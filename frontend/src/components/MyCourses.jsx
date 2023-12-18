@@ -4,6 +4,7 @@ import { useDispatch, useSelector }  from 'react-redux' ;
 import { DeleteMyCourse, MyAllCourses } from '../Actions/course';
 import { Link } from 'react-router-dom';
 import '../styles/App.css' ;
+import { LoadUser } from '../Actions/User';
 
 const MyCourses = () => {
     const dispatch  = useDispatch();
@@ -12,6 +13,7 @@ const MyCourses = () => {
     
     useEffect(() => {
       dispatch(MyAllCourses());
+      dispatch(LoadUser());
      },[dispatch])
 
     const deleteHandler = (courseid) => {

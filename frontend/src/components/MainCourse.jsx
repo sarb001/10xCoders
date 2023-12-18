@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { AddMyLecture, CourseLectures, DeleteMyLecture } from '../Actions/course.js' ;
 import '../styles/App.css';
 import { Button, Input } from '@mui/material';
+import { LoadUser } from '../Actions/User.js';
 
 const MainCourse = () => {
 
@@ -20,6 +21,7 @@ const MainCourse = () => {
 
       useEffect(() => {
         dispatch(CourseLectures(id));
+        dispatch(LoadUser());
       }, [dispatch])
 
       const deleteLecture = async(lectureid) => {

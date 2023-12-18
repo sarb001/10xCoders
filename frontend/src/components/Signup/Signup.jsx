@@ -23,7 +23,7 @@ const Signup = () => {
        return toast.error(' Provide all Fields ');
     }
     await dispatch(userRegister(name,email,password,avatar));
-    // navigate('/login');
+    navigate('/login');
   }
 
   const handleImageChange = (e) => {

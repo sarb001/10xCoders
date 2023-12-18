@@ -14,7 +14,7 @@ const Login = () => {
    const  submitHandler =  async(e) => {
      e.preventDefault();
      await  dispatch(LoginUser(email,password));
-    //  navigate('/')
+     navigate('/')
    }
 
   return (

@@ -5,6 +5,7 @@ import Featured from '../Featured';
 import Freevideos from '../Freevideos';
 import { useSelector  ,useDispatch } from 'react-redux' ;
 import { AllCourses } from '../../Actions/course';
+import { LoadUser } from '../../Actions/User';
 
 
 const Courses = () => {
@@ -15,6 +16,7 @@ const Courses = () => {
 
     useEffect(() => {
         dispatch(AllCourses());
+        dispatch(LoadUser());
     },[dispatch])
 
   return (
