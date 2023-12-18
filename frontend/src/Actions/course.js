@@ -84,14 +84,14 @@ export const DeleteMyCourse = (id) => async(dispatch) => {
     }
 }
 
-export const AddMyLecture = (id,title,description,video) => async(dispatch) => {
+export const AddMyLecture = (id,myForm) => async(dispatch) => {
     try {
         dispatch({type:"AddLectureRequest"});
         const { data } = await axios.post(`/api/v1/course/${id}`,{
-            title,description,video
+            myForm
         },{
             headers: {
-                'Content-Type' : 'application/json',
+                'Content-Type' : 'multipart/form-data',
             },
             withCredentials : true,
         })
@@ -107,18 +107,22 @@ export const AddMyLecture = (id,title,description,video) => async(dispatch) => {
 }
 
 
-export const DeleteMyLecture = () => async(dispatch) => {
+export const DeleteMyLecture = (courseId,lectureId) => async(dispatch) => {
     try {
         dispatch({type:"DeleteLectureRequest"});
-        const { data } = await axios.delete(`/api/v1/lecture`,{
+        const { data } = await axios.delete(`/api/v1/lecture?courseId=${courseId}&lectureId=${lectureId}`,
+        {
             headers: {
                 'Content-Type' : 'application/json'
             }
         })
         console.log('delete  data Lecture -',{data});
+        toast.success(' Lecture Deleted Successfully ');
         dispatch({type:"DeleteLectureSuccess", payload : data.message });
     } catch (error) {
-        dispatch({type:"DeleteLectureFailed"});
+        toast.error(error);
+        dispatch({type:"DeleteLectureFailed" , 
+        payload : error.response.data.message});
     }
 }
 

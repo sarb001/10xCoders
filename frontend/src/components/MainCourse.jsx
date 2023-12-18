@@ -1,7 +1,7 @@
 import React ,{ useEffect, useState } from 'react'
 import { useSelector  ,useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { AddMyLecture, CourseLectures } from '../Actions/course.js' ;
+import { AddMyLecture, CourseLectures, DeleteMyLecture } from '../Actions/course.js' ;
 import '../styles/App.css';
 import { Button, Input } from '@mui/material';
 
@@ -9,21 +9,23 @@ const MainCourse = () => {
 
     const { id } = useParams();
     const dispatch = useDispatch();
-
+    const courseid = id;
     const  [title,setTitle] = useState('');
     const  [description,setdescription] = useState('');
     const  [video,setVideo] = useState('');
     const  [videoprev,setVideoprev] = useState('');
 
-     const  { Lectures  , loading : lectureloading  }  = useSelector((state) => state.allusers);
+     const  { Lectures  , loading : lectureloading }  = useSelector((state) => state.allusers);
      console.log('All Lectures  -',Lectures);
 
       useEffect(() => {
         dispatch(CourseLectures(id));
       }, [dispatch])
 
-      const deleteLecture = (lectureid) => {
-         console.log('lectureid -',lectureid);
+      const deleteLecture = async(lectureid) => {
+         console.log('lectureid del -',lectureid);
+         console.log('courseid del -',courseid);
+         await dispatch(DeleteMyLecture(courseid,lectureid));
       }
 
       const changevideoHandler = (e) => {
@@ -43,12 +45,17 @@ const MainCourse = () => {
 
       const Lecturehandler = async(e,id,title,description,video) => {
             e.preventDefault();
+            const myForm =  new FormData();
 
-            console.log('title-',title);
-            console.log('description--',description);
-            console.log('video -',video);
+            myForm.append('title',title);
+            myForm.append('description',description);
+            myForm.append('file',video);
 
-            await dispatch(AddMyLecture(id,title,description,video));
+            // console.log('title-',title);
+            // console.log('description--',description);
+            // console.log('video -',video);
+
+            await dispatch(AddMyLecture(id,myForm));
             setTitle('');
             setdescription('');
             setVideo('');
@@ -73,7 +80,8 @@ const MainCourse = () => {
                         </video>
                     </div>
                     <div className="second-side">
-                      <button id = "delete" onClick={() => deleteLecture(item._id)}> Delete </button>
+                      <button id = "delete"
+                       onClick={() => deleteLecture(item._id)}> Delete </button>
                     </div>
                 </div>
               )
