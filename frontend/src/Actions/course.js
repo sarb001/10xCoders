@@ -62,7 +62,7 @@ export const CourseLectures = (id) => async(dispatch) => {
                 'Content-Type' : 'application/json'
             }
         })
-        console.log('course lectures-',{data});
+        console.log('course lectures 11-',{data});
         dispatch({type:"CourseLecturesSuccess" , payload : data.Lectures });
     } catch (error) {
         dispatch({type:"CourseLecturesFailed"});
@@ -84,18 +84,23 @@ export const DeleteMyCourse = (id) => async(dispatch) => {
     }
 }
 
-export const AddMyLecture = (id) => async(dispatch) => {
+export const AddMyLecture = (id,title,description,video) => async(dispatch) => {
     try {
         dispatch({type:"AddLectureRequest"});
         const { data } = await axios.post(`/api/v1/course/${id}`,{
+            title,description,video
+        },{
             headers: {
                 'Content-Type' : 'application/json'
             }
         })
-        console.log(' add   Lecture in Course -',{data});
+        console.log(' data in frontend -',{data});
+        toast.success(' Lecture Added  ');
         dispatch({type:"AddLectureSuccess", payload : data.message });
     } catch (error) {
-        dispatch({type:"AddLectureFailed"});
+        console.log('error in frontend -',error);
+        dispatch({type:"AddLectureFailed", 
+        payload : error.response.data.message});
     }
 }
 

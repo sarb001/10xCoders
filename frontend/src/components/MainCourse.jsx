@@ -1,7 +1,7 @@
 import React ,{ useEffect, useState } from 'react'
 import { useSelector  ,useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { CourseLectures } from '../Actions/course.js' ;
+import { AddMyLecture, CourseLectures } from '../Actions/course.js' ;
 import '../styles/App.css';
 import { Button } from '@mui/material';
 
@@ -9,13 +9,15 @@ const MainCourse = () => {
 
     const { id } = useParams();
     const dispatch = useDispatch();
-    console.log('params is --',{ id });       // course id 
+    // console.log('params is --',{ id });       // course id 
 
     const [title,setTitle] = useState('');
     const [description,setdescription] = useState('');
+    const  [video,setVideo] = useState('');
+    const  [videoprev,setVideoprev] = useState('');
 
      const  { Lectures  , loading : lectureloading  }  = useSelector((state) => state.allusers);
-     console.log('Lectures -',Lectures);
+     console.log('All Lectures  -',Lectures);
 
       useEffect(() => {
         dispatch(CourseLectures(id));
@@ -25,8 +27,26 @@ const MainCourse = () => {
          console.log('lectureid -',lectureid);
       }
 
-      const Lecturehandler = () => {
+      const changevideoHandler = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
 
+        reader.readAsDataURL(file);
+    
+        reader.onloadend = () => {
+            setVideoprev(reader.result);
+            setVideo(file);
+        };
+        console.log('video uploaded --');
+      }
+
+      const Lecturehandler = async(e) => {
+         e.preventDefault();
+        await dispatch(AddMyLecture(id,title,description,video));
+         setTitle('');
+         setdescription('');
+         setVideo('');
+         setVideoprev('');
       }
 
   return (
@@ -35,7 +55,7 @@ const MainCourse = () => {
        <div className = "lecture-container" style = {{padding:'5%',display:'grid',gridTemplateColumns:'1fr 1fr'}}>
            
             <div className="section-first">    
-            {Lectures.length > 0  ? ( 
+            {Lectures?.length > 0  ? ( 
               Lectures.map(item =>  
                 <div className = 'lectures-card' key = {item._id}>
                     <div className="first-side">
@@ -56,7 +76,6 @@ const MainCourse = () => {
            <div className="section-second" style = {{textAlign:'center'}}>
                 <h3> Add Lectures Now </h3>
                     <form onSubmit = {Lecturehandler}>
-                      
                         <span style = {{padding:'4%'}}> Title </span>
                         <input type = "text"  placeholder='Enter title ...' 
                         value = {title}
@@ -67,9 +86,18 @@ const MainCourse = () => {
                         value = {description}
                         onChange = {(e) => setdescription(e.target.value)}
                         />
+                        <span style = {{padding:'4%'}}> Select Video </span>
+                        <input type = "file" accept='video/mp4' onChange={changevideoHandler} />
+
+                      {videoprev && (
+                        <video controls src = {videoprev} 
+                        controlsList='nodownload'>
+                        </video>
+                      ) }
                         <span style = {{padding:'4%'}}>
                           <Button variant = 'contained' 
-                          disabled = {lectureloading}> Add Lecture </Button>
+                          type = "submit" 
+                          disabled = {lectureloading}> Upload  Lecture </Button>
                         </span>
                     </form>
                      
