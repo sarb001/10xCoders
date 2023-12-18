@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const Sidebar = () => {
     const dispatch = useDispatch();
     
-    const { isAuthenticated } = useSelector((state) => state.user);
+    const { isAuthenticated , user } = useSelector((state) => state.user);
 
     useEffect(() => {
         dispatch(LoadUser());
@@ -19,8 +19,21 @@ const Sidebar = () => {
   return (
     <div className="sidebar-container">
       <span> MAIN MENU </span>
-      {isAuthenticated == true ? 
+      {user  == null ? 
+         <div className="course-list">
+         <div className="home link">
+             <span> <HomeIcon /> </span>
+             <Link to={'/'}> Home </Link>
+         </div>
+
+         <div className="course link">
+             <span> <SchoolIcon /> </span>
+             <Link to={'/courses'}> Browser All Courses </Link>
+         </div>
+        </div>
+      : 
       <>
+         <>
             <div className="course-list">
                 <div className="home link">
                     <span> <HomeIcon /> </span>
@@ -47,19 +60,7 @@ const Sidebar = () => {
                     <Link to={'/pricing'}> Pricing </Link>
                 </div>
             </div>
-      </> : 
-      <>
-            <div className="course-list">
-                    <div className="home link">
-                        <span> <HomeIcon /> </span>
-                        <Link to={'/'}> Home </Link>
-                    </div>
-
-                    <div className="course link">
-                        <span> <SchoolIcon /> </span>
-                        <Link to={'/courses'}> Browser All Courses </Link>
-                    </div>
-            </div>
+         </>
       </>
       }
     </div>

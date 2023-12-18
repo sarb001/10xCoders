@@ -37,7 +37,7 @@ const Header = () => {
         </div>
 
         <div className="buttons">
-          {isAuthenticated  == false ? (<>
+          {user  == null ? (<>
             <Link to = "/signup"> SignUp </Link>
             <Link to = "/login">  Login </Link>
           </>) : 
