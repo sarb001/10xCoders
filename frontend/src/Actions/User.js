@@ -53,3 +53,18 @@ export const Logout = () => async(dispatch) => {
         dispatch({type:"LogOutFailed" , payload : error.response.data.message });
     }
 }
+
+
+export const LoadUser = () => async(dispatch) => {
+    try {
+        dispatch({type:"LoadUserRequest"});
+        const {data} = await axios.get('/api/v1/me', {
+            withCredentials: true
+        });
+        console.log('loaded user-',{data});
+        dispatch({type:"LoadUserSuccess" ,payload : data.user});
+
+    } catch (error) {
+        dispatch({type:"LoadUserFailed" , payload : error.response.data.message });
+    }
+}

@@ -31,7 +31,6 @@ exports.Register = async(req,res) => {
              });
 
         }else{
-
             mycloud = await cloudinary.v2.uploader.upload(profilepic ,{
                folder : "10xcourse-img"
             });
@@ -119,6 +118,25 @@ exports.Logout = async(req,res) => {
             success : false,
             message: "Logged Out"
         })
+    } catch (error) {
+        return res.status(500).json({
+            success : false,
+            message : error.message
+        })
+    }
+}
+
+exports.MyProfile = async(req,res) => {
+    try {
+        const user  = await User.findById(req.user?._id);
+        console.log('loaded user-',user);
+
+        return res.status(200).json({
+            success : true,
+            message : " User Loaded ",
+            user
+        })
+
     } catch (error) {
         return res.status(500).json({
             success : false,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import  '../../styles/App.css' ;
 import Sidebar from '../Sidebar';
 import Featured from '../Featured';
@@ -7,6 +7,7 @@ import { Avatar, Button, Dialog, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CreateCourse } from '../../Actions/course';
+import { LoadUser } from '../../Actions/User';
 
 const Home = () => {
     const [open,setopen] = useState(false);
@@ -41,6 +42,12 @@ const Home = () => {
       setprice('');
       navigate('/');
     }
+
+    useEffect(() => {
+      dispatch(LoadUser());
+   },[dispatch])
+
+
   return (
     <div className="home container">
         <div className="left-section">
