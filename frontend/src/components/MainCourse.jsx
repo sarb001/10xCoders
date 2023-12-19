@@ -3,9 +3,10 @@ import { useSelector  ,useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { AddMyLecture, CourseLectures, DeleteMyLecture } from '../Actions/course.js' ;
 import '../styles/App.css';
-import { Button, Input } from '@mui/material';
+import { Button, Dialog, Input, Typography } from '@mui/material';
 import { LoadUser } from '../Actions/User.js';
 import BuyCourseNow from './BuyCourseNow.jsx';
+import Sidebar from './Sidebar.jsx';
 
 const MainCourse = () => {
 
@@ -16,6 +17,10 @@ const MainCourse = () => {
     const  [description,setdescription] = useState('');
     const  [video,setVideo] = useState('');
     const  [videoprev,setVideoprev] = useState('');
+    const [open,setopen] = useState(false);
+
+    const handleClickOpen  = () => {setopen(true)}
+    const handleClickClose = () => {setopen(false)}
 
      const  { Lectures  , loading : lectureloading }  = useSelector((state) => state.allusers);
      console.log('All Lectures  -',Lectures);
@@ -68,77 +73,113 @@ const MainCourse = () => {
             setVideoprev('');
       }
 
+    const {  isAuthenticated  } = useSelector((state) => state.user);
+
+    const isSubscribed = false;
+
   return (
     <div>
-        <h1> Lectures Inside Courses </h1>
-       <div className = "lecture-container" style = {{padding:'5%',display:'grid',gridTemplateColumns:'1fr 1fr'}}>
-           
-        
-             <div className="section-first">    
-            {Lectures?.length > 0  ? ( 
-              Lectures.map(item =>  
-                <div className = 'lectures-card' key = {item._id}>
-                    <div className="first-side">
-                      <h2>{item.title} </h2> 
-                      <h2>{item.description} </h2> 
-                        <video width="400" height="300" controls>
-                            <source src = {item.video.url} type="video/mp4">
-                            </source>
-                        </video>
-                    </div>
-                    <div className="second-side">
-                      <button id = "delete"
-                       onClick={() => deleteLecture(item._id)}> Delete </button>
-                    </div>
-                </div>
-              )
-            ) : (<>  No Lectures Present </>)}
+          <div className="home container">
+             <div className="left-section">
+               <Sidebar />
              </div>
-             <div className="section-second">
-                <BuyCourseNow />
-             </div>
-      
-                 {/* // logged user === params id or course's creator */}
-                {/* {
-                  user?._id == id.creator ? 
-                  <>
-                  <div className="section-second" style = {{textAlign:'center'}}>
 
+              <div className = "lecture-container" style = {{padding:'5%',
+              display:'grid',gridTemplateColumns:'1.6fr 0.4fr'}}>
+                 
+                      {isSubscribed ? (
+                      <>  
+                         <div className="section-first">    
+                            {Lectures?.length > 0  ? ( 
+                              Lectures.map(item =>  
+                                <div className = 'lectures-card' key = {item._id}>
+                                    <div className="first-side">
+                                      <h2>{item.title} </h2> 
+                                      <h2>{item.description} </h2> 
+                                        <video width="400" height="300" controls>
+                                            <source src = {item.video.url} type="video/mp4">
+                                            </source>
+                                        </video>
+                                    </div>
+                                    {/* if subscribed then it unlocked already (  can access )  
+                                  //  if Not  Subscribed then it is Locked cannot access lectures  */}
+
+                                  
+                                  </div>
+
+                              )
+                            ) : (<>  No Lectures Present </>)}
+                         </div>
+                      </>
+                      ) : 
+                        <>
+                          <div className="section-first">    
+                          {Lectures?.length > 0  ? ( 
+                            Lectures.map(item =>  
+                              <div className = 'lectures-card' key = {item._id}>
+                                  <div className="first-side">
+                                    <h2>{item.title} </h2> 
+                                  </div>
+                                  {/* if subscribed then it unlocked already (  can access )  
+                                //  if Not  Subscribed then it is Locked cannot access lectures  */}
+
+                                  <div className="second-sid">
+                                    <button onClick={handleClickOpen} >  Unlocked Content  </button>
+                                  </div>
+                                </div>
+
+                            )
+                          ) : (<>  No Lectures Present </>)}
+                          </div>
+                        </>}
+                        {/* // logged user === params id or course's creator */}
+                        {/* {
+                          user?._id == id.creator ? 
+                          <>
+                          <div className="section-second" style = {{textAlign:'center'}}>
+
+                          </div>
+                          </>: 
+                          <>
+                          <h3> Add Lectures Now </h3>
+                              <form onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
+                                  <span style = {{padding:'4%'}}> Title </span>
+                                  <input type = "text"  placeholder='Enter title ...' 
+                                  value = {title}
+                                  onChange = {(e) => setTitle(e.target.value)}
+                                  />
+                                  <span style = {{padding:'4%'}}> Description </span>
+                                  <input type = "text"  placeholder='Enter Description...' 
+                                  value = {description}
+                                  onChange = {(e) => setdescription(e.target.value)}
+                                  />
+                                  <span style = {{padding:'4%'}}> Select Video </span>
+                                  <input type = "file" accept='video/*' onChange={changevideoHandler} />
+          
+                                  {videoprev && (
+                                    <video controls src = {videoprev} 
+                                    controlsList='nodownload'>
+                                    </video>
+                                  ) }
+          
+                                  <span style = {{padding:'4%'}}>
+                                    <Button variant = 'contained' 
+                                    type = "submit" 
+                                    disabled = {lectureloading}> Upload  Lecture </Button>
+                                  </span>
+                              </form> 
+                          </>
+                        } */}
+                
+                   <Dialog  open = {open}  onClose ={handleClickClose}>
+                <div style = {{padding:'8%'}}>
+                  <Typography > Buy Course  </Typography>
                   </div>
-                  </>: 
-                  <>
-                  <h3> Add Lectures Now </h3>
-                      <form onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
-                          <span style = {{padding:'4%'}}> Title </span>
-                          <input type = "text"  placeholder='Enter title ...' 
-                          value = {title}
-                          onChange = {(e) => setTitle(e.target.value)}
-                          />
-                          <span style = {{padding:'4%'}}> Description </span>
-                          <input type = "text"  placeholder='Enter Description...' 
-                          value = {description}
-                          onChange = {(e) => setdescription(e.target.value)}
-                          />
-                          <span style = {{padding:'4%'}}> Select Video </span>
-                          <input type = "file" accept='video/*' onChange={changevideoHandler} />
-  
-                          {videoprev && (
-                            <video controls src = {videoprev} 
-                            controlsList='nodownload'>
-                            </video>
-                          ) }
-  
-                          <span style = {{padding:'4%'}}>
-                            <Button variant = 'contained' 
-                            type = "submit" 
-                            disabled = {lectureloading}> Upload  Lecture </Button>
-                          </span>
-                      </form> 
-                   </>
-                } */}
-        
-       </div>
+                  </Dialog>
+
+              </div>
            </div>
+    </div>
   )
 }
 

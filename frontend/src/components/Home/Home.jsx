@@ -54,6 +54,7 @@ const Home = () => {
         <div className="left-section">
             <Sidebar />
         </div>
+        
         <div className="right-section" style = {{margin:'5%'}}>
            {/* <Featured /> */}
            {/* <button  onClick = {handleClickOpen}> Create Course </button>  

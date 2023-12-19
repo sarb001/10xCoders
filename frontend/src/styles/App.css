@@ -80,9 +80,6 @@ label{
     display: grid;
     grid-template-columns: 6fr 1fr;
 }
-#delete{
-    padding: 3%;
-}
 .feedback{
     display: grid;
     grid-template-columns: repeat(3,1fr);
