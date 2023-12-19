@@ -89,44 +89,56 @@ const Home = () => {
 
                <div className='feedback'>
                   <div className='card'>
-                    <span> Seamless experience with teachcode.
+                     <span id = "card-text">
+                       Seamless experience with teachcode.
                        I can teach all students about 
                        opensource easily.
                      </span>
-                     <span>
+
+                     <span style = {{display:'grid',gridTemplateColumns:'0.5fr 1.5fr'}}>
                        <img src = "/harkirat-face.jpg"  alt = "person-image" 
-                       style = {{width:'5%'}}
+                       style = {{width:'60%',borderRadius:'50%'}}
                        />
-                       <span> Harkirat Singh </span>
-                       <span> Youtuber, 100k+ subs </span>
+                       <div id  = "card-detail">
+                          <span> Harkirat Singh </span>
+                          <span> Youtuber, 100k+ subs </span>
+                       </div>
                      </span>
                   </div>
 
-                  <div className="card">
-                  <span> Must try for all tech 
-                     who want to share their knowledge.
-                 Simply amazing.
+                   <div className="card">
+
+                    <span id = "card-text"> Must try for all tech 
+                        who want to share their knowledge.
+                        Simply amazing.
                      </span>
-                     <span>
+
+                     <span style = {{display:'grid',gridTemplateColumns:'0.5fr 1.5fr'}}>
                        <img src = "/harkirat-face.jpg"  alt = "person-image" 
-                       style = {{width:'5%'}}
+                       style = {{width:'60%',borderRadius:'50%'}}
                        />
-                       <span> Anushka Sharma </span>
-                       <span> CEO </span>
+                       <div id  = "card-detail">
+                          <span> Anushka Sharma </span>
+                          <span> Founder at wingify  </span>
+                       </div>
                      </span>
+                    
                   </div>
 
                   <div className="card">
-                  <span> I always wanted a simple-to-use platform 
-                    to share my knowledge.
-                     Glad that teachcode has finally made it.
+                    <span id = "card-text"> I always wanted a simple-to-use platform 
+                      to share my knowledge.
+                      Glad that teachcode has finally made it.
                      </span>
-                     <span>
+
+                     <span style = {{display:'grid',gridTemplateColumns:'0.5fr 1.5fr'}}>
                        <img src = "/harkirat-face.jpg"  alt = "person-image" 
-                       style = {{width:'5%'}}
+                       style = {{width:'60%',borderRadius:'50%'}}
                        />
-                       <span> Anuj Gupta  </span>
-                       <span> Youtuber, 10k+ subs </span>
+                       <div id  = "card-detail">
+                        <span> Anuj Gupta  </span>
+                        <span> YC Founder </span>
+                       </div>
                      </span>
                   </div>
                </div>

@@ -83,3 +83,25 @@ label{
 #delete{
     padding: 3%;
 }
+.feedback{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin: 3%;
+}
+.card{
+    display: grid;
+    grid-template-rows: 1.3fr 0.7fr;
+    justify-content: space-between;
+    width: 300px;
+    height: 160px;
+    background-color: rgb(163, 140, 187);
+    border-radius: 10px;
+    padding: 1% 4%;
+}
+#card-text{
+    font-size: 20px;
+}
+#card-detail{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
