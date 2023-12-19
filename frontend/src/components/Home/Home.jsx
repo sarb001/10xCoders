@@ -53,41 +53,55 @@ const Home = () => {
         <div className="left-section">
             <Sidebar />
         </div>
-        <div className="right-section">
+        <div className="right-section" style = {{margin:'5%'}}>
            {/* <Featured /> */}
            {/* <button  onClick = {handleClickOpen}> Create Course </button>  
            <h3> Course Whole Template </h3> */}
 
-            <h2> Launch Your  Website, 
-             Create  Courses and Monetize 
-             as a  Coder   
-             </h2>
-             <h3> Earn by spreading your knowledge  </h3>
-             <Button onClick={handleClickOpen} variant='contained'> Create Course  </Button> 
-             <div className="feature-section">
-                <span> No Usage Fee </span>
-                <span>  Analytics </span>
-                <span> Built in India  </span>
+            <div className="text-container" style = {{padding:'2% 20%'}}>
+              <span id = "text" style = {{fontSize:'50px'}}> Launch Your  Website, Create  Courses and Monetize 
+               as a  Coder </span>
+            </div>
+            <div style = {{margin:'4% 1%'}}> 
+             <span style = {{fontSize:'30px'}}> Earn by spreading your knowledge  </span> 
              </div>
+             <Button onClick={handleClickOpen} variant='contained'> 
+              Create Course  
+             </Button> 
+             
+              <div className="feature-section" style = {{margin:'6%'}}>
+                <div style = {{display:'grid',gridTemplateColumns:'1fr 1fr 1fr'}}>
+                    <span> No Usage Fee </span>
+                    <span>  Analytics </span>
+                    <span> Built in India  </span>
+                </div>
+              </div>
 
-               <div className="how-works">
+              <div className="how-works" style = {{margin:'5% 2%'}}>
                 <h2> How it Works  </h2>
-                 <div className='launch-course'>
-                  <span>
-                     <img src = "/public/create-page.png"  alt= "launch-course" />
-                  </span>
-                      <h3> Launch your Course  </h3>
-                 </div>
+                <div style = {{display:'grid',gridTemplateColumns:'1fr 1fr',justifyContent:'space-between'}}>
+                  <div className='launch course'>
+                    <span> <img src = "/public/create-page.png"  alt= "launch-course" />
+                    </span>
+                    <span style = {{margin:'3% 1%'}}>
+                        <span> Launch your Course  </span>
+                    </span>
+                  </div>
 
-                 <div className='launch-course'>
-                  <span>
-                     <img src = "/use-everywhere.png"  alt= "promote-course" />
-                  </span>
-                      <h3> Promote it  Everywhere </h3>
-                 </div>
+                  <div className='promote course'>
+                    <span>
+                      <img src = "/use-everywhere.png"  alt= "promote-course" />
+                    </span>
+                    <span style = {{margin:'3% 1%'}}>
+                        <span> Promote it  Everywhere    </span>
+                    </span>
+                  </div>
                </div>
+              
+              </div>
 
                <div className='feedback'>
+
                   <div className='card'>
                      <span id = "card-text">
                        Seamless experience with teachcode.
@@ -123,24 +137,24 @@ const Home = () => {
                        </div>
                      </span>
                     
-                  </div>
+                   </div>
 
-                  <div className="card">
-                    <span id = "card-text"> I always wanted a simple-to-use platform 
-                      to share my knowledge.
-                      Glad that teachcode has finally made it.
-                     </span>
+                    <div className="card">
+                      <span id = "card-text"> I always wanted a simple-to-use platform 
+                        to share my knowledge.
+                        Glad that teachcode has finally made it.
+                      </span>
 
-                     <span style = {{display:'grid',gridTemplateColumns:'0.5fr 1.5fr'}}>
-                       <img src = "/harkirat-face.jpg"  alt = "person-image" 
-                       style = {{width:'60%',borderRadius:'50%'}}
-                       />
-                       <div id  = "card-detail">
-                        <span> Anuj Gupta  </span>
-                        <span> YC Founder </span>
-                       </div>
-                     </span>
-                  </div>
+                      <span style = {{display:'grid',gridTemplateColumns:'0.5fr 1.5fr'}}>
+                        <img src = "/harkirat-face.jpg"  alt = "person-image" 
+                        style = {{width:'60%',borderRadius:'50%'}}
+                        />
+                        <div id  = "card-detail">
+                          <span> Anuj Gupta  </span>
+                          <span> YC Founder </span>
+                        </div>
+                      </span>
+                    </div>
                </div>
         
           <Dialog  open = {open}  onClose ={handleClickClose}>
