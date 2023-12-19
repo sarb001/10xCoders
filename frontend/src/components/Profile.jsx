@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Sidebar from './Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadUser } from '../Actions/User';
-import { Avatar } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 
 
 const Profile = () => {
@@ -14,6 +14,10 @@ const Profile = () => {
   useEffect(() => {
     dispatch(LoadUser());
  },[dispatch])
+
+   const handlesubscription = () => {
+     console.log('subbsss');
+   }
 
   return (
     <div className="pricing container">
@@ -27,6 +31,9 @@ const Profile = () => {
                 <span> Name - {user?.name}   </span>
                 <span> Email- {user?.email}  </span>
               </div>
+              <Button variant='outlined' onClick={handlesubscription}>
+                 Subscribe 
+              </Button>
           </div>
     </div>
   )

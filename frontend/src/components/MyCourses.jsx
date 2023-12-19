@@ -45,7 +45,7 @@ const MyCourses = () => {
                               <button className = "view-detail"> View Details </button>
                             </Link>
                             </span>
-                          <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button>
+                          {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
                           </div>
                         </span>
                       </div>

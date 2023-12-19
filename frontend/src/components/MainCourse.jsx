@@ -123,7 +123,7 @@ const MainCourse = () => {
                                   {/* if subscribed then it unlocked already (  can access )  
                                 //  if Not  Subscribed then it is Locked cannot access lectures  */}
 
-                                  <div className="second-sid">
+                                  <div className="second-side">
                                     <button onClick={handleClickOpen} >  Unlocked Content  </button>
                                   </div>
                                 </div>
@@ -173,7 +173,14 @@ const MainCourse = () => {
                 
                    <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>
-                     <Typography > Create Account First/Login   </Typography>
+                  {user ? 
+                   (<>
+                       {/* <Typography> Buy Subscription  </Typography> */}
+                       <button> Subscribe Now  </button>
+                   </>)
+                  : <>
+                       <Typography> Create Account First/Login   </Typography>
+                  </>}
                   </div>
                   </Dialog>
 
