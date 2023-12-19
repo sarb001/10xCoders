@@ -4,7 +4,7 @@ import Sidebar from '../Sidebar';
 import Featured from '../Featured';
 import Freevideos from '../Freevideos';
 import { Avatar, Button, Dialog, Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CreateCourse } from '../../Actions/course';
 import { LoadUser } from '../../Actions/User';
@@ -47,6 +47,7 @@ const Home = () => {
       dispatch(LoadUser());
    },[dispatch])
 
+   const {  isAuthenticated  } = useSelector((state) => state.user);
 
   return (
     <div className="home container"> 
@@ -157,36 +158,49 @@ const Home = () => {
                     </div>
                </div>
         
-          <Dialog  open = {open}  onClose ={handleClickClose}>
-            <div style = {{padding:'8%'}}>
-              <Typography> Create Course </Typography>
-                  <form onSubmit={CourseSubmithandler}>
-                    <Avatar   src = {avatar}  />
-                    <input type = "file"     accept="image/*"  onChange = {handleImageChange}  />
-                  
-                      <label> Title </label>
-                      <input type = "text"  placeholder='Enter Title Name' 
-                      value = {title}
-                      onChange={(e) => setTitle(e.target.value)}
-                      />
+            {isAuthenticated === 'true' ? (
+              <>
+                  <Dialog  open = {open}  onClose ={handleClickClose}>
+                <div style = {{padding:'8%'}}>
+                  <Typography> Create Course </Typography>
+                      <form onSubmit={CourseSubmithandler}>
+                        <Avatar   src = {avatar}  />
+                        <input type = "file"     accept="image/*"  onChange = {handleImageChange}  />
+                      
+                          <label> Title </label>
+                          <input type = "text"  placeholder='Enter Title Name' 
+                          value = {title}
+                          onChange={(e) => setTitle(e.target.value)}
+                          />
 
-                      <label> Description </label>
-                      <input type = "text"  placeholder='Write Description'
-                      value = {description}
-                      onChange={(e) => setdescription(e.target.value)}
-                      /> 
+                          <label> Description </label>
+                          <input type = "text"  placeholder='Write Description'
+                          value = {description}
+                          onChange={(e) => setdescription(e.target.value)}
+                          /> 
 
-                      <label> Price:- </label>
-                      <input type = "number"  placeholder='Enter Price' 
-                      value = {price}
-                      onChange={(e) => setprice(e.target.value)}
-                      />
-                      <span style = {{padding:'5% 1%'}}>
-                        <Button type = "submit" variant='contained' >  Create New Course  </Button>
-                      </span>
-                  </form>
-              </div>
-          </Dialog>
+                          <label> Price:- </label>
+                          <input type = "number"  placeholder='Enter Price' 
+                          value = {price}
+                          onChange={(e) => setprice(e.target.value)}
+                          />
+                          <span style = {{padding:'5% 1%'}}>
+                            <Button type = "submit" variant='contained' >  Create New Course  </Button>
+                          </span>
+                      </form>
+                  </div>
+                  </Dialog>
+              </>
+            ) : (
+            <>
+                    <Dialog  open = {open}  onClose ={handleClickClose}>
+              <div style = {{padding:'8%'}}>
+                <Typography> SignUp Form Here </Typography> 
+                </div>
+                    </Dialog>
+            </>)}
+          
+
       </div>
     </div>
   )
