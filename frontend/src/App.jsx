@@ -30,7 +30,6 @@ function App() {
            <Route path = "/logout" element = {<Logout />}>  </Route>
            <Route path = "/courses" element = {<Courses />}>  </Route>
 
-
            <Route path = "/mycourses"  element = { <MyCourses />}>  </Route>
            <Route path = "/pricing" element = {<Pricing />}>  </Route>
            <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>

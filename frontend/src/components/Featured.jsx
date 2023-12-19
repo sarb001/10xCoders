@@ -2,18 +2,18 @@ import React, { useEffect } from 'react'
 import '../styles/App.css' ;
 import { Link } from 'react-router-dom' ;
 import { useDispatch, useSelector } from 'react-redux';
-import { AllCourses, MyAllCourses } from '../Actions/course';
+import { AllCourses } from '../Actions/course';
 import { LoadUser } from '../Actions/User';
 
 const Featured = () => {
 
     const dispatch  = useDispatch();
 
-    const { course } = useSelector((state)  => state.allusers); 
-    console.log('frontend courses - ',course);
+    const { courses } = useSelector((state)  => state.allusers); 
+    console.log('frontend courses - ',courses);
 
     useEffect(() => {
-         dispatch(MyAllCourses());
+         dispatch(AllCourses());
          dispatch(LoadUser());
     },[dispatch])
 
@@ -21,8 +21,9 @@ const Featured = () => {
      <div className="featured-section">
              <h2> Featured  </h2>
          <div className = "mainheader">
+
              <div className="courselist">
-                {course?.map((item) => (
+                {courses?.map((item) => (
                     <div className = 'course-container' key = {item._id}>  
                         <img src =  {item.courseposter.url}  
                         style = {{width:'100%', height:'220px',
@@ -39,6 +40,7 @@ const Featured = () => {
                     </div>
                 ))}
              </div>
+
          </div>
      </div>
   )
