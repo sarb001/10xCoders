@@ -15,7 +15,7 @@ const Courses = () => {
     console.log('frontend courses - ',courses);
 
     useEffect(() => {
-        dispatch(AllCourses());
+        // dispatch(AllCourses());
         dispatch(LoadUser());
     },[dispatch])
 

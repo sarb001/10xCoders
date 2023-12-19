@@ -28,7 +28,7 @@ const Sidebar = () => {
 
          <div className="course link">
              <span> <SchoolIcon /> </span>
-             <Link to={'/courses'}> Browser All Courses </Link>
+             <Link to={'/courses'}>  Courses </Link>
          </div>
         </div>
       : 
@@ -40,14 +40,9 @@ const Sidebar = () => {
                     <Link to={'/'}> Home </Link>
                 </div>
 
-                <div className="course link">
-                    <span> <SchoolIcon /> </span>
-                    <Link to={'/courses'}> Browser All Courses </Link>
-                </div>
-
                 <div className="pricing link">
                     <span> <PaymentsIcon /> </span>
-                    <Link to={'/mycourses'}> My Courses </Link>
+                    <Link to={'/mycourses'}>  Courses </Link>
                 </div>
 
                 <div className="pricing link">

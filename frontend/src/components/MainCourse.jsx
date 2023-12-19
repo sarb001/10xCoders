@@ -5,6 +5,7 @@ import { AddMyLecture, CourseLectures, DeleteMyLecture } from '../Actions/course
 import '../styles/App.css';
 import { Button, Input } from '@mui/material';
 import { LoadUser } from '../Actions/User.js';
+import BuyCourseNow from './BuyCourseNow.jsx';
 
 const MainCourse = () => {
 
@@ -18,6 +19,8 @@ const MainCourse = () => {
 
      const  { Lectures  , loading : lectureloading }  = useSelector((state) => state.allusers);
      console.log('All Lectures  -',Lectures);
+
+     const { user } = useSelector((state) => state.user);
 
       useEffect(() => {
         dispatch(CourseLectures(id));
@@ -70,7 +73,8 @@ const MainCourse = () => {
         <h1> Lectures Inside Courses </h1>
        <div className = "lecture-container" style = {{padding:'5%',display:'grid',gridTemplateColumns:'1fr 1fr'}}>
            
-            <div className="section-first">    
+        
+             <div className="section-first">    
             {Lectures?.length > 0  ? ( 
               Lectures.map(item =>  
                 <div className = 'lectures-card' key = {item._id}>
@@ -89,37 +93,50 @@ const MainCourse = () => {
                 </div>
               )
             ) : (<>  No Lectures Present </>)}
-           </div>
-           <div className="section-second" style = {{textAlign:'center'}}>
-                <h3> Add Lectures Now </h3>
-                    <form onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
-                        <span style = {{padding:'4%'}}> Title </span>
-                        <input type = "text"  placeholder='Enter title ...' 
-                        value = {title}
-                        onChange = {(e) => setTitle(e.target.value)}
-                        />
-                        <span style = {{padding:'4%'}}> Description </span>
-                        <input type = "text"  placeholder='Enter Description...' 
-                        value = {description}
-                        onChange = {(e) => setdescription(e.target.value)}
-                        />
-                        <span style = {{padding:'4%'}}> Select Video </span>
-                        <input type = "file" accept='video/*' onChange={changevideoHandler} />
+             </div>
+             <div className="section-second">
+                <BuyCourseNow />
+             </div>
+      
+                 {/* // logged user === params id or course's creator */}
+                {/* {
+                  user?._id == id.creator ? 
+                  <>
+                  <div className="section-second" style = {{textAlign:'center'}}>
 
-                        {videoprev && (
-                          <video controls src = {videoprev} 
-                          controlsList='nodownload'>
-                          </video>
-                        ) }
-
-                        <span style = {{padding:'4%'}}>
-                          <Button variant = 'contained' 
-                          type = "submit" 
-                          disabled = {lectureloading}> Upload  Lecture </Button>
-                        </span>
-                    </form>
-                     
-           </div>
+                  </div>
+                  </>: 
+                  <>
+                  <h3> Add Lectures Now </h3>
+                      <form onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
+                          <span style = {{padding:'4%'}}> Title </span>
+                          <input type = "text"  placeholder='Enter title ...' 
+                          value = {title}
+                          onChange = {(e) => setTitle(e.target.value)}
+                          />
+                          <span style = {{padding:'4%'}}> Description </span>
+                          <input type = "text"  placeholder='Enter Description...' 
+                          value = {description}
+                          onChange = {(e) => setdescription(e.target.value)}
+                          />
+                          <span style = {{padding:'4%'}}> Select Video </span>
+                          <input type = "file" accept='video/*' onChange={changevideoHandler} />
+  
+                          {videoprev && (
+                            <video controls src = {videoprev} 
+                            controlsList='nodownload'>
+                            </video>
+                          ) }
+  
+                          <span style = {{padding:'4%'}}>
+                            <Button variant = 'contained' 
+                            type = "submit" 
+                            disabled = {lectureloading}> Upload  Lecture </Button>
+                          </span>
+                      </form> 
+                   </>
+                } */}
+        
        </div>
            </div>
   )

@@ -49,15 +49,87 @@ const Home = () => {
 
 
   return (
-    <div className="home container">
+    <div className="home container"> 
         <div className="left-section">
             <Sidebar />
         </div>
         <div className="right-section">
            {/* <Featured /> */}
-           <button  onClick = {handleClickOpen}> Create Course </button>  
-           <h3> Course Whole Template </h3>
-        </div>
+           {/* <button  onClick = {handleClickOpen}> Create Course </button>  
+           <h3> Course Whole Template </h3> */}
+
+            <h2> Launch Your  Website, 
+             Create  Courses and Monetize 
+             as a  Coder   
+             </h2>
+             <h3> Earn by spreading your knowledge  </h3>
+             <Button onClick={handleClickOpen} variant='contained'> Create Course  </Button> 
+             <div className="feature-section">
+                <span> No Usage Fee </span>
+                <span>  Analytics </span>
+                <span> Built in India  </span>
+             </div>
+
+               <div className="how-works">
+                <h2> How it Works  </h2>
+                 <div className='launch-course'>
+                  <span>
+                     <img src = "/public/create-page.png"  alt= "launch-course" />
+                  </span>
+                      <h3> Launch your Course  </h3>
+                 </div>
+
+                 <div className='launch-course'>
+                  <span>
+                     <img src = "/use-everywhere.png"  alt= "promote-course" />
+                  </span>
+                      <h3> Promote it  Everywhere </h3>
+                 </div>
+               </div>
+
+               <div className='feedback'>
+                  <div className='card'>
+                    <span> Seamless experience with teachcode.
+                       I can teach all students about 
+                       opensource easily.
+                     </span>
+                     <span>
+                       <img src = "/harkirat-face.jpg"  alt = "person-image" 
+                       style = {{width:'5%'}}
+                       />
+                       <span> Harkirat Singh </span>
+                       <span> Youtuber, 100k+ subs </span>
+                     </span>
+                  </div>
+
+                  <div className="card">
+                  <span> Must try for all tech 
+                     who want to share their knowledge.
+                 Simply amazing.
+                     </span>
+                     <span>
+                       <img src = "/harkirat-face.jpg"  alt = "person-image" 
+                       style = {{width:'5%'}}
+                       />
+                       <span> Anushka Sharma </span>
+                       <span> CEO </span>
+                     </span>
+                  </div>
+
+                  <div className="card">
+                  <span> I always wanted a simple-to-use platform 
+                    to share my knowledge.
+                     Glad that teachcode has finally made it.
+                     </span>
+                     <span>
+                       <img src = "/harkirat-face.jpg"  alt = "person-image" 
+                       style = {{width:'5%'}}
+                       />
+                       <span> Anuj Gupta  </span>
+                       <span> Youtuber, 10k+ subs </span>
+                     </span>
+                  </div>
+               </div>
         
           <Dialog  open = {open}  onClose ={handleClickClose}>
             <div style = {{padding:'8%'}}>
@@ -89,7 +161,7 @@ const Home = () => {
                   </form>
               </div>
           </Dialog>
-       
+      </div>
     </div>
   )
 }
