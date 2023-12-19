@@ -173,7 +173,7 @@ const MainCourse = () => {
                 
                    <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>
-                  <Typography > Buy Course  </Typography>
+                     <Typography > Create Account First/Login   </Typography>
                   </div>
                   </Dialog>
 

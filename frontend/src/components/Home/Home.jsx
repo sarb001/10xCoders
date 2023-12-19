@@ -54,7 +54,6 @@ const Home = () => {
         <div className="left-section">
             <Sidebar />
         </div>
-        
         <div className="right-section" style = {{margin:'5%'}}>
            {/* <Featured /> */}
            {/* <button  onClick = {handleClickOpen}> Create Course </button>  
@@ -159,7 +158,7 @@ const Home = () => {
                     </div>
                </div>
         
-            {isAuthenticated === 'true' ? (
+            {isAuthenticated === true ? (
               <>
                   <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>
@@ -196,7 +195,8 @@ const Home = () => {
             <>
                     <Dialog  open = {open}  onClose ={handleClickClose}>
               <div style = {{padding:'8%'}}>
-                <Typography> SignUp Form Here </Typography> 
+                <Typography> SignUp Form Here </Typography>
+                    
                 </div>
                     </Dialog>
             </>)}

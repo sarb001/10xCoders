@@ -7,13 +7,13 @@ import Signup from './components/Signup/Signup';
 import Footer from './components/Footer/Footer';
 import Courses from './components/Courses/Courses';
 import MainCourse from './components/MainCourse';
-import Pricing from './components/Pricing';
 import RequestCourse from './components/RequestCourse';
 import MyCourses from './components/MyCourses';
 import {  ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Logout from './components/Logout/Logout';
 import { useSelector } from 'react-redux';
+import Profile from './components/Profile';
 
 function App() {
 
@@ -31,7 +31,7 @@ function App() {
            <Route path = "/courses" element = {<Courses />}>  </Route>
 
            <Route path = "/mycourses"  element = { <MyCourses />}>  </Route>
-           <Route path = "/pricing" element = {<Pricing />}>  </Route>
+           <Route path = "/profile" element = {<Profile />}>  </Route>
            <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
            <Route path = "/course/:id" element = {<MainCourse />}>  </Route>
         </Routes>
