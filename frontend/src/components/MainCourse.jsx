@@ -62,9 +62,10 @@ const MainCourse = () => {
             myForm.append('description',description);
             myForm.append('file',video);
 
-            // console.log('title-',title);
-            // console.log('description--',description);
-            // console.log('video -',video);
+
+            console.log('title-',title);
+            console.log('description--',description);
+            console.log('file video -',video);
 
             await dispatch(AddMyLecture(id,myForm));
             setTitle('');
@@ -80,6 +81,7 @@ const MainCourse = () => {
   return (
     <div>
           <div className="home container">
+          
              <div className="left-section">
                <Sidebar />
              </div>
@@ -171,6 +173,38 @@ const MainCourse = () => {
                           </>
                         } */}
                 
+                          <div> 
+                            <h2> Add Lectures Now  </h2>
+                            <form  
+                            onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
+                                    <span style = {{padding:'4%'}}> Title </span>
+                                    <input type = "text"  placeholder='Enter title ...' 
+                                    value = {title}
+                                    onChange = {(e) => setTitle(e.target.value)}
+                                    />
+                                    <span style = {{padding:'4%'}}> Description </span>
+                                    <input type = "text"  placeholder='Enter Description...' 
+                                    value = {description}
+                                    onChange = {(e) => setdescription(e.target.value)}
+                                    />
+                                    <span style = {{padding:'4%'}}> Select Video </span>
+                                    <input type = "file" accept='video/*'
+                                     onChange={changevideoHandler} />
+            
+                                    {videoprev && (
+                                      <video controls src = {videoprev} 
+                                      controlsList='nodownload'>
+                                      </video>
+                                    ) }
+            
+                                    <span style = {{padding:'4%'}}>
+                                      <Button variant = 'contained' 
+                                      type = "submit" 
+                                      disabled = {lectureloading}> Upload  Lecture </Button>
+                                    </span>
+                            </form> 
+                           </div>
+
                    <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>
                   {user ? 

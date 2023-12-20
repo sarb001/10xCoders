@@ -6,16 +6,18 @@ const  cookieParser = require('cookie-parser');
 const cloudinary = require('cloudinary');
 const Razorpay = require('razorpay');
 const cors = require('cors');
-
+const bodyParser = require('body-parser');
 dotenv.config({path:'../backend/config.env'});
 
 connectDb();
 
+// middlewars 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.json({
-      limit : '50mb'
-}));
+app.use(express.json({limit : '50mb'}));
 app.use(express.urlencoded({extended :true}));
+
 const  PORT = process.env.PORT;
 
 cloudinary.config({

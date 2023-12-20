@@ -144,8 +144,13 @@ exports.RequestCourse = async(req,res) => {
 exports.AddLecture = async(req,res) => {
     try {
         const { id } = req.params;           // passed in url as /course/34u534u534
-        const { title ,description  } = req.body;
+        const {title,description} = req.body;
         console.log('backend body 11 --',title,description);
+        
+        console.log('requested Body title --',req.body.title);
+        console.log('requested Body description  --',req.body.description);
+
+        console.log('requested Body 22--',req.body);
         const course = await Course.findById(id);
 
         if(!course){
@@ -154,7 +159,6 @@ exports.AddLecture = async(req,res) => {
                 message : error.message
             })
         }
-        
 
         // if(!req.files){
         //     return res.status(400).json({

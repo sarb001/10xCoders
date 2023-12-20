@@ -84,12 +84,12 @@ export const DeleteMyCourse = (id) => async(dispatch) => {
     }
 }
 
-export const AddMyLecture = (id,myForm) => async(dispatch) => {
+export const AddMyLecture = (id,formdata) => async(dispatch) => {
     try {
         dispatch({type:"AddLectureRequest"});
-        const { data } = await axios.post(`/api/v1/course/${id}`,{
-            myForm
-        },{
+        console.log('myform fr--',formdata);
+        const { data } = await axios.post(`/api/v1/course/${id}`,
+            formdata,{
             headers: {
                 'Content-Type' : 'multipart/form-data',
             },
