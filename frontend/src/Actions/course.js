@@ -87,7 +87,6 @@ export const DeleteMyCourse = (id) => async(dispatch) => {
 export const AddMyLecture = (id,formdata) => async(dispatch) => {
     try {
         dispatch({type:"AddLectureRequest"});
-        console.log('myform fr--',formdata);
         const { data } = await axios.post(`/api/v1/course/${id}`,
             formdata,{
             headers: {
@@ -95,11 +94,9 @@ export const AddMyLecture = (id,formdata) => async(dispatch) => {
             },
             withCredentials : true,
         })
-        console.log(' data in frontend -',{data});
         toast.success(' Lecture Added  ');
         dispatch({type:"AddLectureSuccess", payload : data.message });
     } catch (error) {
-        console.log('error in frontend -',error);
         dispatch({type:"AddLectureFailed", 
         payload : error.response.data.message});
          toast.error(error.response.data.message);

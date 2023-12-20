@@ -28,7 +28,7 @@ const MainCourse = () => {
      const { user } = useSelector((state) => state.user);
 
       useEffect(() => {
-        dispatch(CourseLectures(id));
+        dispatch(CourseLectures(courseid));
         dispatch(LoadUser());
       }, [dispatch])
 
@@ -50,28 +50,22 @@ const MainCourse = () => {
               setVideo(file);
             }
           };
-        console.log('video uploaded --');
       }
 
-      // not working Properly 
+      
       const Lecturehandler = async(e,id,title,description,video) => {
             e.preventDefault();
             const myForm =  new FormData();
-
             myForm.append('title',title);
             myForm.append('description',description);
             myForm.append('file',video);
-
-
-            console.log('title-',title);
-            console.log('description--',description);
-            console.log('file video -',video);
 
             await dispatch(AddMyLecture(id,myForm));
             setTitle('');
             setdescription('');
             setVideo('');
             setVideoprev('');
+            dispatch(CourseLectures(courseid));
       }
 
     const {  isAuthenticated  } = useSelector((state) => state.user);
