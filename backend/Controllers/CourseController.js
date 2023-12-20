@@ -56,7 +56,7 @@ exports.Createcourse = async(req,res) => {
 exports.AllCourses    = async(req,res) => {
     try {
         const courses = await Course.find({});
-        console.log('all courses- ',courses);
+        console.log('all courses backend- ',courses);
         res.status(200).json({
             success : true,
             message : " All Courses Fetched Successfully ",

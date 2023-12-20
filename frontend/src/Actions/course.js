@@ -1,15 +1,15 @@
 import axios from "axios";
 import { toast } from 'react-toastify' ;
 
-export  const CreateCourse = (title,description,price,courseposter) => async(dispatch) => {
+export  const CreateCourse = (myForm) => async(dispatch) => {
     try {
          dispatch({type:"CreateCourseRequest"});
 
          const data = await axios.post('/api/v1/createcourse',{
-            title,description,price,courseposter
+            myForm
          },{
             headers:{
-                'Content-Type' : 'application/json',
+                'Content-Type' : 'multipart/form-data',
              }
          })
          console.log('create course - action -',data.message);

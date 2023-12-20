@@ -34,8 +34,15 @@ const Home = ({user,isAuthenticated = false}) => {
     };
 
     const CourseSubmithandler = async(e) => {
+
       e.preventDefault();
-      await dispatch(CreateCourse(title,description,price,avatar));
+      const myForm =  new FormData();
+      myForm.append('title',title);
+      myForm.append('description',description);
+      myForm.append('price',price);
+      myForm.append('file',avatar);
+
+      await dispatch(CreateCourse(myForm));
       setAvatar('');
       setTitle('');
       setdescription('');
