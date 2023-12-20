@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { CreateCourse } from '../../Actions/course';
 import { LoadUser } from '../../Actions/User';
 
-const Home = () => {
+const Home = ({user,isAuthenticated = false}) => {
     const [open,setopen] = useState(false);
     const [avatar,setAvatar] = useState("");
 
@@ -46,8 +46,6 @@ const Home = () => {
     useEffect(() => {
       dispatch(LoadUser());
    },[dispatch])
-
-   const {  isAuthenticated  } = useSelector((state) => state.user);
 
   return (
     <div className="home container"> 
@@ -158,7 +156,7 @@ const Home = () => {
                     </div>
                </div>
         
-            {isAuthenticated === true ? (
+            {!isAuthenticated ? (
               <>
                   <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>

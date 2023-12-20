@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import './Header.css' ;
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Dialog } from '@mui/material';
-import  Signup from '../Signup/Signup';
-import  Login from '../Login/Login' ;
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadUser, Logout } from '../../Actions/User';
 
-const Header = () => {
+const Header = ({user,isAuthenticated = false}) => {
+  
     const dispatch = useDispatch();
-
-     const { isAuthenticated , user } = useSelector((state) => state.user);
-     console.log('user existed -',isAuthenticated);
+    const navigate = useNavigate();
 
    const logoutHandler = async(e) => {
       e.preventDefault();
       await dispatch(Logout());
+      navigate('/');
    }
     
    useEffect(() => {
@@ -25,11 +23,11 @@ const Header = () => {
   return (
     <>
     <div className="h-container">
-          <Link to = "/">
           <div className="img-container" style = {{width:'50%',height:'50%'}}>
-              <img src = "/harkirat-face.jpg"  alt= "main-logo" style = {{width:'15%'}} />
-          </div>
+          <Link to = "/">
+              <img src = "/harkirat-face.jpg"  alt= "main-logo" style = {{width:'15%',borderRadius:'50%'}} />
           </Link>
+          </div>
         <div className="searchbar">
            <span>
            <input id = "search" type = "text"  placeholder = 'Type here to Search' />
@@ -37,7 +35,7 @@ const Header = () => {
         </div>
 
         <div className="buttons">
-          {user  == null ? (<>
+          {isAuthenticated ? (<>
             <Link to = "/signup"> SignUp </Link>
             <Link to = "/login">  Login </Link>
           </>) : 

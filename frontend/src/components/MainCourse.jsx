@@ -8,24 +8,22 @@ import { LoadUser } from '../Actions/User.js';
 import BuyCourseNow from './BuyCourseNow.jsx';
 import Sidebar from './Sidebar.jsx';
 
-const MainCourse = () => {
+const MainCourse = ({user,isAuthenticated}) => {
 
-    const { id } = useParams();
-    const dispatch = useDispatch();
-    const courseid = id;
+    const  { id } = useParams();
+    const  dispatch = useDispatch();
+    const  courseid = id;
     const  [title,setTitle] = useState('');
     const  [description,setdescription] = useState('');
     const  [video,setVideo] = useState('');
     const  [videoprev,setVideoprev] = useState('');
-    const [open,setopen] = useState(false);
+    const  [open,setopen] = useState(false);
 
     const handleClickOpen  = () => {setopen(true)}
     const handleClickClose = () => {setopen(false)}
 
      const  { Lectures  , loading : lectureloading }  = useSelector((state) => state.allusers);
      console.log('All Lectures  -',Lectures);
-
-     const { user } = useSelector((state) => state.user);
 
       useEffect(() => {
         dispatch(CourseLectures(courseid));
@@ -51,7 +49,6 @@ const MainCourse = () => {
             }
           };
       }
-
       
       const Lecturehandler = async(e,id,title,description,video) => {
             e.preventDefault();
@@ -64,13 +61,10 @@ const MainCourse = () => {
             setTitle('');
             setdescription('');
             setVideo('');
-            setVideoprev('');
             dispatch(CourseLectures(courseid));
       }
 
-    const {  isAuthenticated  } = useSelector((state) => state.user);
-
-    const isSubscribed = false;
+      const isSubscribed = false;
 
   return (
     <div>
@@ -166,7 +160,7 @@ const MainCourse = () => {
                               </form> 
                           </>
                         } */}
-                
+{/*                 
                           <div> 
                             <h2> Add Lectures Now  </h2>
                             <form  
@@ -197,7 +191,7 @@ const MainCourse = () => {
                                       disabled = {lectureloading}> Upload  Lecture </Button>
                                     </span>
                             </form> 
-                           </div>
+                           </div> */}
 
                    <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>

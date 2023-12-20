@@ -8,7 +8,7 @@ import { AllCourses } from '../../Actions/course';
 import { LoadUser } from '../../Actions/User';
 
 
-const Courses = () => {
+const Courses = ({ user,isAuthenticated }) => {
      const dispatch  = useDispatch();
 
     const { courses } = useSelector((state)  => state.allusers); 
