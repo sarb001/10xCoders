@@ -5,7 +5,7 @@ import { Button, Dialog } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadUser, Logout } from '../../Actions/User';
 
-const Header = ({user,isAuthenticated = false}) => {
+const Header = ({user,isAuthenticated}) => {
   
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Header = ({user,isAuthenticated = false}) => {
         </div>
 
         <div className="buttons">
-          {isAuthenticated ? (<>
+          {user === null ? (<>
             <Link to = "/signup"> SignUp </Link>
             <Link to = "/login">  Login </Link>
           </>) : 

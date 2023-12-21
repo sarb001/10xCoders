@@ -14,7 +14,11 @@ exports.Createcourse = async(req,res) => {
 
            const user = await User.findById(req.user._id);
 
-           const { title , price  , description ,courseposter } = req.body;
+           const { title , price  , description  } = req.body;
+           console.log('course title -',title);
+           console.log('course price -',price);
+           console.log('course desc -',description);
+           
            if(!title || !price || !description){
             return res.status(400).json({
                 success  :  false,
@@ -22,7 +26,10 @@ exports.Createcourse = async(req,res) => {
             })
            }
 
-            const mycloud = await cloudinary.v2.uploader.upload(courseposter, {
+           const  file = req.file;
+           const fileUri = getDataUri(file);
+
+            const mycloud = await cloudinary.v2.uploader.upload(fileUri.content, {
                 folder : "courseimages"
             })
 

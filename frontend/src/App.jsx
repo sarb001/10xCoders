@@ -19,22 +19,31 @@ function App() {
 
      const  { isAuthenticated , user } = useSelector((state) => state.user);
       console.log('main  user exists --',user);
+      console.log('main  isAuthenticated exists --',isAuthenticated);
 
   return (
     <> 
      <Router>
       <Header user = {user}  isAuthenticated = {isAuthenticated}  />
         <Routes>
-           <Route path = "/" element = {<Home  user = {user}  isAuthenticated = {isAuthenticated} />}>  </Route>
-           <Route path = "/login" element = {<Login />}>  </Route>
+           <Route path = "/"  
+            element = {<Home  user = {user}  isAuthenticated = {isAuthenticated} />}>  
+           </Route>
+           <Route path = "/login"  element = {<Login />}>  </Route>
            <Route path = "/signup" element = {<Signup />}>  </Route>
            <Route path = "/logout" element = {<Logout />}>  </Route>
-           <Route path = "/courses" element = {<Courses user = {user}  isAuthenticated = {isAuthenticated} />}>  </Route>
+           <Route path = "/courses" 
+             element = {<Courses user = {user}  isAuthenticated = {isAuthenticated} />}>  
+           </Route>
 
-           <Route path = "/mycourses"  element = { <MyCourses user = {user}  isAuthenticated = {isAuthenticated} />}>  </Route>
+           <Route path = "/mycourses" 
+              element = { <MyCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
+            </Route>
            <Route path = "/profile" element = {<Profile />}>  </Route>
            <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
-           <Route path = "/course/:id" element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  </Route>
+            <Route path = "/course/:id"
+              element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
+            </Route>
         </Routes>
      </Router>
       <Footer />

@@ -12,7 +12,6 @@ import { LoadUser } from '../../Actions/User';
 const Home = ({user,isAuthenticated = false}) => {
     const [open,setopen] = useState(false);
     const [avatar,setAvatar] = useState("");
-
     const[title,setTitle] = useState("");
     const[description,setdescription] = useState("");
     const[price,setprice] = useState("");
@@ -35,12 +34,12 @@ const Home = ({user,isAuthenticated = false}) => {
 
     const CourseSubmithandler = async(e) => {
 
-      e.preventDefault();
-      const myForm =  new FormData();
-      myForm.append('title',title);
-      myForm.append('description',description);
-      myForm.append('price',price);
-      myForm.append('file',avatar);
+        e.preventDefault();
+        const myForm =  new FormData();
+        myForm.append('title',title);
+        myForm.append('description',description);
+        myForm.append('price',price);
+        myForm.append('file',avatar);
 
       await dispatch(CreateCourse(myForm));
       setAvatar('');
@@ -163,7 +162,7 @@ const Home = ({user,isAuthenticated = false}) => {
                     </div>
                </div>
         
-            {!isAuthenticated ? (
+            {/* {!isAuthenticated ? (
               <>
                   <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>
@@ -205,7 +204,37 @@ const Home = ({user,isAuthenticated = false}) => {
                 </div>
                     </Dialog>
             </>)}
-          
+           */}
+                  <Dialog  open = {open}  onClose ={handleClickClose}>
+                <div style = {{padding:'8%'}}>
+                  <Typography> Create Course </Typography>
+                      <form onSubmit={CourseSubmithandler}>
+                        <Avatar   src = {avatar}  />
+                        <input type = "file"     accept="image/*"  onChange = {handleImageChange}  />
+                      
+                          <label> Title </label>
+                          <input type = "text"  placeholder='Enter Title Name' 
+                          value = {title}
+                          onChange={(e) => setTitle(e.target.value)}
+                          />
+
+                          <label> Description </label>
+                          <input type = "text"  placeholder='Write Description'
+                          value = {description}
+                          onChange={(e) => setdescription(e.target.value)}
+                          /> 
+
+                          <label> Price:- </label>
+                          <input type = "number"  placeholder='Enter Price' 
+                          value = {price}
+                          onChange={(e) => setprice(e.target.value)}
+                          />
+                          <span style = {{padding:'5% 1%'}}>
+                            <Button type = "submit" variant='contained' >  Create New Course  </Button>
+                          </span>
+                      </form>
+                  </div>
+                  </Dialog>
 
       </div>
     </div>

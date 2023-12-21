@@ -4,10 +4,9 @@ import { toast } from 'react-toastify' ;
 export  const CreateCourse = (myForm) => async(dispatch) => {
     try {
          dispatch({type:"CreateCourseRequest"});
-
-         const data = await axios.post('/api/v1/createcourse',{
+         const data = await axios.post('/api/v1/createcourse',
             myForm
-         },{
+         ,{
             headers:{
                 'Content-Type' : 'multipart/form-data',
              }
@@ -15,8 +14,10 @@ export  const CreateCourse = (myForm) => async(dispatch) => {
          console.log('create course - action -',data.message);
          toast.success(' Course Created Successfully ');
          dispatch({type:"CreateCourseSuccess",payload : data.message });
-
+         
         } catch (error) {
+            console.log('error in course -',error);
+            toast.error(error);
             dispatch({type:"CreateCourseFailed" , payload: error.response.data.message });
         }
 }
