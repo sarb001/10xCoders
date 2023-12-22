@@ -189,18 +189,15 @@ exports.AddLecture = async(req,res) => {
             })
         }
 
-        // if(!req.files){
-        //     return res.status(400).json({
-        //         success : false,
-        //         message : "No Files Uploadedddd"
-        //     })
-        //  }
-
+       
         const file = req.file;
         console.log('file iss -',file);
         
-        if(!file || !file.originalname){
-          throw new Error(' Invalid File Obejctt ');
+        if(!file){
+            return res.status(400).json({
+                success : false,
+                message : "No Files Uploadedddd"
+            })
          }
        
         async function ConvertFiletoUri(fileBuffer,originalname){
