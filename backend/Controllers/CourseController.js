@@ -5,6 +5,8 @@ const cloudinary = require('cloudinary');
 const instance   = require('../server.js');
 const Payment = require('../models/Payment.js');
 const  getDataUri  = require('../DataUri.js');
+const path    = require('path');
+const DataUri = require('datauri/parser.js');
 
 exports.Createcourse = async(req,res) => {
     try {
@@ -13,25 +15,45 @@ exports.Createcourse = async(req,res) => {
           }
 
            const user = await User.findById(req.user._id);
-
            const { title , price  , description  } = req.body;
            console.log('course title -',title);
            console.log('course price -',price);
            console.log('course desc -',description);
+            //   console.log('requested bodyy  -',req.body);
            
            if(!title || !price || !description){
             return res.status(400).json({
                 success  :  false,
-                message  : " Provide All Fields "
+                message  : " Provide All Fieldsss "
             })
            }
 
-           const  file = req.file;
-           const fileUri = getDataUri(file);
+               const  file = req.file;
+               console.log('file backend --',file);
+              if(!file || !file.originalname){
+                throw new Error(' Invalid File Obejctt ');
+               }
 
-            const mycloud = await cloudinary.v2.uploader.upload(fileUri.content, {
+               async function ConvertFiletoUri(fileBuffer,originalname){
+                   try {
+                        const datauri = new DataUri();
+                        const dataUri = datauri.format(path.extname(originalname),fileBuffer);
+                        return dataUri.content;
+
+                    } catch (error) {
+                        console.log('error is-',error);
+                    }
+               }
+
+            const fileBuffer     = req.file.buffer;
+            const OriginalName   = req.file?.originalname;
+            const convertdataUri = await ConvertFiletoUri(fileBuffer,OriginalName);
+
+
+            const mycloud = await cloudinary.v2.uploader.upload(convertdataUri,{
                 folder : "courseimages"
             })
+            console.log('myclud --',mycloud);
 
            const course = await Course.create({
               title,
@@ -173,12 +195,30 @@ exports.AddLecture = async(req,res) => {
         //         message : "No Files Uploadedddd"
         //     })
         //  }
-         
+
         const file = req.file;
         console.log('file iss -',file);
-        const fileUri = getDataUri(file);
+        
+        if(!file || !file.originalname){
+          throw new Error(' Invalid File Obejctt ');
+         }
+       
+        async function ConvertFiletoUri(fileBuffer,originalname){
+            try {
+                 const datauri = new DataUri();
+                 const dataUri = datauri.format(path.extname(originalname),fileBuffer);
+                 return dataUri.content;
 
-         const mycloud = await cloudinary.v2.uploader.upload(fileUri.content ,{
+             } catch (error) {
+                 console.log('error is-',error);
+             }
+        }
+
+        const fileBuffer     = req.file.buffer;
+        const OriginalName   = req.file?.originalname;
+        const convertdataUri = await ConvertFiletoUri(fileBuffer,OriginalName);
+
+         const mycloud = await cloudinary.v2.uploader.upload(convertdataUri,{
             resource_type : "video",
             folder : 'lecture_videos',
          });

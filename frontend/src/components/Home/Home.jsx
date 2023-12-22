@@ -1,20 +1,19 @@
 import React, { useState , useEffect } from 'react'
 import  '../../styles/App.css' ;
 import Sidebar from '../Sidebar';
-import Featured from '../Featured';
-import Freevideos from '../Freevideos';
 import { Avatar, Button, Dialog, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CreateCourse } from '../../Actions/course';
 import { LoadUser } from '../../Actions/User';
 
-const Home = ({user,isAuthenticated = false}) => {
+const Home = ({user,isAuthenticated}) => {
     const [open,setopen] = useState(false);
     const [avatar,setAvatar] = useState("");
-    const[title,setTitle] = useState("");
-    const[description,setdescription] = useState("");
-    const[price,setprice] = useState("");
+    const [imagePrev,setImagePrev] = useState("");
+    const [title,setTitle] = useState("");
+    const [description,setdescription] = useState("");
+    const [price,setprice] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -27,26 +26,31 @@ const Home = ({user,isAuthenticated = false}) => {
         Reader.readAsDataURL(file);
           Reader.onload = () => {
               if(Reader.readyState === 2){
-                setAvatar(Reader.result);
+                setImagePrev(Reader.result);
+                setAvatar(file)
               }
           }
     };
 
     const CourseSubmithandler = async(e) => {
+            e.preventDefault();
+            const myForm =  new FormData();
+            myForm.append('title',title);
+            myForm.append('description',description);
+            myForm.append('price',price);
+            myForm.append('file',avatar);
 
-        e.preventDefault();
-        const myForm =  new FormData();
-        myForm.append('title',title);
-        myForm.append('description',description);
-        myForm.append('price',price);
-        myForm.append('file',avatar);
+            console.log('title -',title);
+            console.log('desc -',description);
+            console.log('price -',price);
+            console.log('file -',avatar);
 
-      await dispatch(CreateCourse(myForm));
-      setAvatar('');
-      setTitle('');
-      setdescription('');
-      setprice('');
-      navigate('/');
+            await dispatch(CreateCourse(myForm));
+            setAvatar('');
+            setTitle('');
+            setdescription('');
+            setprice('');
+            navigate('/');
     }
 
     useEffect(() => {
@@ -162,14 +166,17 @@ const Home = ({user,isAuthenticated = false}) => {
                     </div>
                </div>
         
-            {/* {!isAuthenticated ? (
+            {isAuthenticated ? (
               <>
                   <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>
                   <Typography> Create Course </Typography>
                       <form onSubmit={CourseSubmithandler}>
-                        <Avatar   src = {avatar}  />
-                        <input type = "file"     accept="image/*"  onChange = {handleImageChange}  />
+                         {imagePrev && (
+                             <Avatar   src = {imagePrev}  /> 
+                           )}
+                           <input type = "file"  accept="image/*" 
+                           onChange = {handleImageChange}  />
                       
                           <label> Title </label>
                           <input type = "text"  placeholder='Enter Title Name' 
@@ -204,8 +211,8 @@ const Home = ({user,isAuthenticated = false}) => {
                 </div>
                     </Dialog>
             </>)}
-           */}
-                  <Dialog  open = {open}  onClose ={handleClickClose}>
+          
+                  {/* <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>
                   <Typography> Create Course </Typography>
                       <form onSubmit={CourseSubmithandler}>
@@ -234,7 +241,7 @@ const Home = ({user,isAuthenticated = false}) => {
                           </span>
                       </form>
                   </div>
-                  </Dialog>
+                  </Dialog> */}
 
       </div>
     </div>
