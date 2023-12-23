@@ -7,6 +7,7 @@ const Payment = require('../models/Payment.js');
 const  getDataUri  = require('../DataUri.js');
 const path    = require('path');
 const DataUri = require('datauri/parser.js');
+const  crypto = require('crypto');
 
 exports.Createcourse = async(req,res) => {
     try {
@@ -399,15 +400,20 @@ exports.PaymentVerification = async(req,res) => {
 
         const generated_signature = crypto
         .createHmac('sha256' ,process.env.RAZORPAY_KEY_SECRET)
-        .update(razorpay_payment_id + "|" +subscription_id,"utf-8")
+        .update(razorpay_payment_id + "|" +razorpay_subscription_id,"utf-8")
         .digest("hex");
-        console.log('generated sign--',generated_signature);
+        
+        console.log('razorpay signid  -', razorpay_signature);
+        console.log('generated sign  --',generated_signature);
 
         const isAuthentic = generated_signature === razorpay_signature;
-        console.log('isAuthentic -',isAuthentic);
+        console.log('isAuthentic cce -',isAuthentic);
 
         if(!isAuthentic){
-             return  new Error(' Payment Failed ');
+             return  res.status(500).json({
+             success : false,
+             message : " Payment Failed "
+             })
             // return res.redirect(`${fronteurl}/paymentfailed`);
         }
         await Payment.create({
@@ -419,7 +425,7 @@ exports.PaymentVerification = async(req,res) => {
         user.subscription.status = "active";
         await user.save();
         console.log('subs done');
-        return res.redirect('/');
+        res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`);
         // return res.redirect(``);
 
     } catch (error) {

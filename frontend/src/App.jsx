@@ -15,7 +15,7 @@ import Logout from './components/Logout/Logout';
 import { useSelector } from 'react-redux';
 import Profile from './components/Profile';
 import Subscribe from './components/Subscribe';
-import PaymentSuccess from './components/PaymentSuccess';
+import PaymentSuccess from './components/PaymentSucces';
 
 function App() {
 
