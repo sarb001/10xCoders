@@ -370,7 +370,7 @@ exports.BuySubscripton = async(req,res) => {
         
         res.status(201).json({
             success : true,
-            subscription : subscription.id,
+            subscriptionId : subscription.id,
         })
 
     } catch (error) {
@@ -384,21 +384,31 @@ exports.BuySubscripton = async(req,res) => {
 
 exports.PaymentVerification = async(req,res) => {
     try {
-        const { razorpay_payment_id , razorpay_order_id , razorpay_signature}  = req.body;
+         console.log('insde verification -');
+        const { razorpay_payment_id , razorpay_subscription_id , razorpay_signature }  = req.body;
+        
+        console.log('razorpay payid -',  razorpay_payment_id);
+        console.log('razorpay subssid -',razorpay_subscription_id);
+        console.log('razorpay signid -', razorpay_signature);
 
         const user = await User.findById(req.user._id);
-        const  subscription_id = user.subscriptions.id;
+        console.log('user found --',user);
+        
+        const  subscription_id = user.subscription.id;
+        console.log('verification started',subscription_id);
 
         const generated_signature = crypto
-        .createHmac('sha256' ,process.env.API_SECRET)
-        .update(razorpay_payment_id +"|"+subscription_id,"utf-8")
+        .createHmac('sha256' ,process.env.RAZORPAY_KEY_SECRET)
+        .update(razorpay_payment_id + "|" +subscription_id,"utf-8")
         .digest("hex");
+        console.log('generated sign--',generated_signature);
 
         const isAuthentic = generated_signature === razorpay_signature;
         console.log('isAuthentic -',isAuthentic);
 
         if(!isAuthentic){
-            return res.redirect(`${fronteurl}/paymentfailed`);
+             return  new Error(' Payment Failed ');
+            // return res.redirect(`${fronteurl}/paymentfailed`);
         }
         await Payment.create({
             razorpay_signature,
@@ -408,10 +418,12 @@ exports.PaymentVerification = async(req,res) => {
         
         user.subscription.status = "active";
         await user.save();
-        
-        return res.redirect(`${frontedurl}/paymentsuccess?reference=${razorpay_payment_id}`);
+        console.log('subs done');
+        return res.redirect('/');
+        // return res.redirect(``);
 
     } catch (error) {
+        console.log('error in verify-',error);
         return res.status(500).json({
             success  : false,
             message  : error.message 

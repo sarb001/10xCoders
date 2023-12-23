@@ -62,4 +62,17 @@ export const userReducer = createReducer({},{
         state.error  =  action.payload
         state.isAuthenticated = false;
      },
+
+     buySubscriptionRequest : (state) => {
+        state.loading = true;
+     },
+     buySubscriptionSuccess : (state,action) => {
+        state.loading = false;
+        state.subscriptionId = action.payload;
+     },
+     buySubscriptionFailure : (state,action) => {
+        state.loading = false;
+        state.error = action.payload;
+     },
+
 })

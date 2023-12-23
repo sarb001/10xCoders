@@ -36,9 +36,9 @@ router.route('/requestcourse').post(isAuthenticated, RequestCourse);
 
 router.route('/subscribe').get(isAuthenticated, BuySubscripton);
 
-router.route('/paymentverification').get(isAuthenticated,PaymentVerification);
+router.route('/paymentverification').post(isAuthenticated,PaymentVerification);
 
-router.route('/razorpaykey').get(GetRazorPayKey);
+router.route('/razorpaykey').get(isAuthenticated,GetRazorPayKey);
 
 
 /// must authorized as subscriber 

@@ -170,7 +170,7 @@ const MainCourse = ({user,isAuthenticated}) => {
                         } */}
 
                 
-                          <div> 
+                          {/* <div> 
                             <h2> Add Lectures Now  </h2>
                             <form  
                             onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
@@ -200,7 +200,7 @@ const MainCourse = ({user,isAuthenticated}) => {
                                       disabled = {lectureloading}> Upload  Lecture </Button>
                                     </span>
                             </form> 
-                           </div> 
+                           </div>  */}
 
                    <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>

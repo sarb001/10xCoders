@@ -3,11 +3,13 @@ import Sidebar from './Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadUser } from '../Actions/User';
 import { Avatar, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 const Profile = () => {
 
    const dispatch = useDispatch();
+   const navigate =   useNavigate();
    const { user } = useSelector((state) => state.user);
    console.log('user Profile -',user);
 
@@ -16,7 +18,7 @@ const Profile = () => {
  },[dispatch])
 
    const handlesubscription = () => {
-     console.log('subbsss');
+     navigate('/subscribe');
    }
 
   return (

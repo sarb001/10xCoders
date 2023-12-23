@@ -68,3 +68,18 @@ export const LoadUser = () => async(dispatch) => {
         dispatch({type:"LoadUserFailed" , payload : error.response.data.message });
     }
 }
+
+
+export const BuySubscription  = () => async(dispatch) => {
+    try {
+        dispatch({type:"buySubscriptionRequest"});
+        const {data} = await axios.get('/api/v1/subscribe', {
+            withCredentials: true
+        });
+        console.log(' Subscribed here- ',{data});
+        dispatch({type:"buySubscriptionSuccess" ,payload : data.subscriptionId});
+
+    } catch (error) {
+        dispatch({type:"buySubscriptionFailure" , payload : error.response.data.message });
+    }
+}

@@ -14,6 +14,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Logout from './components/Logout/Logout';
 import { useSelector } from 'react-redux';
 import Profile from './components/Profile';
+import Subscribe from './components/Subscribe';
+import PaymentSuccess from './components/PaymentSuccess';
 
 function App() {
 
@@ -41,9 +43,17 @@ function App() {
             </Route>
            <Route path = "/profile" element = {<Profile />}>  </Route>
            <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
+
+           <Route path = "/subscribe"   
+           element = {<Subscribe  user = {user}  />}>  </Route>
+
+           <Route path = "/paymentsuccess"   
+           element = {<PaymentSuccess  user = {user}  />}>  </Route>
+
             <Route path = "/course/:id"
               element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
             </Route>
+
         </Routes>
      </Router>
       <Footer />

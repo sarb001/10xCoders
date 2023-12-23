@@ -30,10 +30,8 @@ const user = require('./routes/User.js');
 const course = require('./routes/Course.js');
 
 const instance = new Razorpay({
-      key_id     :"DFEF",
-      key_secret : "DFEF",
-      // key_id: 'rzp_test_VcpymMeDorzIgC',
-      // key_secret :'89WhuftkBjjTUdHQoSJXqxs3'
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret :process.env.RAZORPAY_KEY_SECRET,
 });
 module.exports = instance;
 
