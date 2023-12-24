@@ -451,10 +451,12 @@ exports.CancelSubscription = async(req,res) => {
         const subscriptionId = user.subscription.id;
         let refund = false;
 
-        await instance.subscription.cancel(subscriptionId);
+        instance.subscriptions?.cancel(subscriptionId);
+
         const  payment = await Payment.findOne({
             razorpay_subscription_id : subscriptionId,
         })
+
         const subscribedTime = Date.now()  - payment.createdAt;
         const refundTime = 7 * 24 * 60 * 60 * 1000;
 
@@ -472,13 +474,16 @@ exports.CancelSubscription = async(req,res) => {
 
         res.status(200).json({
             success  : true,
-            message : 
-            refund ? 
-            "  Subs Cancelled , Yes Refunding Money in 7 Days  Now " : 
-            "  Subs  Cancelled ,  Money will be deducted in 3 hrs "
+            message :  refund ? 
+            "  Subscription  Cancelled ,  You will recieve full refund  within 7 days " : 
+            "  Subscription  Cancelled ,  Money will be deducted in as Subscription  was cancelled after 7 days "
         })
 
     } catch (error) {
-        
+        console.log('cancel error',error);
+        res.status(500).json({
+            success  : false,
+            message : " Failed to Cancel Subscription"
+        })
     }
 }

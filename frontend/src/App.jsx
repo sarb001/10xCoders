@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux';
 import Profile from './components/Profile';
 import Subscribe from './components/Subscribe';
 import PaymentSuccess from './components/PaymentSucces';
+import PaymentFailed from './components/PaymentFailed';
 
 function App() {
 
@@ -41,7 +42,9 @@ function App() {
            <Route path = "/mycourses" 
               element = { <MyCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
             </Route>
-           <Route path = "/profile" element = {<Profile />}>  </Route>
+           <Route path = "/profile"
+            element = {<Profile   user = {user} />}>  </Route>
+            
            <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
 
            <Route path = "/subscribe"   
@@ -49,6 +52,9 @@ function App() {
 
            <Route path = "/paymentsuccess"   
            element = {<PaymentSuccess  user = {user}  />}>  </Route>
+
+           <Route path = "/paymentfailed"   
+           element = {<PaymentFailed  user = {user}  />}>  </Route>
 
             <Route path = "/course/:id"
               element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  

@@ -17,7 +17,7 @@ import CardContent from '@mui/material/CardContent';
     // const handleClose = () => setOpen(false);
     const dispatch = useDispatch();
 
-    const { loading ,error , subscriptionId } = useSelector((state) => state.user);
+    const { loading ,error , subscriptionId  , message : subscriptiomessage } = useSelector((state) => state.user);
     console.log('subs id -',subscriptionId);
 
     const subscribeHandler = async () => {
@@ -36,11 +36,6 @@ import CardContent from '@mui/material/CardContent';
               "name": "Acme Corp. Frontend",
               "description": "Monthly Test Plan",
               "callback_url": `/api/v1/paymentverification`,
-              // "handler": function(response) {
-              //   alert(response.razorpay_payment_id),
-              //   alert(response.razorpay_subscription_id),
-              //   alert(response.razorpay_signature);
-              // },
               "prefill": {
                 "name": user?.name,
                 "email": user?.email,
@@ -53,6 +48,8 @@ import CardContent from '@mui/material/CardContent';
            rzp1.open();
       }
     }
+
+
   return (
     <>
           <Card  sx={{ maxWidth: 345 ,bgcolor : 'lightgreen' , border: '2px solid #234', }}>

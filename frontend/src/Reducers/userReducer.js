@@ -75,4 +75,15 @@ export const userReducer = createReducer({},{
         state.error = action.payload;
      },
 
+     cancelSubscriptionRequest : (state) => {
+        state.loading = true;
+     },
+     cancelSubscriptionSuccess : (state,action) => {
+        state.loading = false;
+        state.message = action.payload;
+     },
+     cancelSubscriptionFailure : (state,action) => {
+        state.loading = false;
+        state.error = action.payload;
+     },
 })

@@ -83,3 +83,20 @@ export const BuySubscription  = () => async(dispatch) => {
         dispatch({type:"buySubscriptionFailure" , payload : error.response.data.message });
     }
 }
+
+export const CancelSubscription  = () => async(dispatch) => {
+    try {
+        dispatch({type:"cancelSubscriptionRequest"});
+        const {data} = await axios.get('/api/v1/cancelsubscription', {
+            withCredentials: true
+        });
+        console.log(' UnSubscribed here- ',{data});
+        toast.success(data.message);
+        dispatch({type:"cancelSubscriptionSuccess" ,payload : data.message });
+
+    } catch (error) {
+        console.log('error -',error);
+        toast.error(error);
+        dispatch({type:"cancelSubscriptionFailure" , payload : error.response.data.message });
+    }
+}

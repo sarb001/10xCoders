@@ -10,6 +10,7 @@ exports.isAuthenticated = async(req,res,next) => {
         }
         const decoded = await jwt.verify(token,'tokensecret');
         req.user = await User.findById(decoded._id);
+        console.log('auth passedp');
         next();
 
     } catch (error) {
@@ -23,8 +24,9 @@ exports.isAuthenticated = async(req,res,next) => {
 
 exports.authorizeSubscribers = (req, res, next) => {
     if (req.user.subscription.status !== "active")
-    return res.status(500).json({
+    return res.status(403).json({
         success : false,
-        message : error.message,
+        message : "Only Subscribers can access this Resource",
     })
+    next();
 };
