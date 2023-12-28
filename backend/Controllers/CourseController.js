@@ -86,7 +86,7 @@ export const Createcourse  = async(req,res) => {
 
 export const AllCourses    = async(req,res) => {
     try {
-        const courses = await Course.find({});
+        const courses = await Course.find({}).populate('creator');
         console.log('all courses backend- ',courses);
         res.status(200).json({
             success : true,

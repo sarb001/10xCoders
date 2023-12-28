@@ -7,10 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Profile = () => {
-  // console.log('user Profile -',user);
-  // console.log('user name11 -',user.user.name);
    const dispatch =   useDispatch();
    const navigate =   useNavigate();
+   
   //  const { user , subscriptionId , message  : subscriptiomessage } = useSelector((state) => state.user);
    
   const user = useSelector((state) => state.user?.user);

@@ -10,12 +10,7 @@ import { LoadUser } from '../../Actions/User';
 
 const Courses = ({ user,isAuthenticated }) => {
      const dispatch  = useDispatch();
-
-    // const { courses } = useSelector((state)  => state.allusers); 
-    // console.log('frontend courses - ',courses);
-
     useEffect(() => {
-        // dispatch(AllCourses());
         dispatch(LoadUser());
     },[dispatch])
 
@@ -26,7 +21,6 @@ const Courses = ({ user,isAuthenticated }) => {
         </div>
         <div className="right-section">
             <Featured />
-            {/* <Freevideos /> */}
         </div>
     </div>
   )

@@ -1,36 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from './Sidebar'
-import { useDispatch, useSelector }  from 'react-redux' ;
-import { DeleteMyCourse, MyAllCourses } from '../Actions/course';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import '../styles/App.css' ;
+import { AllCourses } from '../Actions/course';
 import { LoadUser } from '../Actions/User';
 
-const MyCourses = () => {
-    const dispatch  = useDispatch();
-    const { course , message } = useSelector(state => state.allusers);
-    console.log('  myCourses all --', course );
-    
-    useEffect(() => {
-      dispatch(MyAllCourses());
-      dispatch(LoadUser());
+const AllCourse = () => {
+
+    const  dispatch = useDispatch();
+    const { courses , message } = useSelector(state => state.allusers);
+    console.log('allcourses front -',courses);
+
+     useEffect(() => {
+        dispatch(AllCourses())
+        dispatch(LoadUser());
      },[dispatch])
 
-    const deleteHandler = (courseid) => {
-      console.log('courseid -',courseid);
-      dispatch(DeleteMyCourse(courseid))
-    }
-  
   return (
-        <div className="home container">
+    <div>
+            <div className="home container">
             <div className="left-section">
                 <Sidebar />
             </div>
             <div className="right-section">
-                <h3> My  All Courses </h3>
+                <h3> Browsing  All Courses </h3>
                 <div className="courselist">
                 
-                  {course?.map((item) => (
+                  {courses?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
                         objectFit:'cover',display:'block'
@@ -39,6 +35,7 @@ const MyCourses = () => {
                         <span id = "course-detail">
                           <span> Title - {item.title} </span>
                           <span> Price - {item.price} </span>
+                          <span> Creator - {item.creator.name} </span>
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                             <span>
                             <Link to = {`/course/${item._id}`}>
@@ -54,7 +51,8 @@ const MyCourses = () => {
                 </div>
             </div>
         </div>
+    </div>
   )
 }
 
-export default MyCourses
+export default AllCourse

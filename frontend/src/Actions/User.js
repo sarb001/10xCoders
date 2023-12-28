@@ -1,6 +1,7 @@
 import axios from 'axios';
 import  { toast } from 'react-toastify' ;
 
+
 export const userRegister = (name,email,password,profilepic) => async(dispatch) => {
     try {
         dispatch({type:"GetRegisterRequest"});
@@ -34,11 +35,10 @@ export const LoginUser = (email,password) => async(dispatch) => {
         console.log('data login -',{data});
         toast.success(' LoggedIn Successfully ');
         dispatch({type:"LoggedUserSuccess",payload : data.user});
-
     } catch (error) {
-        toast.error(error.response.data.message);
         console.log('erron in actions -',error);
         dispatch({type:"LoggedUserFailed" , payload : error.response.data.message });
+        return toast.error(error.response.data.message);
     }
 }
 

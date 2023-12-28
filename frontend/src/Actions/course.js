@@ -39,7 +39,6 @@ export const AllCourses = () => async(dispatch) => {
     }
 }
 
-
 export const MyAllCourses = () => async(dispatch) => {
     try {
         dispatch({type:"MyCoursesRequest"});

@@ -9,12 +9,10 @@ const Login = () => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
    const  submitHandler =  async(e) => {
      e.preventDefault();
      await  dispatch(LoginUser(email,password));
-     navigate('/')
    }
 
   return (

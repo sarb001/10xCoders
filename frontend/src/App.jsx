@@ -17,6 +17,7 @@ import Profile from './components/Profile';
 import Subscribe from './components/Subscribe';
 import PaymentSuccess from './components/PaymentSucces';
 import PaymentFailed from './components/PaymentFailed';
+import AllCourse from './components/AllCourse';
 
 function App() {
 
@@ -35,8 +36,9 @@ function App() {
            <Route path = "/login"  element = {<Login />}>  </Route>
            <Route path = "/signup" element = {<Signup />}>  </Route>
            <Route path = "/logout" element = {<Logout />}>  </Route>
-           <Route path = "/courses" 
-             element = {<Courses user = {user}  isAuthenticated = {isAuthenticated} />}>  
+
+           <Route path = "/allcourse" 
+             element = {<AllCourse  user = {user}  isAuthenticated = {isAuthenticated} />}>  
            </Route>
 
            <Route path = "/mycourses" 
