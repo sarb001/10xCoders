@@ -28,7 +28,7 @@ const Sidebar = () => {
 
          <div className="course link">
              <span> <SchoolIcon /> </span>
-             <Link to={'/courses'}>  Courses </Link>
+             <Link to={'/allcourse'}>  All Courses </Link>
          </div>
         </div>
       : 

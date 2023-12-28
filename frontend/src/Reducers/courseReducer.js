@@ -46,6 +46,19 @@ export const getcourseReducer = createReducer({
                 state.loading = false;
             },
 
+            // all Users RequestCourses 
+
+            AllUsersCoursesRequest : (state,action) => {
+                state.loading = true;
+            },
+            AllUsersCoursesSuccess : (state,action) => {
+                state.loading = false;
+                state.courses = action.payload;
+            },
+            AllUsersCoursesFailed : (state,action) => {
+                state.loading = false;
+            },
+
          //all Lectures of Course
 
             CourseLecturesRequest : (state,action) => {

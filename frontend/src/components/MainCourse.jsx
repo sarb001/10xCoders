@@ -130,6 +130,9 @@ const MainCourse = ({user,isAuthenticated}) => {
                           ) : (<>  No Lectures Present </>)}
                           </div>
                         </>}
+
+
+
                         {/* // logged user === params id or course's creator */}
                         {/* {
                           user?._id == id.creator ? 
@@ -170,6 +173,9 @@ const MainCourse = ({user,isAuthenticated}) => {
                         } */}
 
                 
+                        {/* loggged user === course creator  */}
+                         {/* courseid */}
+
                           {/* <div> 
                             <h2> Add Lectures Now  </h2>
                             <form  
@@ -203,16 +209,16 @@ const MainCourse = ({user,isAuthenticated}) => {
                            </div>  */}
 
                    <Dialog  open = {open}  onClose ={handleClickClose}>
-                <div style = {{padding:'8%'}}>
-                  {user ? 
-                   (<>
-                       {/* <Typography> Buy Subscription  </Typography> */}
-                       <button> Subscribe Now  </button>
-                   </>)
-                  : <>
-                       <Typography> Create Account First/Login   </Typography>
-                  </>}
-                  </div>
+                  <div style = {{padding:'8%'}}>
+                    {user ? 
+                    (<>
+                        {/* <Typography> Buy Subscription  </Typography> */}
+                        <button> Buy Now  </button>
+                    </>)
+                    : <>
+                        <Typography> Create Account First/Login   </Typography>
+                    </>}
+                    </div>
                   </Dialog>
 
               </div>

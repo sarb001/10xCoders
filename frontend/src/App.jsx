@@ -18,6 +18,8 @@ import Subscribe from './components/Subscribe';
 import PaymentSuccess from './components/PaymentSucces';
 import PaymentFailed from './components/PaymentFailed';
 import AllCourse from './components/AllCourse';
+import AllUserCourses from './components/AllUserCourses';
+// import { AllCourses, AllUsersCourses } from './Actions/course';
 
 function App() {
 
@@ -41,9 +43,14 @@ function App() {
              element = {<AllCourse  user = {user}  isAuthenticated = {isAuthenticated} />}>  
            </Route>
 
+           <Route path = "/usercourses" 
+              element = { <AllUserCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
+            </Route>
+
            <Route path = "/mycourses" 
               element = { <MyCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
             </Route>
+
            <Route path = "/profile"
             element = {<Profile   user = {user} />}>  </Route>
             

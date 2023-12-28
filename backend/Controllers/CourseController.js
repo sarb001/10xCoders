@@ -101,6 +101,30 @@ export const AllCourses    = async(req,res) => {
     }
 }
 
+export const GetAllUserCourses    = async(req,res) => {
+    try {
+         if(!req.user){
+            return res.status(401).json({message : " UnAuthorized "});
+         }
+
+         const loggedUserid = req.user._id;
+         const user = await User.findById(loggedUserid);
+
+        const courses = await Course.find({ user : { $ne : loggedUserid } }).populate('creator');
+        console.log('all courses backend except - ',courses);
+        res.status(200).json({
+            success : true,
+            message : " All Courses Fetched Successfully ",
+            courses
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success : false,
+            message: error.message
+        })
+    }
+}
+
 export const GetLoggedUserCourse = async(req,res) => {
     try {
         if(!req.user){

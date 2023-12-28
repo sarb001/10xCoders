@@ -39,6 +39,7 @@ export const AllCourses = () => async(dispatch) => {
     }
 }
 
+// my all courses
 export const MyAllCourses = () => async(dispatch) => {
     try {
         dispatch({type:"MyCoursesRequest"});
@@ -51,6 +52,23 @@ export const MyAllCourses = () => async(dispatch) => {
         dispatch({type:"MyCoursesSuccess",payload : data.course});
     } catch (error) {
         dispatch({type:"MyCoursesFailed" ,payload: error.response.data.message});
+    }
+}
+
+// all user's  courses 
+export const AllUsersCourses = () => async(dispatch) => {
+    try {
+        dispatch({type:"AllUsersCoursesRequest"});
+        const { data } = await axios.get('/api/v1/usercourses',{
+            headers : {
+                'Content-Type' :  'application/json'
+            }
+        })
+        console.log('all courses   --',data.courses);
+        dispatch({type:"AllUsersCoursesSuccess" ,payload : data.courses});
+
+    } catch (error) {
+        dispatch({type:"AllUsersCoursesFailed" ,payload: error.response.data.message})
     }
 }
 

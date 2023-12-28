@@ -27,7 +27,7 @@ const MyCourses = () => {
                 <Sidebar />
             </div>
             <div className="right-section">
-                <h3> My  All Courses </h3>
+                <h3> My  Total All Courses </h3>
                 <div className="courselist">
                 
                   {course?.map((item) => (
