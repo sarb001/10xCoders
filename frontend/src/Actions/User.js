@@ -84,10 +84,11 @@ export const BuySubscription  = () => async(dispatch) => {
     }
 }
 
-export const CancelSubscription  = () => async(dispatch) => {
+export const CancelSubscription  = (id) => async(dispatch) => {
     try {
+         console.log('cancel id frontend-',id);
         dispatch({type:"cancelSubscriptionRequest"});
-        const {data} = await axios.get('/api/v1/cancelsubscription', {
+        const {data} = await axios.post(`/api/v1/cancelsubscription/${id}`, {
             withCredentials: true
         });
         console.log(' UnSubscribed here- ',{data});

@@ -1,11 +1,13 @@
-const express = require('express');
-const { AllCourses, GetLoggedUserCourse, 
-    RequestCourse, AddLecture,
- DeleteLecture, GetCourseLectures, DeleteCourse, 
- BuySubscripton, PaymentVerification,
-  GetRazorPayKey, CancelSubscription, Createcourse  } = require('../Controllers/CourseController');
-const { isAuthenticated, authorizeSubscribers } = require('../Middleware/auth');
-const  singleUpload  = require('../Middleware/multer');
+
+import express from 'express';
+import {  AllCourses, GetLoggedUserCourse, 
+  RequestCourse, AddLecture,
+DeleteLecture, GetCourseLectures, DeleteCourse, 
+BuySubscripton, PaymentVerification,
+GetRazorPayKey, CancelSubscription, Createcourse } from '../Controllers/CourseController.js';
+
+import { isAuthenticated, authorizeSubscribers } from '../Middleware/auth.js';
+import singleUpload from '../Middleware/multer.js';
 
 const router = express.Router();
 
@@ -43,6 +45,6 @@ router.route('/razorpaykey').get(isAuthenticated,GetRazorPayKey);
 
 /// must authorized as subscriber 
 
-router.route('/cancelsubscription').get(isAuthenticated, authorizeSubscribers, CancelSubscription);
+router.route('/cancelsubscription/:id').post(isAuthenticated, authorizeSubscribers, CancelSubscription);
 
-module.exports = router;
+export default router;

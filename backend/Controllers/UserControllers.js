@@ -1,8 +1,10 @@
-const Course = require('../models/Course.js');
-const User = require('../models/User.js');
-const cloudinary = require('cloudinary');
 
-exports.Register = async(req,res) => {
+import Course from '../models/Course.js';
+import User from '../models/User.js';
+import cloudinary from 'cloudinary';
+
+
+export const Register = async(req,res) => {
     try {
         const {name,email,password,profilepic} = req.body;
 
@@ -56,7 +58,7 @@ exports.Register = async(req,res) => {
     }
 }
 
-exports.Login    = async(req,res) => {
+export const Login    = async(req,res) => {
     try {
         const {email, password} = req.body;
 
@@ -109,7 +111,7 @@ exports.Login    = async(req,res) => {
     }
 }
 
-exports.Logout = async(req,res) => {
+export const  Logout = async(req,res) => {
     try {
         res.status(200).cookie('token',null, {
             expires : new Date(Date.now()),
@@ -126,10 +128,10 @@ exports.Logout = async(req,res) => {
     }
 }
 
-exports.MyProfile = async(req,res) => {
+export const MyProfile = async(req,res) => {
     try {
         const user  = await User.findById(req.user?._id);
-        console.log('loaded user-',user);
+        // console.log('loaded user-',user);
 
         return res.status(200).json({
             success : true,

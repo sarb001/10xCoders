@@ -1,15 +1,16 @@
-const Razorpay = require('razorpay');
-const Course = require('../models/Course.js');
-const User = require('../models/User.js');
-const cloudinary = require('cloudinary');
-const instance   = require('../server.js');
-const Payment = require('../models/Payment.js');
-const  getDataUri  = require('../DataUri.js');
-const path    = require('path');
-const DataUri = require('datauri/parser.js');
-const  crypto = require('crypto');
 
-exports.Createcourse = async(req,res) => {
+import Razorpay from 'razorpay';
+import Course from '../models/Course.js';
+import User from '../models/User.js';
+import cloudinary from 'cloudinary';
+import Payment from '../models/Payment.js';
+import path from 'path';
+import DataUri from 'datauri/parser.js';
+import { instance } from '../server.js';
+import crypto from 'crypto';
+
+
+export const Createcourse  = async(req,res) => {
     try {
           if(!req.user){
             return res.status(401).json({message : " UnAuthorized "});    
@@ -83,7 +84,7 @@ exports.Createcourse = async(req,res) => {
     }
 }
 
-exports.AllCourses    = async(req,res) => {
+export const AllCourses    = async(req,res) => {
     try {
         const courses = await Course.find({});
         console.log('all courses backend- ',courses);
@@ -100,7 +101,7 @@ exports.AllCourses    = async(req,res) => {
     }
 }
 
-exports.GetLoggedUserCourse = async(req,res) => {
+export const GetLoggedUserCourse = async(req,res) => {
     try {
         if(!req.user){
             return res.status(401).json({message : " UnAuthorized "});    
@@ -131,7 +132,7 @@ exports.GetLoggedUserCourse = async(req,res) => {
     }
 }
 
-exports.GetFreeVideos = async(req,res) => {
+export const GetFreeVideos = async(req,res) => {
     try {
         
     } catch (error) {
@@ -142,7 +143,7 @@ exports.GetFreeVideos = async(req,res) => {
     }
 }
 
-exports.RequestCourse = async(req,res) => {
+export const RequestCourse = async(req,res) => {
     try {
         // const { name ,email ,description } = req.body;
         // console.log('request course body -',{name,email,description});
@@ -171,7 +172,7 @@ exports.RequestCourse = async(req,res) => {
     }
 }
 
-exports.AddLecture = async(req,res) => {
+export const AddLecture = async(req,res) => {
     try {
         const { id } = req.params;           // passed in url as /course/34u534u534
         const {title,description} = req.body;
@@ -248,7 +249,7 @@ exports.AddLecture = async(req,res) => {
     }
 }
 
-exports.DeleteLecture = async(req,res) => {
+export const DeleteLecture = async(req,res) => {
     try {
         const {  courseId , lectureId  } = req.query;
         
@@ -285,7 +286,7 @@ exports.DeleteLecture = async(req,res) => {
     }
 }
 
-exports.GetCourseLectures =  async(req,res) => {
+export const GetCourseLectures =  async(req,res) => {
     try {
         const { id } = req.params;
 
@@ -314,7 +315,7 @@ exports.GetCourseLectures =  async(req,res) => {
     }
 }
 
-exports.DeleteCourse = async(req,res) => {
+export const DeleteCourse = async(req,res) => {
     try {
        const {id} = req.params;
        
@@ -349,7 +350,7 @@ exports.DeleteCourse = async(req,res) => {
     }
 }
 
-exports.BuySubscripton = async(req,res) => {
+export const BuySubscripton = async(req,res) => {
     try {
         const user = await User.findById(req.user._id);
 
@@ -363,7 +364,7 @@ exports.BuySubscripton = async(req,res) => {
             quantity: 5,
             total_count: 6,
         })
-        console.log('subscription 11-',subscription);
+        console.log('subscription created-- -',subscription);
         user.subscription.id = subscription.id;
         user.subscription.status = subscription.status; 
 
@@ -383,7 +384,7 @@ exports.BuySubscripton = async(req,res) => {
     }
 }
 
-exports.PaymentVerification = async(req,res) => {
+export const PaymentVerification = async(req,res) => {
     try {
          console.log('insde verification -');
         const { razorpay_payment_id , razorpay_subscription_id , razorpay_signature }  = req.body;
@@ -398,10 +399,8 @@ exports.PaymentVerification = async(req,res) => {
         const  subscription_id = user.subscription.id;
         console.log('verification started',subscription_id);
 
-        const generated_signature = crypto
-        .createHmac('sha256' ,process.env.RAZORPAY_KEY_SECRET)
-        .update(razorpay_payment_id + "|" +razorpay_subscription_id,"utf-8")
-        .digest("hex");
+        const generated_signature = crypto.createHmac('sha256' ,
+        process.env.RAZORPAY_KEY_SECRET).update(razorpay_payment_id + "|" +subscription_id,"utf-8").digest("hex");
         
         console.log('razorpay signid  -', razorpay_signature);
         console.log('generated sign  --',generated_signature);
@@ -437,25 +436,54 @@ exports.PaymentVerification = async(req,res) => {
     }
 }
 
-exports.GetRazorPayKey = async(req,res) => {
+export const GetRazorPayKey = async(req,res) => {
     res.status(200).json({
         success :true,
         key :  process.env.API_KEY
     })
 }
 
-exports.CancelSubscription = async(req,res) => {
+export const CancelSubscription = async(req,res) => {
     try {
-        const user = await User.findById(req.user._id);
+        const { id } = req.params;              // subscription_id -- to cancel
+        console.log('backend cancel id -',id);
 
-        const subscriptionId = user.subscription.id;
+        const user = await User.findById(req.user._id);
+        console.log('logged user-',user);
+
+        // id - subscription_id passed
+        // user.subs.id - output of subs stored in user
+
+        if(id ===   user.subscription.id){
+            console.log('subs cancelled -');
+        }else{
+            console.log('subs NOTTTT cancelled -');
+        }
+
+        const subscriptionId = user.subscription.id;            // 68Tr 
+        console.log('subs  id -',subscriptionId);
         let refund = false;
 
-        instance.subscriptions?.cancel(subscriptionId);
+        console.log('before payment');
+        const currentSubscription = await instance.subscriptions.fetch(id);
+    if (currentSubscription.status === 'cancelled') {
+            console.log('Subscription already cancelled');
+            // Handle already cancelled subscription (e.g., return a message to the user)
+           res.status(400).json({ success: false, message: 'Subscription is already cancelled.' });
+    }
+    
+        //  const res = await instance.subscriptions.cancel(subscriptionId,false);
 
+         console.log('after payment');
+        //  console.log('after payment res -',res);
+        console.log('id is -',id);
         const  payment = await Payment.findOne({
-            razorpay_subscription_id : subscriptionId,
-        })
+            razorpay_subscription_id 
+        });
+        console.log('paymennt is 1 -',payment);
+        if (!payment) {
+            return res.status(404).json({ success: false, message: 'Payment not found' });
+          }
 
         const subscribedTime = Date.now()  - payment.createdAt;
         const refundTime = 7 * 24 * 60 * 60 * 1000;
@@ -471,8 +499,8 @@ exports.CancelSubscription = async(req,res) => {
         user.subscription.id = undefined;
         user.subscription.status = undefined;
         await user.save();
-
-        res.status(200).json({
+        console.log('atlast end--');
+       return res.status(200).json({
             success  : true,
             message :  refund ? 
             "  Subscription  Cancelled ,  You will recieve full refund  within 7 days " : 

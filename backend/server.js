@@ -1,12 +1,18 @@
-const express = require('express') ;
-const { connectDb } = require('./Database/Db');
+
+import express from 'express';
+import { connectDb } from './Database/Db.js';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import cloudinary from 'cloudinary';
+import Razorpay from 'razorpay';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+
+import user from './routes/User.js';
+import course from './routes/Course.js';
+
 const app = express();
-const dotenv = require('dotenv');
-const  cookieParser = require('cookie-parser');
-const cloudinary = require('cloudinary');
-const Razorpay = require('razorpay');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+
 dotenv.config({path:'../backend/config.env'});
 
 connectDb();
@@ -25,15 +31,10 @@ cloudinary.config({
       api_secret : process.env.API_SECRET,
 })
 
-
-const user = require('./routes/User.js');
-const course = require('./routes/Course.js');
-
-const instance = new Razorpay({
+ export var instance = new Razorpay({
       key_id: process.env.RAZORPAY_KEY_ID,
       key_secret :process.env.RAZORPAY_KEY_SECRET,
 });
-module.exports = instance;
 
 app.use('/api/v1' , user);
 app.use('/api/v1' , course);

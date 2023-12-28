@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+
 
 const PaymentSchema = new mongoose.Schema({
     razorpay_signature: {
@@ -23,4 +24,4 @@ mongoose.models = {}
 
 const Payment =  mongoose.models.Payment || mongoose.model('Payment',PaymentSchema);
 
-module.exports = Payment;
+export default Payment

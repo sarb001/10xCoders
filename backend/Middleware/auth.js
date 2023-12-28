@@ -1,7 +1,8 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User.js')
 
-exports.isAuthenticated = async(req,res,next) => {
+import jwt  from 'jsonwebtoken';
+import User from '../models/User.js';
+
+export const isAuthenticated = async(req,res,next) => {
     try {
         const { token } = req.cookies;
         if(!token){
@@ -22,7 +23,8 @@ exports.isAuthenticated = async(req,res,next) => {
     }
 }
 
-exports.authorizeSubscribers = (req, res, next) => {
+export const authorizeSubscribers = (req, res, next) => {
+    console.log('authorized subs -');
     if (req.user.subscription.status !== "active")
     return res.status(403).json({
         success : false,

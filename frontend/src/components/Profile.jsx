@@ -9,9 +9,14 @@ import { useNavigate } from 'react-router-dom';
 const Profile = () => {
   // console.log('user Profile -',user);
   // console.log('user name11 -',user.user.name);
-   const dispatch = useDispatch();
+   const dispatch =   useDispatch();
    const navigate =   useNavigate();
-   const { user ,message  : subscriptiomessage } = useSelector((state) => state.user);
+  //  const { user , subscriptionId , message  : subscriptiomessage } = useSelector((state) => state.user);
+   
+  const user = useSelector((state) => state.user?.user);
+  console.log(' dispatch main  user --',user);
+  const subscriptionId = useSelector((state) => state.user?.user?.subscription?.id);
+   console.log('subsc id dispatched  -',subscriptionId);
 
   useEffect(() => {
     dispatch(LoadUser());
@@ -23,7 +28,7 @@ const Profile = () => {
 
    const cancelsubscription = async() => {
     console.log('cliedkwwk');
-      await dispatch(CancelSubscription());
+      await dispatch(CancelSubscription(subscriptionId));
    }
 
   return (
@@ -37,7 +42,7 @@ const Profile = () => {
                 <span> Name is - {user?.name}   </span>
                 <span> Email is - {user?.email}  </span>
               </div>
-              {user.subscription && user.subscription.status === 'active' ? (   
+              {user?.subscription && user?.subscription.status === 'active' ? (   
                  <Button variant='contained' onClick={cancelsubscription}>
                   Cancel Subscription 
                </Button>
