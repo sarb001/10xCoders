@@ -25,7 +25,7 @@ const AllUserCourses = () => {
         <div className="right-section" style = {{margin:'5%'}}>
           <h2> All  User Cases  </h2>
             
-          {courses?.map((item) => (
+                   {courses?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
                         objectFit:'cover',display:'block'

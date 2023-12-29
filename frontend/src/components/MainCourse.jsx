@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 const MainCourse = ({user,isAuthenticated}) => {
 
     const  { id } = useParams();
+    console.log('userr- ',user);
     const  dispatch = useDispatch();
     const  courseid = id;
     const  [title,setTitle] = useState('');
@@ -129,54 +130,11 @@ const MainCourse = ({user,isAuthenticated}) => {
                             )
                           ) : (<>  No Lectures Present </>)}
                           </div>
-                        </>}
+                        </>
+                        }
 
 
-
-                        {/* // logged user === params id or course's creator */}
-                        {/* {
-                          user?._id == id.creator ? 
-                          <>
-                          <div className="section-second" style = {{textAlign:'center'}}>
-
-                          </div>
-                          </>: 
-                          <>
-                             <h3> Add Lectures Now </h3>
-                          //     <form onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
-                          //         <span style = {{padding:'4%'}}> Title </span>
-                          //         <input type = "text"  placeholder='Enter title ...' 
-                          //         value = {title}
-                          //         onChange = {(e) => setTitle(e.target.value)}
-                          //         />
-                          //         <span style = {{padding:'4%'}}> Description </span>
-                          //         <input type = "text"  placeholder='Enter Description...' 
-                          //         value = {description}
-                          //         onChange = {(e) => setdescription(e.target.value)}
-                          //         />
-                          //         <span style = {{padding:'4%'}}> Select Video </span>
-                          //         <input type = "file" accept='video/*' onChange={changevideoHandler} />
-          
-                          //         {videoprev && (
-                          //           <video controls src = {videoprev} 
-                          //           controlsList='nodownload'>
-                          //           </video>
-                          //         ) }
-          
-                          //         <span style = {{padding:'4%'}}>
-                          //           <Button variant = 'contained' 
-                          //           type = "submit" 
-                          //           disabled = {lectureloading}> Upload  Lecture </Button>
-                          //         </span>
-                          //     </form> 
-                          // </>
-                        } */}
-
-                
-                        {/* loggged user === course creator  */}
-                         {/* courseid */}
-
-                          {/* <div> 
+                        {/* <div> 
                             <h2> Add Lectures Now  </h2>
                             <form  
                             onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
@@ -206,20 +164,19 @@ const MainCourse = ({user,isAuthenticated}) => {
                                       disabled = {lectureloading}> Upload  Lecture </Button>
                                     </span>
                             </form> 
-                           </div>  */}
+                        </div>  */}
 
-                   <Dialog  open = {open}  onClose ={handleClickClose}>
-                  <div style = {{padding:'8%'}}>
-                    {user ? 
-                    (<>
-                        {/* <Typography> Buy Subscription  </Typography> */}
-                        <button> Buy Now  </button>
-                    </>)
-                    : <>
-                        <Typography> Create Account First/Login   </Typography>
-                    </>}
-                    </div>
-                  </Dialog>
+                      <Dialog  open = {open}  onClose ={handleClickClose}>
+                      <div style = {{padding:'8%'}}>
+                        {user ? 
+                        (<>
+                            <button> Buy Now  </button>
+                        </>)
+                        : <>
+                            <Typography> Create Account First/Login   </Typography>
+                        </>}
+                        </div>
+                      </Dialog>
 
               </div>
            </div>

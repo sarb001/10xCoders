@@ -42,13 +42,13 @@ const Sidebar = () => {
 
                 <div className="pricing link">
                     <span> <PaymentsIcon /> </span>
-                    <Link to={'/usercourses'}>  User  All Courses </Link>
+                    <Link to={'/allcourse'}> Browse All Courses </Link>
                 </div>
 
-                <div className="pricing link">
+                {/* <div className="pricing link">
                     <span> <PaymentsIcon /> </span>
                     <Link to={'/mycourses'}>  My  Courses </Link>
-                </div>
+                </div> */}
 
                 <div className="pricing link">
                     <span> <PaymentsIcon /> </span>
