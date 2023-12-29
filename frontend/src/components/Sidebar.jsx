@@ -42,7 +42,7 @@ const Sidebar = () => {
 
                 <div className="pricing link">
                     <span> <PaymentsIcon /> </span>
-                    <Link to={'/allcourse'}> Browse All Courses </Link>
+                    <Link to={'/usercourses'}> Browse All Courses </Link>
                 </div>
 
                 {/* <div className="pricing link">

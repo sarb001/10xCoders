@@ -4,6 +4,7 @@ import { AllUsersCourses } from '../Actions/course';
 import { LoadUser } from '../Actions/User';
 import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
+import '../styles/App.css' ;
 
 const AllUserCourses = () => {
 
