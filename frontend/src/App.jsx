@@ -5,7 +5,6 @@ import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Footer from './components/Footer/Footer';
-import Courses from './components/Courses/Courses';
 import MainCourse from './components/MainCourse';
 import RequestCourse from './components/RequestCourse';
 import MyCourses from './components/MyCourses';
@@ -20,7 +19,7 @@ import PaymentFailed from './components/PaymentFailed';
 import AllCourse from './components/AllCourse';
 import AllUserCourses from './components/AllUserCourses';
 import Dashboard from './components/Dashboard';
-import CreateCourse from './components/CreateCourse';
+import CreateCourses from './components/CreateCourses';
 // import { AllCourses, AllUsersCourses } from './Actions/course';
 
 function App() {
@@ -75,9 +74,8 @@ function App() {
               element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
             </Route>
 
-
             <Route path = "/createcourse"
-              element = {<CreateCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
+              element = {<CreateCourses user = {user}  isAuthenticated = {isAuthenticated} />}>  
             </Route>
 
 

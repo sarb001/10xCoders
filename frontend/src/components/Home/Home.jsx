@@ -8,6 +8,7 @@ import { CreateCourse } from '../../Actions/course';
 import { LoadUser } from '../../Actions/User';
 
 const Home = ({user,isAuthenticated}) => {
+  
     const [open,setopen] = useState(false);
     const [avatar,setAvatar] = useState("");
     const [imagePrev,setImagePrev] = useState("");
@@ -40,11 +41,6 @@ const Home = ({user,isAuthenticated}) => {
             myForm.append('price',price);
             myForm.append('file',avatar);
 
-            console.log('title -',title);
-            console.log('desc -',description);
-            console.log('price -',price);
-            console.log('file -',avatar);
-
             await dispatch(CreateCourse(myForm));
             setAvatar('');
             setTitle('');
@@ -62,20 +58,20 @@ const Home = ({user,isAuthenticated}) => {
         <div className="left-section">
             <Sidebar />
         </div>
+       
         <div className="right-section" style = {{margin:'5%'}}>
-           {/* <Featured /> */}
-           {/* <button  onClick = {handleClickOpen}> Create Course </button>  
-           <h3> Course Whole Template </h3> */}
 
             <div className="text-container" style = {{padding:'2% 20%'}}>
               <span id = "text" style = {{fontSize:'50px'}}> Launch Your  Website, Create  Courses and Monetize 
                as a  Coder </span>
             </div>
+
             <div style = {{margin:'4% 1%'}}> 
              <span style = {{fontSize:'30px'}}> Earn by spreading your knowledge  </span> 
              </div>
+
              <Button onClick={handleClickOpen} variant='contained'> 
-              Create Course  
+                Create Course  
              </Button> 
              
               <div className="feature-section" style = {{margin:'6%'}}>
@@ -196,7 +192,9 @@ const Home = ({user,isAuthenticated}) => {
                           onChange={(e) => setprice(e.target.value)}
                           />
                           <span style = {{padding:'5% 1%'}}>
-                            <Button type = "submit" variant='contained' >  Create New Course  </Button>
+                            <Button type = "submit" variant='contained' > 
+                             Create New Course 
+                              </Button>
                           </span>
                       </form>
                   </div>
@@ -207,43 +205,11 @@ const Home = ({user,isAuthenticated}) => {
                     <Dialog  open = {open}  onClose ={handleClickClose}>
               <div style = {{padding:'8%'}}>
                 <Typography> SignUp Form Here </Typography>
-                    
                 </div>
                     </Dialog>
             </>)}
-          
-                  {/* <Dialog  open = {open}  onClose ={handleClickClose}>
-                <div style = {{padding:'8%'}}>
-                  <Typography> Create Course </Typography>
-                      <form onSubmit={CourseSubmithandler}>
-                        <Avatar   src = {avatar}  />
-                        <input type = "file"     accept="image/*"  onChange = {handleImageChange}  />
-                      
-                          <label> Title </label>
-                          <input type = "text"  placeholder='Enter Title Name' 
-                          value = {title}
-                          onChange={(e) => setTitle(e.target.value)}
-                          />
 
-                          <label> Description </label>
-                          <input type = "text"  placeholder='Write Description'
-                          value = {description}
-                          onChange={(e) => setdescription(e.target.value)}
-                          /> 
-
-                          <label> Price:- </label>
-                          <input type = "number"  placeholder='Enter Price' 
-                          value = {price}
-                          onChange={(e) => setprice(e.target.value)}
-                          />
-                          <span style = {{padding:'5% 1%'}}>
-                            <Button type = "submit" variant='contained' >  Create New Course  </Button>
-                          </span>
-                      </form>
-                  </div>
-                  </Dialog> */}
-
-      </div>
+       </div>
     </div>
   )
 }
