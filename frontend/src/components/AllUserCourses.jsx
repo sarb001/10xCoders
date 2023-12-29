@@ -22,7 +22,7 @@ const AllUserCourses = () => {
             <Sidebar />
         </div>
         <div className="right-section" style = {{margin:'5%'}}>
-          <h2> My Specific User Cases  </h2>
+          <h2> All  User Cases  </h2>
         </div>
   </div>
   )

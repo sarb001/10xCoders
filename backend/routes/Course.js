@@ -13,12 +13,14 @@ const router = express.Router();
 
 // get all courses 
 router.route('/allcourse').get(AllCourses);
-//get users all courses 
-router.route('/usercourses').get(isAuthenticated  , GetAllUserCourses);
 
 //get  logged user courses 
 router.route('/mycourses').get(isAuthenticated  , GetLoggedUserCourse);
 
+
+
+//get users all courses 
+router.route('/usercourses').get(isAuthenticated  , GetAllUserCourses);
 
 // Create Course 
 router.route('/createcourse').post(isAuthenticated,singleUpload,Createcourse);
