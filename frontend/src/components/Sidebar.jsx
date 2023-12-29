@@ -44,12 +44,7 @@ const Sidebar = () => {
                     <span> <PaymentsIcon /> </span>
                     <Link to={'/usercourses'}> Browse All Courses </Link>
                 </div>
-
-                {/* <div className="pricing link">
-                    <span> <PaymentsIcon /> </span>
-                    <Link to={'/mycourses'}>  My  Courses </Link>
-                </div> */}
-
+                
                 <div className="pricing link">
                     <span> <PaymentsIcon /> </span>
                     <Link to={'/requestcourse'}> Request Course </Link>
@@ -58,6 +53,11 @@ const Sidebar = () => {
                 <div className="pricing link">
                     <span> <PaymentsIcon /> </span>
                     <Link to={'/profile'}> Profile </Link>
+                </div>
+
+                <div className="pricing link">
+                    <span> <PaymentsIcon /> </span>
+                    <Link to={'/dashboard'}> Dashboard  </Link>
                 </div>
             </div>
          </>

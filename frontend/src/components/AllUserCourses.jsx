@@ -18,7 +18,6 @@ const AllUserCourses = () => {
     },[dispatch])
 
   return (
-  
   <div className="home container">
         <div className="left-section">
             <Sidebar />

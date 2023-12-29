@@ -1,6 +1,6 @@
 .container{
     display: grid;
-    grid-template-columns: 0.7fr 3fr;
+    grid-template-columns: 3fr 0.7fr;
 }
 .left-section{
     background-color:lightblue;

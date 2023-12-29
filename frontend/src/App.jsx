@@ -19,6 +19,8 @@ import PaymentSuccess from './components/PaymentSucces';
 import PaymentFailed from './components/PaymentFailed';
 import AllCourse from './components/AllCourse';
 import AllUserCourses from './components/AllUserCourses';
+import Dashboard from './components/Dashboard';
+import CreateCourse from './components/CreateCourse';
 // import { AllCourses, AllUsersCourses } from './Actions/course';
 
 function App() {
@@ -56,6 +58,10 @@ function App() {
             
            <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
 
+           <Route path = "/dashboard" element = {<Dashboard />}>  </Route>
+            
+
+
            <Route path = "/subscribe"   
            element = {<Subscribe  user = {user}  />}>  </Route>
 
@@ -68,6 +74,13 @@ function App() {
             <Route path = "/course/:id"
               element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
             </Route>
+
+
+            <Route path = "/createcourse"
+              element = {<CreateCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
+            </Route>
+
+
 
         </Routes>
      </Router>
