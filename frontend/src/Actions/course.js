@@ -64,7 +64,7 @@ export const AllUsersCourses = () => async(dispatch) => {
                 'Content-Type' :  'application/json'
             }
         })
-        console.log('all courses   --',data.courses);
+        console.log(' user data except course  --',data.courses);
         dispatch({type:"AllUsersCoursesSuccess" ,payload : data.courses});
 
     } catch (error) {

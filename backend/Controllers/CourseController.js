@@ -110,11 +110,13 @@ export const GetAllUserCourses    = async(req,res) => {
          const loggedUserid = req.user._id;
          const user = await User.findById(loggedUserid);
 
+            // except (neglect) user     and        get all user 
         const courses = await Course.find({ creator : { 
                 $ne :  user
             } 
-        });
+        }).populate('creator');
         console.log('all courses backend except - ',courses);
+
         res.status(200).json({
             success : true,
             message : " All Courses Fetched Successfully ",
@@ -137,7 +139,7 @@ export const GetLoggedUserCourse = async(req,res) => {
           const loggeduser = req.user._id;
           const user = await User.findById(loggeduser);
 
-          // find user in  course which is   equal to creator id 
+          // find user inside  which is   equal to creator id 
           const course = await Course.find({
              creator : {
                  $in : user
