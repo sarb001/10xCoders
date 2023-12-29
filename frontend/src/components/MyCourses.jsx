@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Sidebar from './Sidebar'
 import { useDispatch, useSelector }  from 'react-redux' ;
 import { DeleteMyCourse, MyAllCourses } from '../Actions/course';
 import { Link } from 'react-router-dom';
 import '../styles/App.css' ;
 import { LoadUser } from '../Actions/User';
+import DashboardSidebar from './DashboardSidebar';
 
-const MyCourses = () => {
+const MyCourses = ({user,isAuthenticated}) => {
+   console.log('user course -',user);
     const dispatch  = useDispatch();
     const { course , message } = useSelector(state => state.allusers);
     console.log('  myCourses all --', course );
@@ -24,23 +25,25 @@ const MyCourses = () => {
   return (
         <div className="home container">
             <div className="left-section">
-                <Sidebar />
-            </div>
-            <div className="right-section">
-                <h3> My  Total All Courses </h3>
                 <div className="courselist">
-                
+                  
                   {course?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
                         objectFit:'cover',display:'block'
                         ,borderRadius:'25px'}} />
-                     
+                    
                         <span id = "course-detail">
                           <span> Title - {item.title} </span>
                           <span> Price - {item.price} </span>
+                          <span> Lectures - {item.lectures.length} </span>
+                          <span> Creator - {item.creator.name} </span>
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                             <span>
+
+                        {/*  logged user === creator_id --  */}
+                            {/*  user._id ===  */}
+
                             <Link to = {`/course/${item._id}`}>
                               <button className = "view-detail"> View Details </button>
                             </Link>
@@ -52,6 +55,11 @@ const MyCourses = () => {
                   ))}
                 
                 </div>
+            </div>
+
+            <div className="right-section">
+                <h3> My  Total All Courses </h3>
+                <DashboardSidebar />
             </div>
         </div>
   )

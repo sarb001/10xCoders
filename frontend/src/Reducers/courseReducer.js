@@ -31,8 +31,8 @@ export const getcourseReducer = createReducer({
                 console.log('all courses after  ssuccess -',action.payload);
             },
             AllCoursesFailed : (state,action) => {
-            state.loading = false;
-          },
+                state.loading = false;
+            },
        // users
 
             MyCoursesRequest : (state,action) => {

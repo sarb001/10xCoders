@@ -18,9 +18,7 @@ import PaymentSuccess from './components/PaymentSucces';
 import PaymentFailed from './components/PaymentFailed';
 import AllCourse from './components/AllCourse';
 import AllUserCourses from './components/AllUserCourses';
-import Dashboard from './components/Dashboard';
 import CreateCourses from './components/CreateCourses';
-// import { AllCourses, AllUsersCourses } from './Actions/course';
 
 function App() {
 
@@ -32,55 +30,51 @@ function App() {
     <> 
      <Router>
       <Header user = {user}  isAuthenticated = {isAuthenticated}  />
-        <Routes>
-           <Route path = "/"  
-            element = {<Home  user = {user}  isAuthenticated = {isAuthenticated} />}>  
-           </Route>
-           <Route path = "/login"  element = {<Login />}>  </Route>
-           <Route path = "/signup" element = {<Signup />}>  </Route>
-           <Route path = "/logout" element = {<Logout />}>  </Route>
+          <Routes>
+            <Route path = "/"  
+              element = {<Home  user = {user}  isAuthenticated = {isAuthenticated} />}>  
+            </Route>
+            <Route path = "/login"  element = {<Login />}>  </Route>
+            <Route path = "/signup" element = {<Signup />}>  </Route>
+            <Route path = "/logout" element = {<Logout />}>  </Route>
 
-           <Route path = "/allcourse" 
-             element = {<AllCourse  user = {user}  isAuthenticated = {isAuthenticated} />}>  
-           </Route>
-
-           <Route path = "/usercourses" 
-              element = { <AllUserCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
+            <Route path = "/allcourse" 
+              element = {<AllCourse  user = {user}  isAuthenticated = {isAuthenticated} />}>  
             </Route>
 
-           <Route path = "/mycourses" 
-              element = { <MyCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
-            </Route>
+            <Route path = "/usercourses" 
+                element = { <AllUserCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
+              </Route>
 
-           <Route path = "/profile"
-            element = {<Profile   user = {user} />}>  </Route>
-            
-           <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
+            <Route path = "/mycourses" 
+                element = { <MyCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
+              </Route>
 
-           <Route path = "/dashboard" element = {<Dashboard />}>  </Route>
-            
+            <Route path = "/profile"
+              element = {<Profile   user = {user} />}>  </Route>
+              
+            <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
 
+            <Route path = "/createcourse" element = {<CreateCourses />}>  </Route>
+              
+            <Route path = "/subscribe"   
+            element = {<Subscribe  user = {user}  />}>  </Route>
 
-           <Route path = "/subscribe"   
-           element = {<Subscribe  user = {user}  />}>  </Route>
+            <Route path = "/paymentsuccess"   
+            element = {<PaymentSuccess  user = {user}  />}>  </Route>
 
-           <Route path = "/paymentsuccess"   
-           element = {<PaymentSuccess  user = {user}  />}>  </Route>
+            <Route path = "/paymentfailed"   
+            element = {<PaymentFailed  user = {user}  />}>  </Route>
 
-           <Route path = "/paymentfailed"   
-           element = {<PaymentFailed  user = {user}  />}>  </Route>
+              <Route path = "/course/:id"
+                element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
+              </Route>
 
-            <Route path = "/course/:id"
-              element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
-            </Route>
+              <Route path = "/createcourse"
+                element = {<CreateCourses user = {user}  isAuthenticated = {isAuthenticated} />}>  
+              </Route>
 
-            <Route path = "/createcourse"
-              element = {<CreateCourses user = {user}  isAuthenticated = {isAuthenticated} />}>  
-            </Route>
-
-
-
-        </Routes>
+          </Routes>
      </Router>
       <Footer />
       <ToastContainer />

@@ -6,19 +6,20 @@ import { useNavigate } from 'react-router-dom';
 import { LoadUser } from '../Actions/User';
 import { CreateCourse } from '../Actions/course';
 
-const CreateCourses = ({user,isAuthenticated}) => {
+const CreateCourses = ({user,isAuthenticated = true}) => {
     
-    const [open,setopen] = useState(false);
-    const [avatar,setAvatar] = useState("");
-    const [imagePrev,setImagePrev] = useState("");
-    const [title,setTitle] = useState("");
-    const [description,setdescription] = useState("");
-    const [price,setprice] = useState("");
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+      const [open,setopen] = useState(false);
+      const [avatar,setAvatar] = useState("");
+      const [imagePrev,setImagePrev] = useState("");
+      const [title,setTitle] = useState("");
+      const [description,setdescription] = useState("");
+      const [price,setprice] = useState("");
+      const dispatch = useDispatch();
+      const navigate = useNavigate();
+      console.log('isAuth-',isAuthenticated);
 
-  const handleClickOpen  = () => {setopen(true)}
-  const handleClickClose = () => {setopen(false)}
+    const handleClickOpen  = () => {setopen(true)}
+    const handleClickClose = () => {setopen(false)}
 
     const handleImageChange = (e) => {
       const  file =  e.target.files[0];

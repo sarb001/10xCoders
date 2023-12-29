@@ -144,7 +144,7 @@ export const GetLoggedUserCourse = async(req,res) => {
              creator : {
                  $in : user
              }
-          })
+          }).populate('creator');
 
             console.log("mycourses backend --",course);
             await user.save();
@@ -328,7 +328,6 @@ export const GetCourseLectures =  async(req,res) => {
         }
 
         const Lectures = findCourse.lectures;
-        // console.log('Get All Lectures-',Lectures);
 
         res.status(200).json({
             success : true,

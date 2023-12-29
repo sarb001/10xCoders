@@ -9,9 +9,8 @@ const DashboardSidebar = () => {
     <div>
         <Box sx = {{width:'100%'}}>
             <Stack spacing={2}>
-                <span> <Link to = "/dashboard">     Dashboard </Link> </span>
                 <span> <Link to = "/createcourse">  Create Course </Link></span>
-                <span> <Link to = "/usercourses">   Courses  </Link> </span>    
+                <span> <Link to = "/mycourses">   My Courses  </Link> </span>    
             </Stack>
         </Box>
     </div>
