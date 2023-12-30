@@ -9,8 +9,8 @@ import DashboardSidebar from './DashboardSidebar';
 const MyCourses = ({user,isAuthenticated}) => {
    console.log('user course -',user);
     const dispatch  = useDispatch();
-    const { course , message } = useSelector(state => state.allusers);
-    console.log('  myCourses all --', course );
+    const { courses , message } = useSelector(state => state.allusers);
+    console.log('  myCourses all --', courses );
     
     useEffect(() => {
       dispatch(MyAllCourses());
@@ -27,7 +27,7 @@ const MyCourses = ({user,isAuthenticated}) => {
             <div className="left-section">
                 <div className="courselist">
                   
-                  {course?.map((item) => (
+                  {courses?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
                         objectFit:'cover',display:'block'

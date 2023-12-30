@@ -13,7 +13,6 @@ const MainCourse = ({user,isAuthenticated}) => {
 
     const  { id } = useParams();
     const  courseid = id;
-    // console.log(' params course  id - ',courseid)
     const  dispatch = useDispatch();
     const  [title,setTitle] = useState('');
     const  [description,setdescription] = useState('');
@@ -24,8 +23,7 @@ const MainCourse = ({user,isAuthenticated}) => {
     const handleClickOpen  = () => {setopen(true)}
     const handleClickClose = () => {setopen(false)}
 
-     const  { course , Lectures  , loading }  = useSelector((state) => state.allusers);
-     
+     const  { courses , Lectures  , loading }  = useSelector((state) => state.allusers);
      
       useEffect(() => {
         dispatch(CourseLectures(courseid));
@@ -80,16 +78,16 @@ const MainCourse = ({user,isAuthenticated}) => {
         return  <h1> <Loader /> </h1>
       }
 
-      console.log('Main COurse  - ',course);
+      console.log('Main COurse  - ',courses);
 
-      const maincourseid = course && course.length > 0 ? course[0] : null; 
+      const maincourseid = courses && courses.length > 0 ? courses[0] : null; 
       const creatorid    = maincourseid ? maincourseid.creator?._id : null; 
       const userid       = user ? user._id : null; 
 
     //  console.log(' MainCourse _id -' ,maincourseid);
      console.log('Logged userr id - ',creatorid);
      console.log('All Lectures  -'   ,userid);
-     console.log(' isAuth  -'   ,isAuthenticated);
+     console.log(' isAuthhh1  -'   ,isAuthenticated);
      console.log(' user --'   ,user);
 
   return (
@@ -129,61 +127,88 @@ const MainCourse = ({user,isAuthenticated}) => {
                                       <h2>{item.title} </h2> 
                                     </div>
                                     <div className="second-side">
-                                     {isAuthenticated && (
+                                     {(user == null ||  creatorid !== userid) ? (
                                       <>  
-                                            <video width="400" height="300" controls>
+                                        <button onClick={handleClickOpen} >  Unlocked Content  </button>
+                                      </>
+                                     ) : (
+                                      <>
+                                      <video width="400" height="300" controls>
                                               <source src = {item.video.url} type="video/mp4">
                                               </source>
                                           </video>
                                       </>
                                      )}
-                                      <button onClick={handleClickOpen} >  Unlocked Content  </button>
                                     </div>
                                 </div>
                               )
-                            ) : (<>  No Lectures Present </>)}
+                            ) : (<>  
+                             No Lectures Present 
+                            </>)}
                             </div>
                           </>
                           }
 
 
-                            {creatorid === userid ? (
-                             <>
-                                <div> 
-                                    <h2> Add Lectures Now  </h2>
-                                    <form  
-                                    onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
-                                            <span style = {{padding:'4%'}}> Title </span>
-                                            <input type = "text"  placeholder='Enter title ...' 
-                                            value = {title}
-                                            onChange = {(e) => setTitle(e.target.value)}
-                                            />
-                                            <span style = {{padding:'4%'}}> Description </span>
-                                            <input type = "text"  placeholder='Enter Description...' 
-                                            value = {description}
-                                            onChange = {(e) => setdescription(e.target.value)}
-                                            />
-                                            <span style = {{padding:'4%'}}> Select Video </span>
-                                            <input type = "file" accept='video/*'
-                                            onChange={changevideoHandler} />
-                    
-                                            {videoprev && (
-                                              <video controls src = {videoprev} 
-                                              controlsList='nodownload'>
-                                              </video>
-                                            ) }
-                    
-                                            <span style = {{padding:'4%'}}>
-                                              <Button variant = 'contained' 
-                                              type = "submit" 
-                                              disabled = {loading}> Upload  Lecture </Button>
-                                            </span>
-                                    </form> 
-                                </div> 
+                          {user == null ? (
+                                <>
+                                
                                 </>
-                            ) : ""}
-                        
+                          ): (
+                          <>
+ <>
+                                  {creatorid === userid ? (
+                                     <>
+                                      <div> 
+                                          <h2> Add Lectures Now  </h2>
+                                          <form  
+                                          onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
+                                                  <span style = {{padding:'4%'}}> Title </span>
+                                                  <input type = "text"  placeholder='Enter title ...' 
+                                                  value = {title}
+                                                  onChange = {(e) => setTitle(e.target.value)}
+                                                  />
+                                                  <span style = {{padding:'4%'}}> Description </span>
+                                                  <input type = "text"  placeholder='Enter Description...' 
+                                                  value = {description}
+                                                  onChange = {(e) => setdescription(e.target.value)}
+                                                  />
+                                                  <span style = {{padding:'4%'}}> Select Video </span>
+                                                  <input type = "file" accept='video/*'
+                                                  onChange={changevideoHandler} />
+                          
+                                                  {videoprev && (
+                                                    <video controls src = {videoprev} 
+                                                    controlsList='nodownload'>
+                                                    </video>
+                                                  ) }
+                          
+                                                  <span style = {{padding:'4%'}}>
+                                                    <Button variant = 'contained' 
+                                                    type = "submit" 
+                                                    disabled = {loading}> Upload  Lecture </Button>
+                                                  </span>
+                                          </form> 
+                                      </div> 
+                                      </>
+                                  ) : (
+                                    <>
+                                        
+                                    </>
+                                  )}     
+                                </>
+                          </>)}
+                 </div>
+             </div>
 
+            {!user == null && (
+              <>
+              <div className="right-section">
+                  <DashboardSidebar />
+              </div>
+              </>
+            )}
+           </div>
                         <Dialog  open = {open}  onClose ={handleClickClose}>
                         <div style = {{padding:'8%'}}>
                           {user ? 
@@ -195,14 +220,6 @@ const MainCourse = ({user,isAuthenticated}) => {
                           </>}
                           </div>
                         </Dialog>
-
-                 </div>
-             </div>
-
-             <div className="right-section">
-                <DashboardSidebar />
-            </div>
-           </div>
     </div>
   )
 }

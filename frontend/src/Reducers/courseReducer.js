@@ -40,7 +40,7 @@ export const getcourseReducer = createReducer({
             },
             MyCoursesSuccess : (state,action) => {
                 state.loading = false;
-                state.course = action.payload;
+                state.courses = action.payload;
             },
             MyCoursesFailed : (state,action) => {
                 state.loading = false;

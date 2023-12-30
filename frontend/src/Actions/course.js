@@ -49,13 +49,13 @@ export const MyAllCourses = () => async(dispatch) => {
             }
         })
         console.log('mycourses --',data);
-        dispatch({type:"MyCoursesSuccess",payload : data.course});
+        dispatch({type:"MyCoursesSuccess",payload : data.courses});
     } catch (error) {
         dispatch({type:"MyCoursesFailed" ,payload: error.response.data.message});
     }
 }
 
-// all user's  courses 
+// all user's  courses except 
 export const AllUsersCourses = () => async(dispatch) => {
     try {
         dispatch({type:"AllUsersCoursesRequest"});

@@ -17,6 +17,7 @@ router.route('/allcourse').get(AllCourses);
 //get  logged user courses 
 router.route('/mycourses').get(isAuthenticated  , GetLoggedUserCourse);
 
+
 //get users all courses 
 router.route('/usercourses').get(isAuthenticated  , GetAllUserCourses);
 
