@@ -23,7 +23,7 @@ const MyCourses = ({user,isAuthenticated}) => {
     }
   
   return (
-        <div className="home container">
+        <div className="home secondcontainer">
             <div className="left-section">
                 <div className="courselist">
                   
@@ -40,10 +40,6 @@ const MyCourses = ({user,isAuthenticated}) => {
                           <span> Creator - {item.creator.name} </span>
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                             <span>
-
-                        {/*  logged user === creator_id --  */}
-                            {/*  user._id ===  */}
-
                             <Link to = {`/course/${item._id}`}>
                               <button className = "view-detail"> View Details </button>
                             </Link>

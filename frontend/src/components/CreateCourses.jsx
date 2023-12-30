@@ -56,15 +56,16 @@ const CreateCourses = ({user,isAuthenticated = true}) => {
 
   return (
     <>
-       <div className="home container">
+       <div className="home secondcontainer">
             <div className="left-section">
                     <h2> Create Courses  </h2>  
                     <Button onClick={handleClickOpen} variant='contained'> 
                         Create Course  
                     </Button>     
             </div>
-            <div className="right-section" style = {{margin:'5%'}}>
-                  <DashboardSidebar />
+            
+            <div className="right-section">
+                   <DashboardSidebar />
             </div>
         </div>
 

@@ -380,13 +380,21 @@ export const DeleteCourse = async(req,res) => {
 
 export const BuySubscripton = async(req,res) => {
     try {
-        const user = await User.findById(req.user._id);
+        const user = await User.findById(req.user._id).populate('courselist');
+        const  { id } = req.params;
+        console.log('id in params -',{id});
+
+        
+         console.log('userrr subsc-',user);
+        // const getcourseid = user.courselist.populate('_id');
+        // console.log('fullcourse -',getcourseid);
 
          const instance = new Razorpay({
             key_id: process.env.RAZORPAY_KEY_ID,
             key_secret :process.env.RAZORPAY_KEY_SECRET
          });
-         const subscription =  await instance.subscriptions.create({
+         const order  =  await instance.orders.create({
+            // amount : 
             plan_id: process.env.RAZORPAY_PLAN_ID,
             customer_notify: 1,
             quantity: 5,

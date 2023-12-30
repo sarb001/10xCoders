@@ -1,10 +1,10 @@
 import React ,{ useEffect, useState } from 'react'
 import { useSelector  ,useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { AddMyLecture, CourseLectures, DeleteMyLecture } from '../Actions/course.js' ;
 import '../styles/App.css';
 import { Button, Dialog, Input, Typography } from '@mui/material';
-import { LoadUser } from '../Actions/User.js';
+import { BuySubscription, LoadUser } from '../Actions/User.js';
 import { toast } from 'react-toastify';
 import DashboardSidebar from './DashboardSidebar.jsx';
 import Loader from './Loader.jsx';
@@ -19,9 +19,11 @@ const MainCourse = ({user,isAuthenticated}) => {
     const  [video,setVideo] = useState('');
     const  [videoprev,setVideoprev] = useState('');
     const  [open,setopen] = useState(false);
+    // const  [openpaymentbox,setopenpaymentbox] = useState(false);
 
     const handleClickOpen  = () => {setopen(true)}
     const handleClickClose = () => {setopen(false)}
+    const navigate = useNavigate();
 
      const  { courses , Lectures  , loading }  = useSelector((state) => state.allusers);
      
@@ -87,8 +89,18 @@ const MainCourse = ({user,isAuthenticated}) => {
     //  console.log(' MainCourse _id -' ,maincourseid);
      console.log('Logged userr id - ',creatorid);
      console.log('All Lectures  -'   ,userid);
-     console.log(' isAuthhh1  -'   ,isAuthenticated);
-     console.log(' user --'   ,user);
+     console.log(' isAuthhh1  -'     ,isAuthenticated);
+     console.log(' user --'          ,user);
+
+      const handlebuycourse = async () => {
+          handlePaymentBox();
+         dispatch(BuySubscription());
+      }
+
+      const handlePaymentBox = () => {
+        // navigate('subscribe');
+      }
+
 
   return (
     <div>
@@ -209,11 +221,11 @@ const MainCourse = ({user,isAuthenticated}) => {
               </>
             )}
            </div>
-                        <Dialog  open = {open}  onClose ={handleClickClose}>
-                        <div style = {{padding:'8%'}}>
+                        <Dialog  style = {{margin:'5%'}} open = {open}  onClose ={handleClickClose}>
+                        <div style = {{padding:'8%',margin:'5%'}}>
                           {user ? 
                           (<>
-                              <button> Buy Now  </button>
+                              <button  onClick={handlebuycourse}> Buy Now  </button>
                           </>)
                           : <>
                               <Typography> Create Account First/Login   </Typography>

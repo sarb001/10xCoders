@@ -21,9 +21,9 @@ const Profile = () => {
     dispatch(LoadUser());
  },[dispatch])
 
-   const handlesubscription = () => {
-     navigate('/subscribe');
-   }
+  //  const handlesubscription = () => {
+  //    navigate('/subscribe');
+  //  }
 
    const cancelsubscription = async() => {
     console.log('cliedkwwk');
@@ -41,7 +41,7 @@ const Profile = () => {
                 <span> Name is - {user?.name}   </span>
                 <span> Email is - {user?.email}  </span>
               </div>
-              {user?.subscription && user?.subscription.status === 'active' ? (   
+              {/* {user?.subscription && user?.subscription.status === 'active' ? (   
                  <Button variant='contained' onClick={cancelsubscription}>
                   Cancel Subscription 
                </Button>
@@ -49,7 +49,7 @@ const Profile = () => {
                   <Button variant='contained' onClick={handlesubscription}>
                      Subscribe 
                   </Button>
-                )}
+                )} */}
           </div>
     </div>
   )

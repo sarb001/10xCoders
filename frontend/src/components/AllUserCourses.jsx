@@ -22,9 +22,10 @@ const AllUserCourses = () => {
         <div className="left-section">
             <Sidebar />
         </div>
-        <div className="right-section" style = {{margin:'5%'}}>
+        <div className="right-section" style = {{margin:'1%'}}>
           <h2> All  User Cases  </h2>
             
+                 <div className="courselist">
                    {courses?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
@@ -47,6 +48,7 @@ const AllUserCourses = () => {
                         </span>
                       </div>
                   ))}
+                 </div>
         </div>
   </div>
   )
