@@ -86,9 +86,11 @@ const MainCourse = ({user,isAuthenticated}) => {
       const creatorid    = maincourseid ? maincourseid.creator?._id : null; 
       const userid       = user ? user._id : null; 
 
-     console.log(' MainCourse _id -' ,maincourseid);
+    //  console.log(' MainCourse _id -' ,maincourseid);
      console.log('Logged userr id - ',creatorid);
      console.log('All Lectures  -'   ,userid);
+     console.log(' isAuth  -'   ,isAuthenticated);
+     console.log(' user --'   ,user);
 
   return (
     <div>
@@ -97,7 +99,6 @@ const MainCourse = ({user,isAuthenticated}) => {
              <div className="left-section">
                 <div className = "lecture-container" style = {{padding:'5%',
                 display:'grid',gridTemplateColumns:'1.6fr 0.4fr'}}>
-
 
                         {isSubscribed ? (
                         <>  
@@ -113,12 +114,7 @@ const MainCourse = ({user,isAuthenticated}) => {
                                               </source>
                                           </video>
                                       </div>
-                                      {/* if subscribed then it unlocked already (  can access )  
-                                    //  if Not  Subscribed then it is Locked cannot access lectures  */}
-
-                                    
                                     </div>
-
                                 )
                               ) : (<>  No Lectures Present </>)}
                           </div>
@@ -133,10 +129,17 @@ const MainCourse = ({user,isAuthenticated}) => {
                                       <h2>{item.title} </h2> 
                                     </div>
                                     <div className="second-side">
+                                     {isAuthenticated && (
+                                      <>  
+                                            <video width="400" height="300" controls>
+                                              <source src = {item.video.url} type="video/mp4">
+                                              </source>
+                                          </video>
+                                      </>
+                                     )}
                                       <button onClick={handleClickOpen} >  Unlocked Content  </button>
                                     </div>
-                                  </div>
-
+                                </div>
                               )
                             ) : (<>  No Lectures Present </>)}
                             </div>
@@ -144,43 +147,42 @@ const MainCourse = ({user,isAuthenticated}) => {
                           }
 
 
-
-                          {/*    user._  ===     */}
-                          {/*  loggeduser ===  creator_id */}
-
-
-
-                          {/* <div> 
-                              <h2> Add Lectures Now  </h2>
-                              <form  
-                              onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
-                                      <span style = {{padding:'4%'}}> Title </span>
-                                      <input type = "text"  placeholder='Enter title ...' 
-                                      value = {title}
-                                      onChange = {(e) => setTitle(e.target.value)}
-                                      />
-                                      <span style = {{padding:'4%'}}> Description </span>
-                                      <input type = "text"  placeholder='Enter Description...' 
-                                      value = {description}
-                                      onChange = {(e) => setdescription(e.target.value)}
-                                      />
-                                      <span style = {{padding:'4%'}}> Select Video </span>
-                                      <input type = "file" accept='video/*'
-                                      onChange={changevideoHandler} />
-              
-                                      {videoprev && (
-                                        <video controls src = {videoprev} 
-                                        controlsList='nodownload'>
-                                        </video>
-                                      ) }
-              
-                                      <span style = {{padding:'4%'}}>
-                                        <Button variant = 'contained' 
-                                        type = "submit" 
-                                        disabled = {lectureloading}> Upload  Lecture </Button>
-                                      </span>
-                              </form> 
-                          </div>  */}
+                            {creatorid === userid ? (
+                             <>
+                                <div> 
+                                    <h2> Add Lectures Now  </h2>
+                                    <form  
+                                    onSubmit = {e => Lecturehandler(e,id,title,description,video)}>
+                                            <span style = {{padding:'4%'}}> Title </span>
+                                            <input type = "text"  placeholder='Enter title ...' 
+                                            value = {title}
+                                            onChange = {(e) => setTitle(e.target.value)}
+                                            />
+                                            <span style = {{padding:'4%'}}> Description </span>
+                                            <input type = "text"  placeholder='Enter Description...' 
+                                            value = {description}
+                                            onChange = {(e) => setdescription(e.target.value)}
+                                            />
+                                            <span style = {{padding:'4%'}}> Select Video </span>
+                                            <input type = "file" accept='video/*'
+                                            onChange={changevideoHandler} />
+                    
+                                            {videoprev && (
+                                              <video controls src = {videoprev} 
+                                              controlsList='nodownload'>
+                                              </video>
+                                            ) }
+                    
+                                            <span style = {{padding:'4%'}}>
+                                              <Button variant = 'contained' 
+                                              type = "submit" 
+                                              disabled = {loading}> Upload  Lecture </Button>
+                                            </span>
+                                    </form> 
+                                </div> 
+                                </>
+                            ) : ""}
+                        
 
                         <Dialog  open = {open}  onClose ={handleClickClose}>
                         <div style = {{padding:'8%'}}>
