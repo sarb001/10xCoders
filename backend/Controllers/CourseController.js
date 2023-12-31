@@ -389,6 +389,9 @@ export const BuyCourse =  async(req,res) => {
             const { id } = req.params;
             console.log(' _id for  BuyCourse -- ',id);
 
+            const  course = await Course.findById(id);
+            console.log('courses to byuu-',course);
+
             return  res.status(200).json({
                 success : true,
                 message : "Get Details Course",
