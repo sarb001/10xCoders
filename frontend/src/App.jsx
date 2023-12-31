@@ -39,7 +39,7 @@ function App() {
             <Route path = "/logout" element = {<Logout />}>  </Route>
 
             <Route path = "/allcourse" 
-              element = {<AllCourse  user = {user}  isAuthenticated = {isAuthenticated} />}>  
+              element = {<AllCourse  />}>  
             </Route>
 
             <Route path = "/usercourses" 

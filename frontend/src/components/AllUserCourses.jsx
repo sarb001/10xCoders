@@ -8,8 +8,9 @@ import '../styles/App.css' ;
 
 const AllUserCourses = () => {
 
-   const {  courses  } = useSelector(state => state.allusers);
-   console.log(' course for except use1r -',courses);
+   const allusercourse  = useSelector(state => state.allusers?.courses);
+
+   console.log(' course for except user -',allusercourse);
    const  dispatch = useDispatch();
 
     useEffect(()=> {
@@ -17,16 +18,21 @@ const AllUserCourses = () => {
       dispatch(LoadUser());
     },[dispatch])
 
+    const BuyingCourseHandler = (id) => {
+      console.log('id is --',id);
+    }
+
   return (
   <div className="home container">
         <div className="left-section">
             <Sidebar />
         </div>
+
         <div className="right-section" style = {{margin:'1%'}}>
           <h2> All  User Cases  </h2>
             
                  <div className="courselist">
-                   {courses?.map((item) => (
+                   {allusercourse?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
                         objectFit:'cover',display:'block'
@@ -38,22 +44,17 @@ const AllUserCourses = () => {
                           <span> Creator - {item.creator.name} </span>
                           <span> Lectures - {item.lectures.length} </span>
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
-                            {/* <span>
-                              <Link to = {`/course/${item._id}`}>
-                                <button className = "view detail"> View Details </button>
-                              </Link>
-                            </span> */}
                             <span>
-                              {/* <Link to = {`/course/${item._id}`}> */}
-                                <button className = "view detail"> Buy Now </button>
-                              {/* </Link> */}
+                                <button onClick = {()  => BuyingCourseHandler(item._id)}
+                                 className = "view detail"> Buy Now </button>
                             </span>
                          
                           {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
                           </div>
                         </span>
+
                       </div>
-                  ))}
+                   ))}
                  </div>
         </div>
   </div>
@@ -61,3 +62,10 @@ const AllUserCourses = () => {
 }
 
 export default AllUserCourses
+
+
+{/* <span>
+  <Link to = {`/course/${item._id}`}>
+    <button className = "view detail"> View Details </button>
+  </Link>
+</span> */}

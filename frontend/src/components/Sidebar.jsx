@@ -55,10 +55,11 @@ const Sidebar = () => {
                     <Link to={'/profile'}> Profile </Link>
                 </div>
 
-                <div className="pricing link">
+                {/* <div className="pricing link">
                     <span> <PaymentsIcon /> </span>
                     <Link to={'/createcourse'}> Settings </Link>
-                </div>
+                </div> */}
+
             </div>
          </>
       </>

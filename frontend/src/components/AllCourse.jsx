@@ -8,8 +8,11 @@ import { LoadUser } from '../Actions/User';
 const AllCourse = () => {
 
     const  dispatch = useDispatch();
-    const { courses , message } = useSelector(state => state.allusers);
-    console.log('allcourses front -',courses);
+    
+    const { isAuthenticated , user } = useSelector((state) => state.user);
+
+    const allcourses  = useSelector(state => state.allusers?.courses);
+    console.log('allcourses front -',allcourses);
 
      useEffect(() => {
         dispatch(AllCourses())
@@ -19,6 +22,9 @@ const AllCourse = () => {
      const BuyingCourseHandler = (id) => {
        console.log('buying course-',id);
      }
+
+    //  const user
+    
 
   return (
     <div>
@@ -30,7 +36,7 @@ const AllCourse = () => {
                 <h3> Browsing  All Courses </h3>
                 <div className="courselist">
                 
-                  {courses?.map((item) => (
+                  {allcourses?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
                         objectFit:'cover',display:'block'
@@ -43,12 +49,22 @@ const AllCourse = () => {
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                             <span>
                             {/* <Link to = {`/course/${item._id}`}> */}
-
-
-                          <button className = "view detail"  
-                          onClick = {()  => BuyingCourseHandler(item._id)}> Buy Now </button>
-                            {/* </Link> */}
-                            </span>
+                              {user == null ? (
+                              <> 
+                                 <button className = "view detail"  
+                                 > Login First 
+                                 </button>
+                             
+                              </>): (
+                              <>  
+                                  <button className = "view detail"  
+                                     onClick = {()  => BuyingCourseHandler(item._id)}> Buy Now 
+                                 </button>
+                              </>)}
+                                {/* <button className = "view detail"  
+                                 onClick = {()  => BuyingCourseHandler(item._id)}> Buy Now 
+                                 </button> */}
+                                </span>
 
                             
                           {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
