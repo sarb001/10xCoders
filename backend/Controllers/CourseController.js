@@ -381,7 +381,6 @@ export const DeleteCourse = async(req,res) => {
 
 export const BuyCourse =  async(req,res) => {
     try {
-         
             if(!req.user){
                 return res.status(401).json({message : " UnAuthorized "});
             }
@@ -390,12 +389,19 @@ export const BuyCourse =  async(req,res) => {
             console.log(' _id for  BuyCourse -- ',id);
 
             const  course = await Course.findById(id);
-            console.log('courses to byuu-',course);
+            console.log('course price --',course.price);
+
+             const order = await  instance.orders.create({
+                amount : course.price * 100,
+                currency : 'INR',
+             });
+
+            console.log('order in backend -',order);
 
             return  res.status(200).json({
                 success : true,
                 message : "Get Details Course",
-                id, 
+                course, 
             })
 
     } catch (error) {

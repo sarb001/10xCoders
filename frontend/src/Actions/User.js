@@ -81,7 +81,7 @@ export const BuyCourse  = (id) => async(dispatch) => {
             withCredentials: true
         });
         console.log(' Buying Course here - ',{data});
-        dispatch({type:"BuySpecificCourseSuccess" ,payload : data});
+        dispatch({type:"BuySpecificCourseSuccess" ,payload : data.course});
 
     } catch (error) {
         console.log('error in actions -',error);

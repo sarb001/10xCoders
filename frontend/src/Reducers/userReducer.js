@@ -71,7 +71,7 @@ export const userReducer = createReducer({},{
      BuySpecificCourseSuccess : (state,action) => {
         state.loading = false,
         state.isAuthenticated = true;
-        state.id = action.payload;
+        state.course = action.payload;
     },
     BuySpecificCourseFailed : (state,action) => {
         state.loading = false,
