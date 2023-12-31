@@ -18,8 +18,9 @@ const AllUserCourses = () => {
       dispatch(LoadUser());
     },[dispatch])
 
-    const BuyingCourseHandler = (id) => {
+    const BuyingCourseHandler = (id,price) => {
       console.log('id is --',id);
+      console.log('pricee is --',price);
     }
 
   return (
@@ -45,7 +46,8 @@ const AllUserCourses = () => {
                           <span> Lectures - {item.lectures.length} </span>
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                             <span>
-                                <button onClick = {()  => BuyingCourseHandler(item._id)}
+                                 
+                                <button onClick = {()  => BuyingCourseHandler(item._id,item.price)}
                                  className = "view detail"> Buy Now </button>
                             </span>
                          
