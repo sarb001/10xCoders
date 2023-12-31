@@ -16,6 +16,10 @@ const AllCourse = () => {
         dispatch(LoadUser());
      },[dispatch])
 
+     const BuyingCourseHandler = (id) => {
+       console.log('buying course-',id);
+     }
+
   return (
     <div>
             <div className="home container">
@@ -38,10 +42,15 @@ const AllCourse = () => {
                           <span> Creator - {item.creator.name} </span>
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                             <span>
-                            <Link to = {`/course/${item._id}`}>
-                              <button className = "view-detail"> View Details </button>
-                            </Link>
+                            {/* <Link to = {`/course/${item._id}`}> */}
+
+
+                          <button className = "view detail"  
+                          onClick = {()  => BuyingCourseHandler(item._id)}> Buy Now </button>
+                            {/* </Link> */}
                             </span>
+
+                            
                           {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
                           </div>
                         </span>

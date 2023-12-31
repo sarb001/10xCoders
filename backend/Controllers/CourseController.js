@@ -383,7 +383,6 @@ export const BuySubscripton = async(req,res) => {
         const user = await User.findById(req.user._id).populate('courselist');
         const  { id } = req.params;
         console.log('id in params -',{id});
-
         
          console.log('userrr subsc-',user);
         // const getcourseid = user.courselist.populate('_id');
@@ -393,6 +392,7 @@ export const BuySubscripton = async(req,res) => {
             key_id: process.env.RAZORPAY_KEY_ID,
             key_secret :process.env.RAZORPAY_KEY_SECRET
          });
+         
          const order  =  await instance.orders.create({
             // amount : 
             plan_id: process.env.RAZORPAY_PLAN_ID,

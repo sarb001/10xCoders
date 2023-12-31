@@ -38,11 +38,17 @@ const AllUserCourses = () => {
                           <span> Creator - {item.creator.name} </span>
                           <span> Lectures - {item.lectures.length} </span>
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
+                            {/* <span>
+                              <Link to = {`/course/${item._id}`}>
+                                <button className = "view detail"> View Details </button>
+                              </Link>
+                            </span> */}
                             <span>
-                            <Link to = {`/course/${item._id}`}>
-                              <button className = "view-detail"> View Details </button>
-                            </Link>
+                              {/* <Link to = {`/course/${item._id}`}> */}
+                                <button className = "view detail"> Buy Now </button>
+                              {/* </Link> */}
                             </span>
+                         
                           {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
                           </div>
                         </span>

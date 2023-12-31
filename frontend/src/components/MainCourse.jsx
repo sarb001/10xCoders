@@ -104,7 +104,7 @@ const MainCourse = ({user,isAuthenticated}) => {
 
   return (
     <div>
-          <div className="home container">
+          <div className="home secondcontainer">
           
              <div className="left-section">
                 <div className = "lecture-container" style = {{padding:'5%',
@@ -138,26 +138,32 @@ const MainCourse = ({user,isAuthenticated}) => {
                                     <div className="first-side">
                                       <h2>{item.title} </h2> 
                                     </div>
+                                    
                                     <div className="second-side">
-                                     {(user == null ||  creatorid !== userid) ? (
+                                         <video width="400" height="300" controls>
+                                              <source src = {item.video.url} type="video/mp4">
+                                              </source>
+                                          </video>
+                                    </div>
+                                     {/* {(user == null ||  creatorid !== userid) ? (
                                       <>  
                                         <button onClick={handleClickOpen} >  Unlocked Content  </button>
                                       </>
                                      ) : (
                                       <>
-                                      <video width="400" height="300" controls>
+                                           <video width="400" height="300" controls>
                                               <source src = {item.video.url} type="video/mp4">
                                               </source>
                                           </video>
                                       </>
-                                     )}
-                                    </div>
+                                     )} */}
                                 </div>
                               )
                             ) : (<>  
                              No Lectures Present 
                             </>)}
                             </div>
+                           
                           </>
                           }
 
@@ -167,8 +173,7 @@ const MainCourse = ({user,isAuthenticated}) => {
                                 
                                 </>
                           ): (
-                          <>
- <>
+                            <>
                                   {creatorid === userid ? (
                                      <>
                                       <div> 
@@ -208,20 +213,25 @@ const MainCourse = ({user,isAuthenticated}) => {
                                         
                                     </>
                                   )}     
-                                </>
+                              
                           </>)}
                  </div>
              </div>
 
-            {!user == null && (
-              <>
-              <div className="right-section">
-                  <DashboardSidebar />
-              </div>
-              </>
-            )}
+             <div className="right-section">
+               <Button  variant='contained' onClick = {handlebuycourse}> Buy Now  </Button>
+             </div>
+
+                {!user == null && (
+                  <>
+                  <div className="right-section">
+                      <DashboardSidebar />
+                  </div>
+                  </>
+                )}
            </div>
-                        <Dialog  style = {{margin:'5%'}} open = {open}  onClose ={handleClickClose}>
+
+           <Dialog  style = {{margin:'5%'}} open = {open}  onClose ={handleClickClose}>
                         <div style = {{padding:'8%',margin:'5%'}}>
                           {user ? 
                           (<>
@@ -231,7 +241,8 @@ const MainCourse = ({user,isAuthenticated}) => {
                               <Typography> Create Account First/Login   </Typography>
                           </>}
                           </div>
-                        </Dialog>
+           </Dialog>
+    
     </div>
   )
 }
