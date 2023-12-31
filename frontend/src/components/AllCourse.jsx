@@ -61,8 +61,6 @@ const AllCourse = () => {
                                 </>): ("")
                                 }
                                   </span>
-
-                              
                             {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
                             </div>
                           </span>

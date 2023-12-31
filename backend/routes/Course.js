@@ -2,9 +2,8 @@
 import express from 'express';
 import {  AllCourses, GetLoggedUserCourse, 
   RequestCourse, AddLecture,
-DeleteLecture, GetCourseLectures, DeleteCourse, 
-BuySubscripton, PaymentVerification,
-GetRazorPayKey, CancelSubscription, Createcourse, GetAllUserCourses } from '../Controllers/CourseController.js';
+DeleteLecture, GetCourseLectures, DeleteCourse,
+ Createcourse, GetAllUserCourses, BuyCourse } from '../Controllers/CourseController.js';
 
 import { isAuthenticated, authorizeSubscribers } from '../Middleware/auth.js';
 import singleUpload from '../Middleware/multer.js';
@@ -42,15 +41,20 @@ router.route('/lecture').delete(isAuthenticated,DeleteLecture);
 router.route('/requestcourse').post(isAuthenticated, RequestCourse);
 
 
-router.route('/subscribe').get(isAuthenticated, BuySubscripton);
-
-router.route('/paymentverification').post(isAuthenticated,PaymentVerification);
-
-router.route('/razorpaykey').get(isAuthenticated,GetRazorPayKey);
+router.route('/payment/:id').get(isAuthenticated, BuyCourse);
 
 
-/// must authorized as subscriber 
 
-router.route('/cancelsubscription/:id').post(isAuthenticated, authorizeSubscribers, CancelSubscription);
+// router.route('/subscribe').get(isAuthenticated, BuySubscripton);
+
+// router.route('/paymentverification').post(isAuthenticated,PaymentVerification);
+
+// router.route('/razorpaykey').get(isAuthenticated,GetRazorPayKey);
+
+
+// /// must authorized as subscriber 
+
+// router.route('/cancelsubscription/:id').post(isAuthenticated, authorizeSubscribers, CancelSubscription);
+
 
 export default router;

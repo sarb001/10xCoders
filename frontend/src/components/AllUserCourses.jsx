@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AllUsersCourses } from '../Actions/course';
-import { LoadUser } from '../Actions/User';
+import { BuyCourse, LoadUser } from '../Actions/User';
 import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 import '../styles/App.css' ;
@@ -15,12 +15,12 @@ const AllUserCourses = () => {
 
     useEffect(()=> {
       dispatch(AllUsersCourses());
-      dispatch(LoadUser());
+      // dispatch(LoadUser());
     },[dispatch])
 
-    const BuyingCourseHandler = (id,price) => {
+    const BuyingCourseHandler = (id) => {
       console.log('id is --',id);
-      console.log('pricee is --',price);
+      dispatch(BuyCourse(id));
     }
 
   return (
@@ -47,7 +47,7 @@ const AllUserCourses = () => {
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                             <span>
                                  
-                                <button onClick = {()  => BuyingCourseHandler(item._id,item.price)}
+                                <button onClick = {()  => BuyingCourseHandler(item._id)}
                                  className = "view detail"> Buy Now </button>
                             </span>
                          

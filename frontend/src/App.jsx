@@ -13,9 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Logout from './components/Logout/Logout';
 import { useSelector } from 'react-redux';
 import Profile from './components/Profile';
-import Subscribe from './components/Subscribe';
-import PaymentSuccess from './components/PaymentSucces';
-import PaymentFailed from './components/PaymentFailed';
 import AllCourse from './components/AllCourse';
 import AllUserCourses from './components/AllUserCourses';
 import CreateCourses from './components/CreateCourses';
@@ -38,16 +35,16 @@ function App() {
             <Route path = "/signup" element = {<Signup />}>  </Route>
             <Route path = "/logout" element = {<Logout />}>  </Route>
 
-            <Route path = "/allcourse" 
-              element = {<AllCourse  />}>  
-            </Route>
+              <Route path = "/allcourse" 
+                element = {<AllCourse  />}>  
+              </Route>
 
-            <Route path = "/usercourses" 
+             <Route path = "/usercourses" 
                 element = { <AllUserCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
               </Route>
 
-            <Route path = "/mycourses" 
-                element = { <MyCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
+              <Route path = "/mycourses" 
+                 element = { <MyCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
               </Route>
 
             <Route path = "/profile"
@@ -57,14 +54,16 @@ function App() {
 
             <Route path = "/createcourse" element = {<CreateCourses />}>  </Route>
               
-            <Route path = "/subscribe"   
+
+            {/* <Route path = "/subscribe"   
             element = {<Subscribe  user = {user}  />}>  </Route>
 
             <Route path = "/paymentsuccess"   
             element = {<PaymentSuccess  user = {user}  />}>  </Route>
 
             <Route path = "/paymentfailed"   
-            element = {<PaymentFailed  user = {user}  />}>  </Route>
+            element = {<PaymentFailed  user = {user}  />}>  </Route> */}
+
 
               <Route path = "/course/:id"
                 element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  

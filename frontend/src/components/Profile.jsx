@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Sidebar from './Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import { CancelSubscription, LoadUser } from '../Actions/User';
+import {  LoadUser } from '../Actions/User';
 import { Avatar, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,8 +14,8 @@ const Profile = () => {
    
   const user = useSelector((state) => state.user?.user);
   console.log(' dispatch main  user --',user);
-  const subscriptionId = useSelector((state) => state.user?.user?.subscription?.id);
-   console.log('subsc id dispatched  -',subscriptionId);
+  // const subscriptionId = useSelector((state) => state.user?.user?.subscription?.id);
+  //  console.log('subsc id dispatched  -',subscriptionId);
 
   useEffect(() => {
     dispatch(LoadUser());
@@ -27,7 +27,7 @@ const Profile = () => {
 
    const cancelsubscription = async() => {
     console.log('cliedkwwk');
-      await dispatch(CancelSubscription(subscriptionId));
+      // await dispatch(CancelSubscription(subscriptionId));
    }
 
   return (

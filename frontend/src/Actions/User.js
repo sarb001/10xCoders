@@ -54,7 +54,6 @@ export const Logout = () => async(dispatch) => {
     }
 }
 
-
 export const LoadUser = () => async(dispatch) => {
     try {
         dispatch({type:"LoadUserRequest"});
@@ -69,35 +68,23 @@ export const LoadUser = () => async(dispatch) => {
     }
 }
 
-
-export const BuySubscription  = () => async(dispatch) => {
+export const BuyCourse  = (id) => async(dispatch) => {
     try {
-        dispatch({type:"buySubscriptionRequest"});
-        const {data} = await axios.get('/api/v1/subscribe', {
+        console.log('id in  action -',id);
+        
+        dispatch({type:"BuySpecificCourseRequest"});
+        const {data} = await axios.get(`/api/v1/payment/${id}`, 
+        {
+          headers:{
+             'Content-Type' : 'application/json',
+         },
             withCredentials: true
         });
-        console.log(' Subscribed here- ',{data});
-        dispatch({type:"buySubscriptionSuccess" ,payload : data.subscriptionId});
+        console.log(' Buying Course here - ',{data});
+        dispatch({type:"BuySpecificCourseSuccess" ,payload : data});
 
     } catch (error) {
-        dispatch({type:"buySubscriptionFailure" , payload : error.response.data.message });
-    }
-}
-
-export const CancelSubscription  = (id) => async(dispatch) => {
-    try {
-         console.log('cancel id frontend-',id);
-        dispatch({type:"cancelSubscriptionRequest"});
-        const {data} = await axios.post(`/api/v1/cancelsubscription/${id}`, {
-            withCredentials: true
-        });
-        console.log(' UnSubscribed here- ',{data});
-        toast.success(data.message);
-        dispatch({type:"cancelSubscriptionSuccess" ,payload : data.message });
-
-    } catch (error) {
-        console.log('error -',error);
-        toast.error(error);
-        dispatch({type:"cancelSubscriptionFailure" , payload : error.response.data.message });
+        console.log('error in actions -',error);
+        dispatch({type:"BuySpecificCourseFailed" , payload : error.response.data.message });
     }
 }

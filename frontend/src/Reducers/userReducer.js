@@ -63,27 +63,45 @@ export const userReducer = createReducer({},{
         state.isAuthenticated = false;
      },
 
-     buySubscriptionRequest : (state) => {
+
+
+     BuySpecificCourseRequest  : (state) => {
         state.loading = true;
      },
-     buySubscriptionSuccess : (state,action) => {
-        state.loading = false;
-        state.subscriptionId = action.payload;
-     },
-     buySubscriptionFailure : (state,action) => {
-        state.loading = false;
-        state.error = action.payload;
+     BuySpecificCourseSuccess : (state,action) => {
+        state.loading = false,
+        state.isAuthenticated = true;
+        state.id = action.payload;
+    },
+    BuySpecificCourseFailed : (state,action) => {
+        state.loading = false,
+        state.error  =  action.payload
+        state.isAuthenticated = false;
      },
 
-     cancelSubscriptionRequest : (state) => {
-        state.loading = true;
-     },
-     cancelSubscriptionSuccess : (state,action) => {
-        state.loading = false;
-        state.message = action.payload;
-     },
-     cancelSubscriptionFailure : (state,action) => {
-        state.loading = false;
-        state.error = action.payload;
-     },
+
+
+    //  buySubscriptionRequest : (state) => {
+    //     state.loading = true;
+    //  },
+    //  buySubscriptionSuccess : (state,action) => {
+    //     state.loading = false;
+    //     state.subscriptionId = action.payload;
+    //  },
+    //  buySubscriptionFailure : (state,action) => {
+    //     state.loading = false;
+    //     state.error = action.payload;
+    //  },
+
+    //  cancelSubscriptionRequest : (state) => {
+    //     state.loading = true;
+    //  },
+    //  cancelSubscriptionSuccess : (state,action) => {
+    //     state.loading = false;
+    //     state.message = action.payload;
+    //  },
+    //  cancelSubscriptionFailure : (state,action) => {
+    //     state.loading = false;
+    //     state.error = action.payload;
+    //  },
 })

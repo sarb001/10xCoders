@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AddMyLecture, CourseLectures, DeleteMyLecture } from '../Actions/course.js' ;
 import '../styles/App.css';
 import { Button, Dialog, Input, Typography } from '@mui/material';
-import { BuySubscription, LoadUser } from '../Actions/User.js';
+import {  LoadUser } from '../Actions/User.js';
 import { toast } from 'react-toastify';
 import DashboardSidebar from './DashboardSidebar.jsx';
 import Loader from './Loader.jsx';
@@ -94,7 +94,7 @@ const MainCourse = ({user,isAuthenticated}) => {
 
       const handlebuycourse = async () => {
           handlePaymentBox();
-         dispatch(BuySubscription());
+        //  dispatch(BuySubscription());
       }
 
       const handlePaymentBox = () => {

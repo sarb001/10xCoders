@@ -16,19 +16,19 @@ export const Createcourse  = async(req,res) => {
             return res.status(401).json({message : " UnAuthorized "});    
           }
 
-           const user = await User.findById(req.user._id);
-           const { title , price  , description  } = req.body;
-           console.log('course title -',title);
-           console.log('course price -',price);
-           console.log('course desc -',description);
-            //   console.log('requested bodyy  -',req.body);
-           
-           if(!title || !price || !description){
-            return res.status(400).json({
-                success  :  false,
-                message  : " Provide All Fieldsss "
-            })
-           }
+          const { title , price  , description  } = req.body;
+          console.log('course title -',title);
+          console.log('course price -',price);
+          console.log('course desc -',description);
+          //   console.log('requested bodyy  -',req.body);
+          
+          if(!title || !price || !description){
+              return res.status(400).json({
+                  success  :  false,
+                  message  : " Provide All Fieldsss "
+                })
+            }
+            const user = await User.findById(req.user._id);
 
                const  file = req.file;
                console.log('file backend --',file);
@@ -378,176 +378,209 @@ export const DeleteCourse = async(req,res) => {
     }
 }
 
-export const BuySubscripton = async(req,res) => {
+
+export const BuyCourse =  async(req,res) => {
     try {
-        const user = await User.findById(req.user._id).populate('courselist');
-        const  { id } = req.params;
-        console.log('id in params -',{id});
-        
-         console.log('userrr subsc-',user);
-        // const getcourseid = user.courselist.populate('_id');
-        // console.log('fullcourse -',getcourseid);
-
-         const instance = new Razorpay({
-            key_id: process.env.RAZORPAY_KEY_ID,
-            key_secret :process.env.RAZORPAY_KEY_SECRET
-         });
          
-         const order  =  await instance.orders.create({
-            // amount : 
-            plan_id: process.env.RAZORPAY_PLAN_ID,
-            customer_notify: 1,
-            quantity: 5,
-            total_count: 6,
-        })
-        console.log('subscription created-- -',subscription);
-        user.subscription.id = subscription.id;
-        user.subscription.status = subscription.status; 
+            if(!req.user){
+                return res.status(401).json({message : " UnAuthorized "});
+            }
 
-        await user.save();
-        
-        res.status(201).json({
-            success : true,
-            subscriptionId : subscription.id,
-        })
+            const { id } = req.params;
+            console.log(' _id for  BuyCourse -- ',id);
+
+            return  res.status(200).json({
+                success : true,
+                message : "Get Details Course",
+                id, 
+            })
 
     } catch (error) {
         console.log('error in sub -',error);
-        return res.status(500).json({
-            success :false,
-            message : error.message
+         return res.status(500).json({
+                    success :false,
+                    message : error.message
         })
     }
 }
 
-export const PaymentVerification = async(req,res) => {
-    try {
-         console.log('insde verification -');
-        const { razorpay_payment_id , razorpay_subscription_id , razorpay_signature }  = req.body;
+
+
+
+
+
+
+
+// export const BuySubscripton = async(req,res) => {
+//     try {
+//         const user = await User.findById(req.user._id).populate('courselist');
+//         const  { id } = req.params;
+//         console.log('id in params -',{id});
         
-        console.log('razorpay payid -',  razorpay_payment_id);
-        console.log('razorpay subssid -',razorpay_subscription_id);
-        console.log('razorpay signid -', razorpay_signature);
+//          console.log('userrr subsc-',user);
+//         // const getcourseid = user.courselist.populate('_id');
+//         // console.log('fullcourse -',getcourseid);
 
-        const user = await User.findById(req.user._id);
-        console.log('user found --',user);
+//          const instance = new Razorpay({
+//             key_id: process.env.RAZORPAY_KEY_ID,
+//             key_secret :process.env.RAZORPAY_KEY_SECRET
+//          });
+         
+//          const order  =  await instance.orders.create({
+//             // amount : 
+//             plan_id: process.env.RAZORPAY_PLAN_ID,
+//             customer_notify: 1,
+//             quantity: 5,
+//             total_count: 6,
+//         })
+//         console.log('subscription created-- -',subscription);
+//         user.subscription.id = subscription.id;
+//         user.subscription.status = subscription.status; 
+
+//         await user.save();
         
-        const  subscription_id = user.subscription.id;
-        console.log('verification started',subscription_id);
+//         res.status(201).json({
+//             success : true,
+//             subscriptionId : subscription.id,
+//         })
 
-        const generated_signature = crypto.createHmac('sha256' ,
-        process.env.RAZORPAY_KEY_SECRET).update(razorpay_payment_id + "|" +subscription_id,"utf-8").digest("hex");
+//     } catch (error) {
+//         console.log('error in sub -',error);
+//         return res.status(500).json({
+//             success :false,
+//             message : error.message
+//         })
+//     }
+// }
+
+// export const PaymentVerification = async(req,res) => {
+//     try {
+//          console.log('insde verification -');
+//         const { razorpay_payment_id , razorpay_subscription_id , razorpay_signature }  = req.body;
         
-        console.log('razorpay signid  -', razorpay_signature);
-        console.log('generated sign  --',generated_signature);
+//         console.log('razorpay payid -',  razorpay_payment_id);
+//         console.log('razorpay subssid -',razorpay_subscription_id);
+//         console.log('razorpay signid -', razorpay_signature);
 
-        const isAuthentic = generated_signature === razorpay_signature;
-        console.log('isAuthentic cce -',isAuthentic);
-
-        if(!isAuthentic){
-             return  res.status(500).json({
-             success : false,
-             message : " Payment Failed "
-             })
-            // return res.redirect(`${fronteurl}/paymentfailed`);
-        }
-        await Payment.create({
-            razorpay_signature,
-            razorpay_payment_id,
-            razorpay_subscription_id,
-        });
+//         const user = await User.findById(req.user._id);
+//         console.log('user found --',user);
         
-        user.subscription.status = "active";
-        await user.save();
-        console.log('subs done');
-        res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`);
-        // return res.redirect(``);
+//         const  subscription_id = user.subscription.id;
+//         console.log('verification started',subscription_id);
 
-    } catch (error) {
-        console.log('error in verify-',error);
-        return res.status(500).json({
-            success  : false,
-            message  : error.message 
-        })
-    }
-}
+//         const generated_signature = crypto.createHmac('sha256' ,
+//         process.env.RAZORPAY_KEY_SECRET).update(razorpay_payment_id + "|" +subscription_id,"utf-8").digest("hex");
+        
+//         console.log('razorpay signid  -', razorpay_signature);
+//         console.log('generated sign  --',generated_signature);
 
-export const GetRazorPayKey = async(req,res) => {
-    res.status(200).json({
-        success :true,
-        key :  process.env.API_KEY
-    })
-}
+//         const isAuthentic = generated_signature === razorpay_signature;
+//         console.log('isAuthentic cce -',isAuthentic);
 
-export const CancelSubscription = async(req,res) => {
-    try {
-        const { id } = req.params;              // subscription_id -- to cancel
-        console.log('backend cancel id -',id);
+//         if(!isAuthentic){
+//              return  res.status(500).json({
+//              success : false,
+//              message : " Payment Failed "
+//              })
+//             // return res.redirect(`${fronteurl}/paymentfailed`);
+//         }
+//         await Payment.create({
+//             razorpay_signature,
+//             razorpay_payment_id,
+//             razorpay_subscription_id,
+//         });
+        
+//         user.subscription.status = "active";
+//         await user.save();
+//         console.log('subs done');
+//         res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`);
+//         // return res.redirect(``);
 
-        const user = await User.findById(req.user._id);
-        console.log('logged user-',user);
+//     } catch (error) {
+//         console.log('error in verify-',error);
+//         return res.status(500).json({
+//             success  : false,
+//             message  : error.message 
+//         })
+//     }
+// }
 
-        // id - subscription_id passed
-        // user.subs.id - output of subs stored in user
+// export const GetRazorPayKey = async(req,res) => {
+//     res.status(200).json({
+//         success :true,
+//         key :  process.env.API_KEY
+//     })
+// }
 
-        if(id ===   user.subscription.id){
-            console.log('subs cancelled -');
-        }else{
-            console.log('subs NOTTTT cancelled -');
-        }
+// export const CancelSubscription = async(req,res) => {
+//     try {
+//         const { id } = req.params;              // subscription_id -- to cancel
+//         console.log('backend cancel id -',id);
 
-        const subscriptionId = user.subscription.id;            // 68Tr 
-        console.log('subs  id -',subscriptionId);
-        let refund = false;
+//         const user = await User.findById(req.user._id);
+//         console.log('logged user-',user);
 
-        console.log('before payment');
-        const currentSubscription = await instance.subscriptions.fetch(id);
-    if (currentSubscription.status === 'cancelled') {
-            console.log('Subscription already cancelled');
-            // Handle already cancelled subscription (e.g., return a message to the user)
-           res.status(400).json({ success: false, message: 'Subscription is already cancelled.' });
-    }
+//         // id - subscription_id passed
+//         // user.subs.id - output of subs stored in user
+
+//         if(id ===   user.subscription.id){
+//             console.log('subs cancelled -');
+//         }else{
+//             console.log('subs NOTTTT cancelled -');
+//         }
+
+//         const subscriptionId = user.subscription.id;            // 68Tr 
+//         console.log('subs  id -',subscriptionId);
+//         let refund = false;
+
+//         console.log('before payment');
+//         const currentSubscription = await instance.subscriptions.fetch(id);
+//     if (currentSubscription.status === 'cancelled') {
+//             console.log('Subscription already cancelled');
+//             // Handle already cancelled subscription (e.g., return a message to the user)
+//            res.status(400).json({ success: false, message: 'Subscription is already cancelled.' });
+//     }
     
-        //  const res = await instance.subscriptions.cancel(subscriptionId,false);
+//         //  const res = await instance.subscriptions.cancel(subscriptionId,false);
 
-         console.log('after payment');
-        //  console.log('after payment res -',res);
-        console.log('id is -',id);
-        const  payment = await Payment.findOne({
-            razorpay_subscription_id 
-        });
-        console.log('paymennt is 1 -',payment);
-        if (!payment) {
-            return res.status(404).json({ success: false, message: 'Payment not found' });
-          }
+//          console.log('after payment');
+//         //  console.log('after payment res -',res);
+//         console.log('id is -',id);
+//         const  payment = await Payment.findOne({
+//             razorpay_subscription_id 
+//         });
+//         console.log('paymennt is 1 -',payment);
+//         if (!payment) {
+//             return res.status(404).json({ success: false, message: 'Payment not found' });
+//           }
 
-        const subscribedTime = Date.now()  - payment.createdAt;
-        const refundTime = 7 * 24 * 60 * 60 * 1000;
+//         const subscribedTime = Date.now()  - payment.createdAt;
+//         const refundTime = 7 * 24 * 60 * 60 * 1000;
 
-            // 7 > 2 (its  now 2 days since i subscribed )
-        if(refundTime > subscribedTime){
-             await instance.payments.refund(payment.razorpay_payment_id);
-             refund = true;
-             // refunding  money now 
-        } 
+//             // 7 > 2 (its  now 2 days since i subscribed )
+//         if(refundTime > subscribedTime){
+//              await instance.payments.refund(payment.razorpay_payment_id);
+//              refund = true;
+//              // refunding  money now 
+//         } 
 
-        await payment.remove();
-        user.subscription.id = undefined;
-        user.subscription.status = undefined;
-        await user.save();
-        console.log('atlast end--');
-       return res.status(200).json({
-            success  : true,
-            message :  refund ? 
-            "  Subscription  Cancelled ,  You will recieve full refund  within 7 days " : 
-            "  Subscription  Cancelled ,  Money will be deducted in as Subscription  was cancelled after 7 days "
-        })
+//         await payment.remove();
+//         user.subscription.id = undefined;
+//         user.subscription.status = undefined;
+//         await user.save();
+//         console.log('atlast end--');
+//        return res.status(200).json({
+//             success  : true,
+//             message :  refund ? 
+//             "  Subscription  Cancelled ,  You will recieve full refund  within 7 days " : 
+//             "  Subscription  Cancelled ,  Money will be deducted in as Subscription  was cancelled after 7 days "
+//         })
 
-    } catch (error) {
-        console.log('cancel error',error);
-        res.status(500).json({
-            success  : false,
-            message : " Failed to Cancel Subscription"
-        })
-    }
-}
+//     } catch (error) {
+//         console.log('cancel error',error);
+//         res.status(500).json({
+//             success  : false,
+//             message : " Failed to Cancel Subscription"
+//         })
+//     }
+// }
