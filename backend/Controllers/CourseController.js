@@ -434,6 +434,12 @@ export const PaymentVerification = async(req,res) => {
         const { razorpay_payment_id , razorpay_order_id , razorpay_signature }  
         = req.body;
 
+        if(!razorpay_payment_id || !razorpay_order_id || !razorpay_signature){
+            return res.status(400).json({
+                success : false,
+                message : " Payment Verification Not Complete ",
+            })
+        }
                 const user = await User.findById(req.user._id);
 
                 console.log('razorpay payid -',  razorpay_payment_id);

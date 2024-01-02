@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AllUsersCourses } from '../Actions/course';
 import { BuyCourse, LoadUser, PaymentVerification } from '../Actions/User';
 import Sidebar from './Sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/App.css' ;
 import axios from 'axios';
 
 const AllUserCourses = () => {
 
+   const navigate = useNavigate();
    const allusercourse  = useSelector(state => state.allusers?.courses);
 
     console.log(' course for except user -',allusercourse);
@@ -16,7 +17,11 @@ const AllUserCourses = () => {
     
     const course  = useSelector(state => state.user?.course);
     console.log(' specificOrder  111 -' ,course);
-    
+
+    // if(course?.status === 'paid'){
+    //   return navigate(`/course/${courseid}`)
+    // }   
+
     useEffect(() => {
       dispatch(AllUsersCourses());
       // dispatch(LoadUser());
@@ -24,6 +29,7 @@ const AllUserCourses = () => {
 
     const BuyingCourseHandler = async(courseid) => {
       console.log('id is --',courseid);
+
      await  dispatch(BuyCourse(courseid));
      await  dispatch(PaymentVerification(courseid));
       handlecheckout(course?.price,courseid);
@@ -51,7 +57,6 @@ const AllUserCourses = () => {
           description:"Razorpay tutorial",
           order_id:order?.id,
           callback_url:`/api/v1/paymentverification/${id}`,
-          // callback_url:`/api/v1/paymentverification`,
           prefill:{
             name:"Amandeep gupta",
             email:"amandeepguptasir@gmail.com",
@@ -69,6 +74,9 @@ const AllUserCourses = () => {
         const razor = new Razorpay(options);
         razor.open();
     }
+
+
+
 
   return (
   <div className="home container">
@@ -94,13 +102,19 @@ const AllUserCourses = () => {
                           <span> Lectures - {item.lectures.length} </span>
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                             <span>
+                              
                                  
-                                <button onClick = {()  => BuyingCourseHandler(item._id)}
-                                 className = "view detail"> Buy Now </button>
+                                   {item.order?.status === "paid" ? ( 
+                                   <> 
+                                      <Link to = {`/course/${item._id}`}>
+                                         <button className = "view detail"> View Details </button>
+                                      </Link>
+                                   </>) : (
+                                   <>
+                                    <button onClick = {()  => BuyingCourseHandler(item._id)}
+                                     className = "view detail"> Buy Now  </button>
+                                   </>)}
 
-                                {/* <button onClick = {()  => BuyingCourseHandler(item._id)}
-                                 className = "view detail"> View Details 
-                                  </button> */}
                             </span>
                          
                           {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
@@ -116,10 +130,3 @@ const AllUserCourses = () => {
 }
 
 export default AllUserCourses
-
-
-{/* <span>
-  <Link to = {`/course/${item._id}`}>
-    <button className = "view detail"> View Details </button>
-  </Link>
-</span> */}

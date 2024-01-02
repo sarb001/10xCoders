@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardHeader  } from '@mui/material';
+import { Button, Card, CardContent, CardHeader, Typography  } from '@mui/material';
 import React from 'react'
 import { Link, useSearchParams } from 'react-router-dom' ;
 
@@ -9,9 +9,10 @@ import { Link, useSearchParams } from 'react-router-dom' ;
             <>
                 <Card  sx={{ maxWidth: 345 ,bgcolor : 'lightgreen' ,
                  border: '2px solid #234', }}>
-                <CardHeader
-                title= "You have Pro Pack"  />
+                <CardHeader   title= " Payment has been Completed"  />
+                <Typography> You can Access Lectures Now   </Typography>
                 <CardContent >
+                  <Link to = "/profile">  Go to Profile  </Link>
                      <h3> Reference ID - {reference} </h3>
                 </CardContent>
                 </Card>

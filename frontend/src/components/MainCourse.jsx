@@ -94,13 +94,7 @@ const MainCourse = ({user,isAuthenticated}) => {
 
       const handlebuycourse = async () => {
           handlePaymentBox();
-        //  dispatch(BuySubscription());
       }
-
-      const handlePaymentBox = () => {
-        // navigate('subscribe');
-      }
-
 
   return (
     <div>
@@ -145,18 +139,7 @@ const MainCourse = ({user,isAuthenticated}) => {
                                               </source>
                                           </video>
                                     </div>
-                                     {/* {(user == null ||  creatorid !== userid) ? (
-                                      <>  
-                                        <button onClick={handleClickOpen} >  Unlocked Content  </button>
-                                      </>
-                                     ) : (
-                                      <>
-                                           <video width="400" height="300" controls>
-                                              <source src = {item.video.url} type="video/mp4">
-                                              </source>
-                                          </video>
-                                      </>
-                                     )} */}
+                                     
                                 </div>
                               )
                             ) : (<>  
@@ -218,9 +201,9 @@ const MainCourse = ({user,isAuthenticated}) => {
                  </div>
              </div>
 
-             <div className="right-section">
+             {/* <div className="right-section">
                <Button  variant='contained' onClick = {handlebuycourse}> Buy Now  </Button>
-             </div>
+             </div> */}
 
                 {!user == null && (
                   <>

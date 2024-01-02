@@ -30,7 +30,7 @@ router.route('/course/:id').delete(isAuthenticated,DeleteCourse);
 router.route('/course/:id').post(isAuthenticated ,singleUpload, AddLecture);
 
 // Get All Course Lectures 
-router.route('/course/:id').get(isAuthenticated,GetCourseLectures);
+router.route('/course/:id').get(isAuthenticated , GetCourseLectures);
 
 // Delete Lecture 
 router.route('/lecture').delete(isAuthenticated,DeleteLecture);
@@ -47,14 +47,6 @@ router.route('/paymentverification/:id').post(isAuthenticated  ,PaymentVerificat
 
 
 router.route('/razorpaykey').get(isAuthenticated,GetRazorPayKey);
-
-
-
-
-// router.route('/subscribe').get(isAuthenticated, BuySubscripton);
-
-
-
 
 // /// must authorized as subscriber 
 
