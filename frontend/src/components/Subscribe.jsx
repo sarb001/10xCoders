@@ -20,7 +20,7 @@ import CardContent from '@mui/material/CardContent';
     const { loading ,error , subscriptionId  , message : subscriptiomessage } = useSelector((state) => state.user);
     console.log('subs id -',subscriptionId);
 
-    const subscribeHandler = async () => {
+    const subscribeHandler = async() => {
         const { data : { key } } = await axios.get(`/api/v1/razorpaykey`);
         console.log('key is -',key);
         setKey(key);

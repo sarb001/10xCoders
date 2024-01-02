@@ -63,8 +63,6 @@ export const userReducer = createReducer({},{
         state.isAuthenticated = false;
      },
 
-
-
      BuySpecificCourseRequest  : (state) => {
         state.loading = true;
      },
@@ -72,6 +70,7 @@ export const userReducer = createReducer({},{
         state.loading = false,
         state.isAuthenticated = true;
         state.course = action.payload;
+        state.order = action.payload;
     },
     BuySpecificCourseFailed : (state,action) => {
         state.loading = false,

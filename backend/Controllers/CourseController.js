@@ -401,6 +401,7 @@ export const BuyCourse =  async(req,res) => {
             return  res.status(200).json({
                 success : true,
                 message : "Get Details Course",
+                order,
                 course, 
             })
 
@@ -414,8 +415,52 @@ export const BuyCourse =  async(req,res) => {
 }
 
 
+export const PaymentVerification = async(req,res) => {
+    console.log('inside verificationn ');
+    try {
+        const { razorpay_payment_id , razorpay_order_id , razorpay_signature }  = req.body;
+        
+                console.log('razorpay payid -',  razorpay_payment_id);
+                console.log('razorpay order id -',razorpay_order_id);
+                console.log('razorpay signid from body -', razorpay_signature);
+
+                const body = razorpay_order_id + "|" + razorpay_payment_id;
+                const expectedsgnature = crypto.createHmac('sha256',process.env.RAZORPAY_KEY_SECRET)
+                .update(body.toString()).digest('hex');
+                const isauth = expectedsgnature === razorpay_signature;
+
+                console.log(' isAuth verified  ', isauth);
+
+                if(isauth){
+                 await Payment.create({
+                     razorpay_order_id,
+                     razorpay_payment_id,
+                     razorpay_signature 
+                 })
+                 res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
+                }
+                else{
+                 return res.status(400).json({
+                    success:false,
+                    message:" Signature not Verified "
+                    }); 
+                }
+    } catch (error) {
+        console.log('error in sub -',error);
+        return res.status(500).json({
+                   success :false,
+                   message : error.message
+        })
+    }
+}
 
 
+export const GetRazorPayKey = async(req,res) => {
+    res.status(200).json({
+        success :true,
+        key :  process.env.API_KEY
+    })
+}
 
 
 

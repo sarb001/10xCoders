@@ -3,7 +3,7 @@ import express from 'express';
 import {  AllCourses, GetLoggedUserCourse, 
   RequestCourse, AddLecture,
 DeleteLecture, GetCourseLectures, DeleteCourse,
- Createcourse, GetAllUserCourses, BuyCourse } from '../Controllers/CourseController.js';
+ Createcourse, GetAllUserCourses, BuyCourse, PaymentVerification, GetRazorPayKey } from '../Controllers/CourseController.js';
 
 import { isAuthenticated, authorizeSubscribers } from '../Middleware/auth.js';
 import singleUpload from '../Middleware/multer.js';
@@ -36,7 +36,6 @@ router.route('/course/:id').get(isAuthenticated,GetCourseLectures);
 router.route('/lecture').delete(isAuthenticated,DeleteLecture);
 
 
-
 // Request Course 
 router.route('/requestcourse').post(isAuthenticated, RequestCourse);
 
@@ -44,12 +43,17 @@ router.route('/requestcourse').post(isAuthenticated, RequestCourse);
 router.route('/payment/:id').get(isAuthenticated, BuyCourse);
 
 
+router.route('/paymentverification').post(isAuthenticated,PaymentVerification);
+
+
+router.route('/razorpaykey').get(isAuthenticated,GetRazorPayKey);
+
+
+
 
 // router.route('/subscribe').get(isAuthenticated, BuySubscripton);
 
-// router.route('/paymentverification').post(isAuthenticated,PaymentVerification);
 
-// router.route('/razorpaykey').get(isAuthenticated,GetRazorPayKey);
 
 
 // /// must authorized as subscriber 

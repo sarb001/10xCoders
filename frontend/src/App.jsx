@@ -16,6 +16,7 @@ import Profile from './components/Profile';
 import AllCourse from './components/AllCourse';
 import AllUserCourses from './components/AllUserCourses';
 import CreateCourses from './components/CreateCourses';
+import PaymentSucces from './components/PaymentSucces';
 
 function App() {
 
@@ -53,13 +54,15 @@ function App() {
             <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
 
             <Route path = "/createcourse" element = {<CreateCourses />}>  </Route>
+
+            <Route path = "/paymentsuccess"   
+            element = {<PaymentSucces user = {user}  />}>  </Route>
               
+
 
             {/* <Route path = "/subscribe"   
             element = {<Subscribe  user = {user}  />}>  </Route>
 
-            <Route path = "/paymentsuccess"   
-            element = {<PaymentSuccess  user = {user}  />}>  </Route>
 
             <Route path = "/paymentfailed"   
             element = {<PaymentFailed  user = {user}  />}>  </Route> */}

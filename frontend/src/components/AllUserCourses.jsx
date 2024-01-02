@@ -5,15 +5,23 @@ import { BuyCourse, LoadUser } from '../Actions/User';
 import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 import '../styles/App.css' ;
+import axios from 'axios';
 
 const AllUserCourses = () => {
 
    const allusercourse  = useSelector(state => state.allusers?.courses);
 
-   console.log(' course for except user -',allusercourse);
-   const  dispatch = useDispatch();
+    console.log(' course for except user -',allusercourse);
+    const  dispatch = useDispatch();
+    
+    const course  = useSelector(state => state.user?.course);
+    console.log(' specificOrder  111 -' ,course);
+    
+    // const order  = useSelector(state => state.user?.order);
+    // console.log(' specificOrder 22 -' ,order);
+    // console.log(' specificCourse 2 - ',course);   
 
-    useEffect(()=> {
+    useEffect(() => {
       dispatch(AllUsersCourses());
       // dispatch(LoadUser());
     },[dispatch])
@@ -21,6 +29,48 @@ const AllUserCourses = () => {
     const BuyingCourseHandler = (id) => {
       console.log('id is --',id);
       dispatch(BuyCourse(id));
+
+      handlecheckout(course?.price,id);
+    }
+
+    const handlecheckout = async(price,id) => {               
+      console.log('inside price -',price);
+
+      const { data : { key } } = await axios.get(`/api/v1/razorpaykey`);
+      const { data : {order} } = await axios.get(`/api/v1/payment/${id}`);
+
+       console.log('data in order- ',{order});
+       console.log('order id -',order.id);
+
+       console.log('order amount  -',order.amount);
+
+        console.log('key in  data --',key);
+        console.log('windoww- ',window);
+
+        const options = {
+          key : key,
+          amount:order?.amount,
+          currency:"INR",
+          name:"Sinmplyjs",
+          description:"Razorpay tutorial",
+          order_id:order?.id,
+          callback_url:`/api/v1/paymentverification`,
+          prefill:{
+            name:"Amandeep gupta",
+            email:"amandeepguptasir@gmail.com",
+            contact:"1234567890"
+          },
+          notes:{
+            "address":"razorapy official"
+          },
+          theme:{
+            "color":"#3399cc"
+          }
+        };
+
+        console.log('at last  razorpay -');
+        const razor = new Razorpay(options);
+        razor.open();
     }
 
   return (
