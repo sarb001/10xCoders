@@ -17,10 +17,6 @@ const AllUserCourses = () => {
     const course  = useSelector(state => state.user?.course);
     console.log(' specificOrder  111 -' ,course);
     
-    // const order  = useSelector(state => state.user?.order);
-    // console.log(' specificOrder 22 -' ,order);
-    // console.log(' specificCourse 2 - ',course);   
-
     useEffect(() => {
       dispatch(AllUsersCourses());
       // dispatch(LoadUser());

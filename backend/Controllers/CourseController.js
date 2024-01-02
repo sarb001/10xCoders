@@ -458,7 +458,7 @@ export const PaymentVerification = async(req,res) => {
 export const GetRazorPayKey = async(req,res) => {
     res.status(200).json({
         success :true,
-        key :  process.env.API_KEY
+        key :  process.env.RAZORPAY_KEY_ID
     })
 }
 
