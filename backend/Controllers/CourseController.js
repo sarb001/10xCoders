@@ -115,7 +115,7 @@ export const GetAllUserCourses    = async(req,res) => {
                 $ne :  user
             } 
         }).populate('creator');
-        console.log('all courses backend except - ',courses);
+        // console.log('all courses backend except - ',courses);
 
         res.status(200).json({
             success : true,
@@ -385,6 +385,7 @@ export const BuyCourse =  async(req,res) => {
                 return res.status(401).json({message : " UnAuthorized "});
             }
 
+            const user = req.user;
             const { id } = req.params;
             console.log(' _id for  BuyCourse -- ',id);
 
@@ -397,6 +398,13 @@ export const BuyCourse =  async(req,res) => {
              });
 
             console.log('order in backend -',order);
+            
+            
+            user.order.status = order.status;
+            user.order.id = order.id;
+            await user.save();
+            console.log('order in status -',order.status);
+            console.log('order in idd -',order.id);
 
             return  res.status(200).json({
                 success : true,
@@ -419,7 +427,9 @@ export const PaymentVerification = async(req,res) => {
     console.log('inside verificationn ');
     try {
         const { razorpay_payment_id , razorpay_order_id , razorpay_signature }  = req.body;
-        
+
+                const user = await User.findById(req.user._id);
+
                 console.log('razorpay payid -',  razorpay_payment_id);
                 console.log('razorpay order id -',razorpay_order_id);
                 console.log('razorpay signid from body -', razorpay_signature);
@@ -431,13 +441,17 @@ export const PaymentVerification = async(req,res) => {
 
                 console.log(' isAuth verified  ', isauth);
 
-                if(isauth){
+            if(isauth){
                  await Payment.create({
-                     razorpay_order_id,
-                     razorpay_payment_id,
-                     razorpay_signature 
+                     razorpay_order_id, razorpay_payment_id, razorpay_signature 
                  })
-                 res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
+                 user.order.status = "paid";
+                 await user.save();
+                 
+                 console.log(' order paid done ');
+                 console.log('order in status -',user.order.status);
+                 console.log('order in idd -',user.order.id); 
+                 return res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
                 }
                 else{
                  return res.status(400).json({
@@ -445,6 +459,8 @@ export const PaymentVerification = async(req,res) => {
                     message:" Signature not Verified "
                     }); 
                 }
+
+
     } catch (error) {
         console.log('error in sub -',error);
         return res.status(500).json({
