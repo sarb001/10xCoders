@@ -88,3 +88,24 @@ export const BuyCourse  = (id) => async(dispatch) => {
         dispatch({type:"BuySpecificCourseFailed" , payload : error.response.data.message });
     }
 }
+
+
+export const PaymentVerification = (id) => async(dispatch) => {
+    try {
+            console.log(' course id in payment verify -',id);
+            dispatch({type:"VerifyPaymentCourseRequest"});
+            const {data} = await axios.post(`/api/v1/paymentverification/${id}`, 
+            {
+              headers:{
+                 'Content-Type' : 'application/json',
+             },
+                withCredentials: true
+            });
+            console.log(' Buying Course here - ',{data});
+            dispatch({type:"VerifyPaymentCourseSuccess" ,payload : data.course});
+    } catch (error) {
+        console.log('error in actions -',error);
+        dispatch({type:"VerifyPaymentCourseFailed" , 
+        payload : error.response.data.message });
+    }
+}

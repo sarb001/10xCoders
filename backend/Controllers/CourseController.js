@@ -397,14 +397,13 @@ export const BuyCourse =  async(req,res) => {
                 currency : 'INR',
              });
 
-            console.log('order in backend -',order);
+             console.log('order in backend -',order);
             
-            
-            user.order.status = order.status;
-            user.order.id = order.id;
-            await user.save();
-            console.log('order in status -',order.status);
-            console.log('order in idd -',order.id);
+             course.order.status = order.status;
+             course.order.id = order.id;
+             await course.save();
+             console.log(' course  in  status ',order.status);
+             console.log(' course  in  status ',order.id);
 
             return  res.status(200).json({
                 success : true,
@@ -426,7 +425,14 @@ export const BuyCourse =  async(req,res) => {
 export const PaymentVerification = async(req,res) => {
     console.log('inside verificationn ');
     try {
-        const { razorpay_payment_id , razorpay_order_id , razorpay_signature }  = req.body;
+        
+        const { id } = req.params;
+        console.log(' coursee _id for Course Payment  -- ',id);
+
+        const course = await Course.findById(id);
+            
+        const { razorpay_payment_id , razorpay_order_id , razorpay_signature }  
+        = req.body;
 
                 const user = await User.findById(req.user._id);
 
@@ -445,14 +451,20 @@ export const PaymentVerification = async(req,res) => {
                  await Payment.create({
                      razorpay_order_id, razorpay_payment_id, razorpay_signature 
                  })
-                 user.order.status = "paid";
-                 await user.save();
+                 course.order.status = "paid";
+                 await course?.save();
                  
                  console.log(' order paid done ');
-                 console.log('order in status -',user.order.status);
-                 console.log('order in idd -',user.order.id); 
-                 return res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
+                 console.log(' course in status -',course.order?.status);
+                 console.log(' course in idd -',course.order?.id);
+                    
+                 const redirectedURl = `http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`;
+                 res.redirect(redirectedURl);
+
+                 return course;
                 }
+                
+
                 else{
                  return res.status(400).json({
                     success:false,

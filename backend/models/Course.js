@@ -18,6 +18,10 @@ const CourseSchema = new  mongoose.Schema({
         type:Number,
         required : [true," Please Enter Price "]
      },
+     order : {
+        id : String,
+        status : String,
+     },
     creator : 
     {
             type : mongoose.Schema.Types.ObjectId,

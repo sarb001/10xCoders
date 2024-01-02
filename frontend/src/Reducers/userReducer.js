@@ -79,6 +79,23 @@ export const userReducer = createReducer({},{
      },
 
 
+      VerifyPaymentCourseRequest  : (state) => {
+        state.loading = true;
+     },
+      VerifyPaymentCourseSuccess : (state,action) => {
+        state.loading = false,
+        state.isAuthenticated = true;
+        state.course = action.payload;
+      },
+     VerifyPaymentCourseFailed : (state,action) => {
+        state.loading = false,
+        state.error  =  action.payload
+        state.isAuthenticated = false;
+      },
+
+
+
+
 
     //  buySubscriptionRequest : (state) => {
     //     state.loading = true;

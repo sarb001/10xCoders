@@ -23,12 +23,12 @@ export const isAuthenticated = async(req,res,next) => {
     }
 }
 
-export const authorizeSubscribers = (req, res, next) => {
-    console.log('authorized subs -');
-    if (req.user.subscription.status !== "active")
+export const authorizeOrders = (req, res, next) => {
+    console.log('authorized orders -');
+    if (req.user.order?.status !== "paid")
     return res.status(403).json({
         success : false,
-        message : "Only Subscribers can access this Resource",
+        message : "Only Paid  Course can access Resource",
     })
     next();
 };

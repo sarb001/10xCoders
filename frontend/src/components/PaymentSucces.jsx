@@ -12,7 +12,6 @@ import { Link, useSearchParams } from 'react-router-dom' ;
                 <CardHeader
                 title= "You have Pro Pack"  />
                 <CardContent >
-                     Hello Card Content 
                      <h3> Reference ID - {reference} </h3>
                 </CardContent>
                 </Card>

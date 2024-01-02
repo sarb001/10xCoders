@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AllUsersCourses } from '../Actions/course';
-import { BuyCourse, LoadUser } from '../Actions/User';
+import { BuyCourse, LoadUser, PaymentVerification } from '../Actions/User';
 import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 import '../styles/App.css' ;
@@ -22,11 +22,11 @@ const AllUserCourses = () => {
       // dispatch(LoadUser());
     },[dispatch])
 
-    const BuyingCourseHandler = (id) => {
-      console.log('id is --',id);
-      dispatch(BuyCourse(id));
-
-      handlecheckout(course?.price,id);
+    const BuyingCourseHandler = async(courseid) => {
+      console.log('id is --',courseid);
+     await  dispatch(BuyCourse(courseid));
+     await  dispatch(PaymentVerification(courseid));
+      handlecheckout(course?.price,courseid);
     }
 
     const handlecheckout = async(price,id) => {               
@@ -50,7 +50,8 @@ const AllUserCourses = () => {
           name:"Sinmplyjs",
           description:"Razorpay tutorial",
           order_id:order?.id,
-          callback_url:`/api/v1/paymentverification`,
+          callback_url:`/api/v1/paymentverification/${id}`,
+          // callback_url:`/api/v1/paymentverification`,
           prefill:{
             name:"Amandeep gupta",
             email:"amandeepguptasir@gmail.com",
@@ -81,9 +82,10 @@ const AllUserCourses = () => {
                  <div className="courselist">
                    {allusercourse?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
-                          <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
-                        objectFit:'cover',display:'block'
-                        ,borderRadius:'25px'}} />
+                          <img src =  {item.courseposter.url}
+                          style = {{width:'100%', height:'220px',
+                          objectFit:'cover',display:'block'
+                         ,borderRadius:'25px'}} />
                      
                         <span id = "course-detail">
                           <span> Title - {item.title} </span>
@@ -95,6 +97,10 @@ const AllUserCourses = () => {
                                  
                                 <button onClick = {()  => BuyingCourseHandler(item._id)}
                                  className = "view detail"> Buy Now </button>
+
+                                {/* <button onClick = {()  => BuyingCourseHandler(item._id)}
+                                 className = "view detail"> View Details 
+                                  </button> */}
                             </span>
                          
                           {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}

@@ -20,10 +20,6 @@ const UserSchema = new mongoose.Schema({
         minLength : [6,"Password must be atleast  6 characters"],
         select :false,
      },
-       order : {
-         id : String,
-         status : String,
-      },
       profilepic :{
          public_id : String,
          url : String

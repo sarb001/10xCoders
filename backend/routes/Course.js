@@ -5,7 +5,7 @@ import {  AllCourses, GetLoggedUserCourse,
 DeleteLecture, GetCourseLectures, DeleteCourse,
  Createcourse, GetAllUserCourses, BuyCourse, PaymentVerification, GetRazorPayKey } from '../Controllers/CourseController.js';
 
-import { isAuthenticated, authorizeSubscribers } from '../Middleware/auth.js';
+import { isAuthenticated , authorizeOrders } from '../Middleware/auth.js';
 import singleUpload from '../Middleware/multer.js';
 
 const router = express.Router();
@@ -40,10 +40,10 @@ router.route('/lecture').delete(isAuthenticated,DeleteLecture);
 router.route('/requestcourse').post(isAuthenticated, RequestCourse);
 
 
-router.route('/payment/:id').get(isAuthenticated, BuyCourse);
+router.route('/payment/:id').get(isAuthenticated  ,BuyCourse);
 
 
-router.route('/paymentverification').post(isAuthenticated,PaymentVerification);
+router.route('/paymentverification/:id').post(isAuthenticated  ,PaymentVerification);
 
 
 router.route('/razorpaykey').get(isAuthenticated,GetRazorPayKey);
