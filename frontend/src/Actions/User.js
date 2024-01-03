@@ -47,7 +47,7 @@ export const LoginUser = (email,password) => async(dispatch) => {
 export const Logout = () => async(dispatch) => {
     try {
         dispatch({type:"LogOutRequest"});
-        const data = await axios.get("${BACKEND_URL}/api/v1/loggingout");
+        const data = await axios.get(`${BACKEND_URL}/api/v1/loggingout`);
         console.log('loggedOut Data -',data);
         toast.success(' LoggedOut Successfully ');
         dispatch({type:"LogOutSuccess", payload : data.user});
@@ -59,7 +59,7 @@ export const Logout = () => async(dispatch) => {
 export const LoadUser = () => async(dispatch) => {
     try {
         dispatch({type:"LoadUserRequest"});
-        const {data} = await axios.get('${BACKEND_URL}/api/v1/me', {
+        const {data} = await axios.get(`${BACKEND_URL}/api/v1/me`, {
             withCredentials: true
         });
         // console.log('loaded user-',{data});

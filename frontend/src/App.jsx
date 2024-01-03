@@ -37,7 +37,7 @@ function App() {
             <Route path = "/signup" element = {<Signup />}>  </Route>
             <Route path = "/logout" element = {<Logout />}>  </Route>
 
-              <Route path = "/allcourse"  element = {!isAuthenticated  ? <AllCourse  /> : ""}> </Route>
+              <Route path = "/allcourse"  element = {<AllCourse  />}> </Route>
 
              <Route path = "/usercourses" 
                 element = { isAuthenticated  ?  <AllUserCourses /> : ""}> 
