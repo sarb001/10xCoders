@@ -19,7 +19,7 @@ connectDb();
 // middlewars
 
 app.use(cors({
-      origin : 'https://10x-coders-frontend.vercel.app',
+      origin : 'https://10x-coders-frontend-chi.vercel.app',
       credentials: true,
 }))
 
