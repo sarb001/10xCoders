@@ -27,7 +27,8 @@ function App() {
   return (
     <> 
      <Router>
-      <Header user = {user}  isAuthenticated = {isAuthenticated}  />
+      {/* {isAuthenticated &&  } */}
+      <Header  />
           <Routes>
             <Route path = "/"  
               element = {<Home  user = {user}  isAuthenticated = {isAuthenticated} />}>  
