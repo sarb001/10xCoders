@@ -7,9 +7,9 @@ import { LoadUser } from '../Actions/User';
 
 const AllCourse = () => {
 
-    const  dispatch = useDispatch();
-    
-    const { isAuthenticated , user } = useSelector((state) => state.user);
+  const { isAuthenticated , user } = useSelector((state) => state.user);
+
+   const  dispatch = useDispatch();    
 
     const allcourses  = useSelector(state => state.allusers?.courses);
     console.log('allcourses front -',allcourses);
@@ -23,9 +23,6 @@ const AllCourse = () => {
        console.log('buying course-',id);
        console.log('buying price -',price);
      }
-
-    //  const isCoursePaid = true;
-
 
   return (
     <div>
@@ -51,7 +48,6 @@ const AllCourse = () => {
                             <span> Creator - {item.creator.name} </span>
                             <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                               <span>
-                              {/* <Link to = {`/course/${item._id}`}> */}
                                 {user == null ? (
                                 <> 
                                   <button className = "view detail"  
