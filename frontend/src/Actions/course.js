@@ -9,7 +9,7 @@ export  const CreateCourse = (myForm) => async(dispatch) => {
     try {
          dispatch({type:"CreateCourseRequest"});
          console.log(' myForm frontend --',myForm);
-         const data = await axios.post('${BACKEND_URL}/api/v1/createcourse', myForm
+         const data = await axios.post(`${BACKEND_URL}/api/v1/createcourse`, myForm
          ,{
             headers:{
                 'Content-Type' : 'multipart/form-data',
@@ -30,7 +30,7 @@ export  const CreateCourse = (myForm) => async(dispatch) => {
 export const AllCourses = () => async(dispatch) => {
     try {
         dispatch({type:"AllCoursesRequest"});
-        const { data } = await axios.get('${BACKEND_URL}/api/v1/allcourse',{
+        const { data } = await axios.get(`${BACKEND_URL}/api/v1/allcourse`,{
             headers : {
                 'Content-Type' :  'application/json'
             }
@@ -47,7 +47,7 @@ export const AllCourses = () => async(dispatch) => {
 export const MyAllCourses = () => async(dispatch) => {
     try {
         dispatch({type:"MyCoursesRequest"});
-        const { data } = await axios.get('${BACKEND_URL}/api/v1/mycourses',{
+        const { data } = await axios.get(`${BACKEND_URL}/api/v1/mycourses`,{
             headers : {
                 'Content-Type' :  'application/json'
             }
@@ -63,7 +63,7 @@ export const MyAllCourses = () => async(dispatch) => {
 export const AllUsersCourses = () => async(dispatch) => {
     try {
         dispatch({type:"AllUsersCoursesRequest"});
-        const { data } = await axios.get('${BACKEND_URL}/api/v1/usercourses',{
+        const { data } = await axios.get(`${BACKEND_URL}/api/v1/usercourses`,{
             headers : {
                 'Content-Type' :  'application/json'
             }
