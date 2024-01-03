@@ -43,9 +43,6 @@ cloudinary.config({
 app.use('/api/v1' , user);
 app.use('/api/v1' , course);
 
-app.get('/', (req,res) => {
-      res.send(' Backend is Working... ')
-})
 
 app.listen(PORT, (req,res)  => {
    console.log(` Server Running onn ${PORT} Broo`);
