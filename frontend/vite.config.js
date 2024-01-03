@@ -7,7 +7,7 @@ export default defineConfig({
   server : {
     proxy : {
       '/api' : {
-        target : 'http://localhost:4000',
+        target : 'https://one0xcourses-backend.onrender.com',
         changeOrigin :true
        }
     }
