@@ -17,6 +17,7 @@ import AllCourse from './components/AllCourse';
 import AllUserCourses from './components/AllUserCourses';
 import CreateCourses from './components/CreateCourses';
 import PaymentSucces from './components/PaymentSucces';
+import NotFound from './components/NotFound';
 
 function App() {
 
@@ -27,7 +28,6 @@ function App() {
   return (
     <> 
      <Router>
-      {/* {isAuthenticated &&  } */}
       <Header  />
           <Routes>
             <Route path = "/"  
@@ -37,12 +37,10 @@ function App() {
             <Route path = "/signup" element = {<Signup />}>  </Route>
             <Route path = "/logout" element = {<Logout />}>  </Route>
 
-              <Route path = "/allcourse" 
-                element = {<AllCourse  />}>  
-              </Route>
+              <Route path = "/allcourse"  element = {<AllCourse  />}> </Route>
 
              <Route path = "/usercourses" 
-                element = { <AllUserCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
+                element = { isAuthenticated  ?  <AllUserCourses /> : ""}> 
               </Route>
 
               <Route path = "/mycourses" 
@@ -50,24 +48,16 @@ function App() {
               </Route>
 
             <Route path = "/profile"
-              element = {<Profile   user = {user} />}>  </Route>
+              element = { isAuthenticated ? <Profile /> : <NotFound /> }>  </Route>
               
-            <Route path = "/requestcourse" element = {<RequestCourse />}>  </Route>
+            <Route path = "/requestcourse" element = {isAuthenticated ? <RequestCourse /> : <NotFound />}>  </Route>
 
             <Route path = "/createcourse" element = {<CreateCourses />}>  </Route>
 
             <Route path = "/paymentsuccess"   
             element = {<PaymentSucces user = {user}  />}>  </Route>
               
-
-
-            {/* <Route path = "/subscribe"   
-            element = {<Subscribe  user = {user}  />}>  </Route>
-
-
-            <Route path = "/paymentfailed"   
-            element = {<PaymentFailed  user = {user}  />}>  </Route> */}
-
+             <Route path= "*"  element = {  <NotFound /> }  />
 
               <Route path = "/course/:id"
                 element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  

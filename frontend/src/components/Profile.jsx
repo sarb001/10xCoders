@@ -10,25 +10,12 @@ const Profile = () => {
    const dispatch =   useDispatch();
    const navigate =   useNavigate();
    
-  //  const { user , subscriptionId , message  : subscriptiomessage } = useSelector((state) => state.user);
-   
-  const user = useSelector((state) => state.user?.user);
-  console.log(' dispatch main  user --',user);
-  // const subscriptionId = useSelector((state) => state.user?.user?.subscription?.id);
-  //  console.log('subsc id dispatched  -',subscriptionId);
+    const user = useSelector((state) => state.user?.user);
+   console.log(' dispatch main  user --',user);
 
-  useEffect(() => {
-    dispatch(LoadUser());
- },[dispatch])
-
-  //  const handlesubscription = () => {
-  //    navigate('/subscribe');
-  //  }
-
-   const cancelsubscription = async() => {
-    console.log('cliedkwwk');
-      // await dispatch(CancelSubscription(subscriptionId));
-   }
+    useEffect(() => {
+      dispatch(LoadUser());
+  },[dispatch])
 
   return (
     <div className="pricing container">
@@ -41,15 +28,6 @@ const Profile = () => {
                 <span> Name is - {user?.name}   </span>
                 <span> Email is - {user?.email}  </span>
               </div>
-              {/* {user?.subscription && user?.subscription.status === 'active' ? (   
-                 <Button variant='contained' onClick={cancelsubscription}>
-                  Cancel Subscription 
-               </Button>
-                ) : (
-                  <Button variant='contained' onClick={handlesubscription}>
-                     Subscribe 
-                  </Button>
-                )} */}
           </div>
     </div>
   )

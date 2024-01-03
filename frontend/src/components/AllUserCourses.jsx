@@ -18,13 +18,10 @@ const AllUserCourses = () => {
     const course  = useSelector(state => state.user?.course);
     console.log(' specificOrder  111 -' ,course);
 
-    // if(course?.status === 'paid'){
-    //   return navigate(`/course/${courseid}`)
-    // }   
 
     useEffect(() => {
       dispatch(AllUsersCourses());
-      // dispatch(LoadUser());
+      dispatch(LoadUser());
     },[dispatch])
 
     const BuyingCourseHandler = async(courseid) => {

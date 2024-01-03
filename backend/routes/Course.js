@@ -48,9 +48,5 @@ router.route('/paymentverification/:id').post(isAuthenticated  ,PaymentVerificat
 
 router.route('/razorpaykey').get(isAuthenticated,GetRazorPayKey);
 
-// /// must authorized as subscriber 
-
-// router.route('/cancelsubscription/:id').post(isAuthenticated, authorizeSubscribers, CancelSubscription);
-
 
 export default router;
