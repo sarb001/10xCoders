@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
 import Razorpay from 'razorpay';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 
 import user from './routes/User.js';
 import course from './routes/Course.js';
@@ -39,9 +38,9 @@ cloudinary.config({
 app.use('/api/v1' , user);
 app.use('/api/v1' , course);
 
-// app.get('/', (req,res) => {
-//       res.send(' Backend is Working... ')
-// })
+app.get('/', (req,res) => {
+      res.send(' Backend is Working... ')
+})
 
 app.listen(PORT, (req,res)  => {
    console.log(` Server Running onn ${PORT} Broo`);
