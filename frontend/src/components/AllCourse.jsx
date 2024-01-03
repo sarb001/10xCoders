@@ -12,7 +12,7 @@ const AllCourse = () => {
    const  dispatch = useDispatch();    
 
     const allcourses  = useSelector(state => state.allusers?.courses);
-    console.log('allcourses front -',allcourses);
+    console.log('allcourses front 11 -',allcourses);
 
      useEffect(() => {
         dispatch(AllCourses())
@@ -20,8 +20,8 @@ const AllCourse = () => {
      },[dispatch])
 
      const BuyingCourseHandler = (id,price) => {
-       console.log('buying course-',id);
-       console.log('buying price -',price);
+       console.log('buying course- 1',id);
+       console.log('buying price  1-',price);
      }
 
   return (
