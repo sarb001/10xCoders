@@ -18,6 +18,11 @@ connectDb();
 
 // middlewars
 
+app.use(cors({
+      origin : 'https://10x-coders-frontend.vercel.app',
+      credentials: true,
+}))
+
 app.use(express.json({limit : '50mb'}));
 app.use(cookieParser());
 app.use(express.urlencoded({extended :true}));
