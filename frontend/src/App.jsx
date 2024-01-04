@@ -21,18 +21,18 @@ import NotFound from './components/NotFound';
 
 function App() {
 
-     const  { isAuthenticated , user } = useSelector((state) => state.user);
-      console.log('main  user exists --',user);
-      console.log('main  isAuthenticated exists --',isAuthenticated);
+     const   mainuser = useSelector(state => state.user?.user);
+     const   MainisAuthenticated  = useSelector(state => state.user?.isAuthenticated);
+
+      console.log('main  user exists --',mainuser);
+      console.log('main  isAuthenticated exists --',MainisAuthenticated);
 
   return (
     <> 
      <Router>
       <Header  />
           <Routes>
-            <Route path = "/"  
-              element = {<Home  />}>  
-            </Route>
+            <Route path = "/"  element = {<Home  />}> </Route>
             <Route path = "/login"  element = {<Login />}>  </Route>
             <Route path = "/signup" element = {<Signup />}>  </Route>
             <Route path = "/logout" element = {<Logout />}>  </Route>
@@ -40,19 +40,19 @@ function App() {
               <Route path = "/allcourse"  element = {<AllCourse  />}> </Route>
 
              <Route path = "/usercourses" 
-                element = { isAuthenticated  ?  <AllUserCourses /> : ""}> 
+                element = { MainisAuthenticated  ?  <AllUserCourses /> : ""}> 
               </Route>
 
               <Route path = "/mycourses" 
-                 element = { <MyCourses user = {user}  isAuthenticated = {isAuthenticated} />}> 
+                 element = { <MyCourses user = {user}  isAuthenticated = {MainisAuthenticated} />}> 
               </Route>
 
             <Route path = "/profile"
-              element = { isAuthenticated ? <Profile /> : <NotFound /> }>  </Route>
+              element = { MainisAuthenticated ? <Profile /> : <NotFound /> }>  </Route>
               
-            <Route path = "/requestcourse" element = {isAuthenticated ? <RequestCourse /> : <NotFound />}>  </Route>
+            <Route path = "/requestcourse" element = {MainisAuthenticated ? <RequestCourse /> : <NotFound />}>  </Route>
 
-            <Route path = "/createcourse" element = {isAuthenticated  ?   <CreateCourses /> : <NotFound /> }>  </Route>
+            <Route path = "/createcourse" element = {MainisAuthenticated  ?   <CreateCourses /> : <NotFound /> }>  </Route>
 
             <Route path = "/paymentsuccess"   
             element = {<PaymentSucces user = {user}  />}>  </Route>
@@ -60,7 +60,7 @@ function App() {
              <Route path= "*"  element = {  <NotFound /> }  />
 
               <Route path = "/course/:id"
-                element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
+                element = {<MainCourse user = {user}  isAuthenticated = {MainisAuthenticated} />}>  
               </Route>
 
           </Routes>
