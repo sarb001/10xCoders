@@ -19,7 +19,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar-container">
       <span> MAIN MENU </span>
-      {user  == null ? 
+      {!isAuthenticated ? 
          <div className="course-list">
          <div className="home link">
              <span> <HomeIcon /> </span>
@@ -54,12 +54,6 @@ const Sidebar = () => {
                     <span> <PaymentsIcon /> </span>
                     <Link to={'/profile'}> Profile </Link>
                 </div>
-
-                {/* <div className="pricing link">
-                    <span> <PaymentsIcon /> </span>
-                    <Link to={'/createcourse'}> Settings </Link>
-                </div> */}
-
             </div>
          </>
       </>

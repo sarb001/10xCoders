@@ -63,10 +63,6 @@ function App() {
                 element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
               </Route>
 
-              {/* <Route path = "/createcourse"
-                element = {<CreateCourses user = {user}  isAuthenticated = {isAuthenticated} />}>  
-              </Route> */}
-
           </Routes>
      </Router>
       <Footer />
