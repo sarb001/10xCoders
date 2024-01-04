@@ -20,7 +20,8 @@ export const courseReducer = createReducer({},{
 
 export const getcourseReducer = createReducer({
     courses: [],Lectures : []
-},{   
+},
+{   
             AllCoursesRequest : (state,action) => {
                 state.loading = true;
             },
@@ -46,18 +47,6 @@ export const getcourseReducer = createReducer({
                 state.loading = false;
             },
 
-            // all Users RequestCourses 
-
-            AllUsersCoursesRequest : (state,action) => {
-                state.loading = true;
-            },
-            AllUsersCoursesSuccess : (state,action) => {
-                state.loading = false;
-                state.courses = action.payload;
-            },
-            AllUsersCoursesFailed : (state,action) => {
-                state.loading = false;
-            },
 
          //all Lectures of Course
 
@@ -108,4 +97,20 @@ export const getcourseReducer = createReducer({
             DeleteLectureFailed : (state,action)  => {
                 state.loading = false;
             }
+})
+
+export const exceptloggedcourseReducer = createReducer({
+    courses : []
+},{
+    // all Users RequestCourses 
+    AllUsersCoursesRequest : (state) => {
+        state.loading = true;
+    },
+    AllUsersCoursesSuccess : (state,action) => {
+        state.loading = false;
+        state.courses = action.payload;
+    },
+    AllUsersCoursesFailed : (state) => {
+        state.loading = false;
+    },
 })

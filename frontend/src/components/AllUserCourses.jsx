@@ -11,9 +11,9 @@ import axios from 'axios';
 const AllUserCourses = () => {
 
    const navigate = useNavigate();
-   const allusercourse  = useSelector(state => state.allusers?.courses);
+   const allusercourse  = useSelector(state => state.usercourse?.courses);
 
-    console.log(' course  except logged  user -',allusercourse);
+    console.log('  except logged  course -',allusercourse);
     const  dispatch = useDispatch();
     
     const course  = useSelector(state => state.user?.course);

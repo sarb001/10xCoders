@@ -110,12 +110,10 @@ export const GetAllUserCourses    = async(req,res) => {
          const loggedUserid = req.user?._id;
          const user = await User.findById(loggedUserid);
 
-            // except (neglect) user     and        get all user 
         const courses = await Course.find({ creator : { 
                 $ne :  user
             } 
         }).populate('creator');
-        // console.log('all courses backend except - ',courses);
 
         res.status(200).json({
             success : true,
