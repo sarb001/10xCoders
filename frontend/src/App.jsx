@@ -21,10 +21,10 @@ import NotFound from './components/NotFound';
 
 function App() {
 
-     const   mainuser = useSelector(state => state.user?.user);
+     const   user = useSelector(state => state.user?.user);
      const   MainisAuthenticated  = useSelector(state => state.user?.isAuthenticated);
 
-      console.log('main  user exists --',mainuser);
+      console.log('main  user exists --',user);
       console.log('main  isAuthenticated exists --',MainisAuthenticated);
 
   return (
