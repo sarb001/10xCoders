@@ -5,7 +5,7 @@ import {  AllCourses, GetLoggedUserCourse,
 DeleteLecture, GetCourseLectures, DeleteCourse,
  Createcourse, GetAllUserCourses, BuyCourse, PaymentVerification, GetRazorPayKey } from '../Controllers/CourseController.js';
 
-import { isAuthenticated , authorizeOrders } from '../Middleware/auth.js';
+import { isAuthenticated  } from '../Middleware/auth.js';
 import singleUpload from '../Middleware/multer.js';
 
 const router = express.Router();

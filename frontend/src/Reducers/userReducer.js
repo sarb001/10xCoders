@@ -2,11 +2,8 @@
 
 import { createReducer } from "@reduxjs/toolkit";
 
-const initialState = {
-    isAuthenticated : false,
-}
 
-export const userReducer = createReducer(initialState ,{
+export const userReducer = createReducer({} ,{
 
     // Register Account 
     GetRegisterRequest : (state,action) => {
@@ -15,9 +12,10 @@ export const userReducer = createReducer(initialState ,{
      GetRegisterSuccess : (state,action) => {
          state.loading = false,
          state.user = action.payload;
+         state.isAuthenticated = true;
+        },
+        GetRegisterFailed : (state,action) => {
          state.isAuthenticated = false;
-     },
-     GetRegisterFailed : (state,action) => {
          state.loading = false,
          state.error  =  action.payload
      },
@@ -49,78 +47,10 @@ export const userReducer = createReducer(initialState ,{
      LogOutFailed : (state,action) => {
          state.loading = false,
          state.error  =  action.payload
-         state.isAuthenticated = false;
+         state.isAuthenticated = true;
      },
 
      LoadUserRequest : (state) => {
          state.loading = true
      }, 
-     LoadUserSuccess : (state,action) => {
-        state.loading = false,
-        state.isAuthenticated = true;
-        state.user = action.payload;
-    },
-     LoadUserFailed : (state,action) => {
-        state.loading = false,
-        state.error  =  action.payload
-        state.isAuthenticated = false;
-     },
-
-     BuySpecificCourseRequest  : (state) => {
-        state.loading = true;
-     },
-     BuySpecificCourseSuccess : (state,action) => {
-        state.loading = false,
-        state.isAuthenticated = true;
-        state.course = action.payload;
-        state.order = action.payload;
-    },
-    BuySpecificCourseFailed : (state,action) => {
-        state.loading = false,
-        state.error  =  action.payload
-        state.isAuthenticated = false;
-     },
-
-
-      VerifyPaymentCourseRequest  : (state) => {
-        state.loading = true;
-     },
-      VerifyPaymentCourseSuccess : (state,action) => {
-        state.loading = false,
-        state.isAuthenticated = true;
-        state.course = action.payload;
-      },
-     VerifyPaymentCourseFailed : (state,action) => {
-        state.loading = false,
-        state.error  =  action.payload
-        state.isAuthenticated = false;
-      },
-
-
-
-
-
-    //  buySubscriptionRequest : (state) => {
-    //     state.loading = true;
-    //  },
-    //  buySubscriptionSuccess : (state,action) => {
-    //     state.loading = false;
-    //     state.subscriptionId = action.payload;
-    //  },
-    //  buySubscriptionFailure : (state,action) => {
-    //     state.loading = false;
-    //     state.error = action.payload;
-    //  },
-
-    //  cancelSubscriptionRequest : (state) => {
-    //     state.loading = true;
-    //  },
-    //  cancelSubscriptionSuccess : (state,action) => {
-    //     state.loading = false;
-    //     state.message = action.payload;
-    //  },
-    //  cancelSubscriptionFailure : (state,action) => {
-    //     state.loading = false;
-    //     state.error = action.payload;
-    //  },
-})
+});

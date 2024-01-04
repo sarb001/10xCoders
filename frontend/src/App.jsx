@@ -36,19 +36,14 @@ function App() {
             <Route path = "/login"  element = {<Login />}>  </Route>
             <Route path = "/signup" element = {<Signup />}>  </Route>
             <Route path = "/logout" element = {<Logout />}>  </Route>
-
-              <Route path = "/allcourse"  element = {<AllCourse  />}> </Route>
-
-             <Route path = "/usercourses" 
-                element = { MainisAuthenticated  ?  <AllUserCourses /> : ""}> 
-              </Route>
+            <Route path = "/allcourse"  element = {<AllCourse  />}> </Route>
+            <Route path = "/usercourses"  element = {  <AllUserCourses /> }>  </Route>
 
               <Route path = "/mycourses" 
                  element = { <MyCourses user = {user}  isAuthenticated = {MainisAuthenticated} />}> 
               </Route>
 
-            <Route path = "/profile"
-              element = { MainisAuthenticated ? <Profile /> : <NotFound /> }>  </Route>
+            <Route path = "/profile" element = {  <Profile /> }>  </Route>
               
             <Route path = "/requestcourse" element = {MainisAuthenticated ? <RequestCourse /> : <NotFound />}>  </Route>
 
