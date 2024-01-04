@@ -2,7 +2,11 @@
 
 import { createReducer } from "@reduxjs/toolkit";
 
-export const userReducer = createReducer({},{
+const initialState = {
+    isAuthenticated : false,
+}
+
+export const userReducer = createReducer(initialState ,{
 
     // Register Account 
     GetRegisterRequest : (state,action) => {
@@ -11,11 +15,10 @@ export const userReducer = createReducer({},{
      GetRegisterSuccess : (state,action) => {
          state.loading = false,
          state.user = action.payload;
-         state.isAuthenticated = true;
+         state.isAuthenticated = false;
      },
      GetRegisterFailed : (state,action) => {
          state.loading = false,
-         state.isAuthenticated = false;
          state.error  =  action.payload
      },
 
@@ -46,7 +49,7 @@ export const userReducer = createReducer({},{
      LogOutFailed : (state,action) => {
          state.loading = false,
          state.error  =  action.payload
-         state.isAuthenticated = true;
+         state.isAuthenticated = false;
      },
 
      LoadUserRequest : (state) => {
