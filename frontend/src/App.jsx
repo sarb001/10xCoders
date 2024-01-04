@@ -55,7 +55,7 @@ function App() {
              <Route path= "*"  element = {  <NotFound /> }  />
 
               <Route path = "/course/:id"
-                element = {<MainCourse user = {user}  isAuthenticated = {MainisAuthenticated} />}>  
+                element = {<MainCourse  />}>  
               </Route>
 
           </Routes>
