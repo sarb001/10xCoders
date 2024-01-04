@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import DashboardSidebar from './DashboardSidebar'
 import { Avatar , Button, Dialog, Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { LoadUser } from '../Actions/User';
 import { CreateCourse } from '../Actions/course';
 
-const CreateCourses = ({user,isAuthenticated = true}) => {
+const CreateCourses = () => {
     
       const [open,setopen] = useState(false);
       const [avatar,setAvatar] = useState("");
@@ -17,6 +17,9 @@ const CreateCourses = ({user,isAuthenticated = true}) => {
       const dispatch = useDispatch();
       const navigate = useNavigate();
       console.log('isAuth-',isAuthenticated);
+
+     const { isAuthenticated , user } = useSelector((state) => state.user);
+
 
     const handleClickOpen  = () => {setopen(true)}
     const handleClickClose = () => {setopen(false)}
@@ -74,6 +77,7 @@ const CreateCourses = ({user,isAuthenticated = true}) => {
                   <Dialog  open = {open}  onClose ={handleClickClose}>
                 <div style = {{padding:'8%'}}>
                   <Typography> Create Course </Typography>
+
                       <form onSubmit={CourseSubmithandler}>
                          {imagePrev && (
                              <Avatar   src = {imagePrev}  /> 
@@ -104,6 +108,7 @@ const CreateCourses = ({user,isAuthenticated = true}) => {
                               </Button>
                           </span>
                       </form>
+
                   </div>
                   </Dialog>
               </>

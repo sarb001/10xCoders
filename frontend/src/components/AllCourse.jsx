@@ -48,13 +48,13 @@ const AllCourse = () => {
                             <span> Creator - {item.creator.name} </span>
                             <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
                               <span>
-                                {user == null ? (
+                                {!isAuthenticated ? (
                                 <> 
                                   <button className = "view detail"  
                                   > Login First 
                                   </button>
                               
-                                </>): ("")
+                                </>): ""
                                 }
                                   </span>
                             {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}

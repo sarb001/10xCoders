@@ -31,7 +31,7 @@ function App() {
       <Header  />
           <Routes>
             <Route path = "/"  
-              element = {<Home  user = {user}  isAuthenticated = {isAuthenticated} />}>  
+              element = {<Home  />}>  
             </Route>
             <Route path = "/login"  element = {<Login />}>  </Route>
             <Route path = "/signup" element = {<Signup />}>  </Route>
@@ -52,7 +52,7 @@ function App() {
               
             <Route path = "/requestcourse" element = {isAuthenticated ? <RequestCourse /> : <NotFound />}>  </Route>
 
-            <Route path = "/createcourse" element = {<CreateCourses />}>  </Route>
+            <Route path = "/createcourse" element = {isAuthenticated  ?   <CreateCourses /> : <NotFound /> }>  </Route>
 
             <Route path = "/paymentsuccess"   
             element = {<PaymentSucces user = {user}  />}>  </Route>
@@ -63,9 +63,9 @@ function App() {
                 element = {<MainCourse user = {user}  isAuthenticated = {isAuthenticated} />}>  
               </Route>
 
-              <Route path = "/createcourse"
+              {/* <Route path = "/createcourse"
                 element = {<CreateCourses user = {user}  isAuthenticated = {isAuthenticated} />}>  
-              </Route>
+              </Route> */}
 
           </Routes>
      </Router>

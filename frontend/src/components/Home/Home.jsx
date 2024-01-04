@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { CreateCourse } from '../../Actions/course';
 import { LoadUser } from '../../Actions/User';
 
-const Home = ({user,isAuthenticated}) => {
+const Home = () => {
   
     const [open,setopen] = useState(false);
     const [avatar,setAvatar] = useState("");
@@ -17,6 +17,8 @@ const Home = ({user,isAuthenticated}) => {
     const [price,setprice] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const { isAuthenticated } = useSelector(state => state.user);
 
   const handleClickOpen  = () => {setopen(true)}
   const handleClickClose = () => {setopen(false)}

@@ -86,7 +86,6 @@ const MainCourse = ({user,isAuthenticated}) => {
       const creatorid    = maincourseid ? maincourseid.creator?._id : null; 
       const userid       = user ? user._id : null; 
 
-    //  console.log(' MainCourse _id -' ,maincourseid);
      console.log('Logged userr id - ',creatorid);
      console.log('All Lectures  -'   ,userid);
      console.log(' isAuthhh1  -'     ,isAuthenticated);
