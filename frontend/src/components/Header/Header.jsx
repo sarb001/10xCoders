@@ -7,9 +7,8 @@ import { LoadUser, Logout } from '../../Actions/User';
 
 const Header = () => {
   
-  const  usermain = useSelector(state => state.user?.user);
-  console.log('isAuth in userr- ',usermain);
-
+  const  { isAuthenticated } = useSelector(state => state.user);
+  console.log('isAuth in Header - ',isAuthenticated);
   
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -39,7 +38,7 @@ const Header = () => {
         </div>
 
         <div className="buttons">
-          {!usermain ? (<>
+          {!isAuthenticated ? (<>
             <Link to = "/signup"> SignUp </Link>
             <Link to = "/login">  Login </Link>
           </>) : 
