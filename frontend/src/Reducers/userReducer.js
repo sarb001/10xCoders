@@ -2,7 +2,6 @@
 
 import { createReducer } from "@reduxjs/toolkit";
 
-
 export const userReducer = createReducer({} ,{
 
     // Register Account 

@@ -37,6 +37,7 @@ function App() {
             <Route path = "/signup" element = {<Signup />}>  </Route>
             <Route path = "/logout" element = {<Logout />}>  </Route>
             <Route path = "/allcourse"  element = {<AllCourse  />}> </Route>
+            
             <Route path = "/usercourses"  element = {  <AllUserCourses /> }>  </Route>
 
               <Route path = "/mycourses" 
@@ -45,9 +46,11 @@ function App() {
 
             <Route path = "/profile" element = {  <Profile /> }>  </Route>
               
-            <Route path = "/requestcourse" element = {MainisAuthenticated ? <RequestCourse /> : <NotFound />}>  </Route>
+            <Route path = "/requestcourse" element = {MainisAuthenticated ?
+               <RequestCourse /> : <NotFound />}>  </Route>
 
-            <Route path = "/createcourse" element = {MainisAuthenticated  ?   <CreateCourses /> : <NotFound /> }>  </Route>
+            <Route path = "/createcourse" element = {MainisAuthenticated  ?  
+               <CreateCourses /> : <NotFound /> }>  </Route>
 
             <Route path = "/paymentsuccess"   
             element = {<PaymentSucces user = {user}  />}>  </Route>

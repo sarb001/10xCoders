@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AllUsersCourses } from '../Actions/course';
@@ -12,13 +13,11 @@ const AllUserCourses = () => {
    const navigate = useNavigate();
    const allusercourse  = useSelector(state => state.allusers?.courses);
 
-    console.log(' course for except user -',allusercourse);
+    console.log(' course  except logged  user -',allusercourse);
     const  dispatch = useDispatch();
     
     const course  = useSelector(state => state.user?.course);
-    console.log(' specificOrder  111 -' ,course);
-
-      
+    console.log(' Specific Course -' ,course);
 
     useEffect(() => {
       dispatch(AllUsersCourses());
@@ -72,9 +71,6 @@ const AllUserCourses = () => {
         const razor = new Razorpay(options);
         razor.open();
     }
-
-
-
 
   return (
   <div className="home container">

@@ -1,5 +1,4 @@
 
-import Razorpay from 'razorpay';
 import Course from '../models/Course.js';
 import User from '../models/User.js';
 import cloudinary from 'cloudinary';
@@ -101,13 +100,14 @@ export const AllCourses    = async(req,res) => {
     }
 }
 
+
 export const GetAllUserCourses    = async(req,res) => {
     try {
          if(!req.user){
-            return res.status(401).json({message : " UnAuthorized "});
+            return res.status(401).json({message : " UnAuthorizeddd  "});
          }
 
-         const loggedUserid = req.user._id;
+         const loggedUserid = req.user?._id;
          const user = await User.findById(loggedUserid);
 
             // except (neglect) user     and        get all user 
