@@ -107,8 +107,10 @@ export const exceptloggedcourseReducer = createReducer({
         state.loading = true;
     },
     AllUsersCoursesSuccess : (state,action) => {
+        console.log('expect reducer before- ',action.payload);
         state.loading = false;
         state.courses = action.payload;
+        console.log('expect reducer after - ',action.payload);
     },
     AllUsersCoursesFailed : (state) => {
         state.loading = false;
