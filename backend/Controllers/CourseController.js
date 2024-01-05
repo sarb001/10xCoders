@@ -12,14 +12,13 @@ import crypto from 'crypto';
 export const Createcourse  = async(req,res) => {
     try {
           if(!req.user){
-            return res.status(401).json({message : " UnAuthorized "});    
+            return res.status(401).json({message : " UnAuthorizeddd  "});    
           }
 
           const { title , price  , description  } = req.body;
           console.log('course title -',title);
           console.log('course price -',price);
           console.log('course desc -',description);
-          //   console.log('requested bodyy  -',req.body);
           
           if(!title || !price || !description){
               return res.status(400).json({
@@ -48,8 +47,7 @@ export const Createcourse  = async(req,res) => {
 
             const fileBuffer     = req.file.buffer;
             const OriginalName   = req.file?.originalname;
-            const convertdataUri = await ConvertFiletoUri(fileBuffer,OriginalName);
-
+            const convertdataUri = await ConvertFiletoUri(fileBuffer,OriginalName)
 
             const mycloud = await cloudinary.v2.uploader.upload(convertdataUri,{
                 folder : "courseimages"

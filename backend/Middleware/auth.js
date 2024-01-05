@@ -3,13 +3,13 @@ import jwt  from 'jsonwebtoken';
 import User from '../models/User.js';
 
 export const isAuthenticated = async(req,res,next) => {
+    console.log('auth started ');
+    const { token } = req.cookies;
+    if(!token){
+        console.log('token not Present');
+        return next();
+    }
     try {
-        console.log('auth started ');
-        const { token } = req.cookies;
-        if(!token){
-            console.log('token not Present');
-            return next();
-        }
         const decoded = await jwt.verify(token,'tokensecret');
         console.log('decodeod -',decoded);
         req.user = await User.findById(decoded._id);
