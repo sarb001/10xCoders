@@ -11,9 +11,9 @@ import axios from 'axios';
 const AllUserCourses = () => {
 
    const navigate = useNavigate();
-   const allusercourse  = useSelector(state => state.usercourse?.courses);
+   const { courses }  = useSelector(state => state.usercourse);
 
-    console.log('  except logged  course -',allusercourse);
+    console.log('  except logged  course -',courses);
     const  dispatch = useDispatch();
     
     const course  = useSelector(state => state.user?.course);
@@ -82,7 +82,7 @@ const AllUserCourses = () => {
           <h2> All  User Cases  </h2>
             
                  <div className="courselist">
-                   {allusercourse?.map((item) => (
+                   {courses?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}
                           style = {{width:'100%', height:'220px',
