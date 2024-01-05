@@ -43,7 +43,6 @@ export const AllCourses = () => async(dispatch) => {
     }
 }
 
-// my all courses
 export const MyAllCourses = () => async(dispatch) => {
     try {
         dispatch({type:"MyCoursesRequest"});
@@ -60,7 +59,6 @@ export const MyAllCourses = () => async(dispatch) => {
 }
 
 
-
 // all user's  courses except 
 export const AllUsersCourses = () => async(dispatch) => {
     try {
@@ -68,7 +66,8 @@ export const AllUsersCourses = () => async(dispatch) => {
         const { data } = await axios.get(`${BACKEND_URL}/api/v1/usercourses`,{
             headers : {
                 'Content-Type' :  'application/json'
-            }
+            },
+            withCredentials: true
         })
         console.log(' user data except course  --',data.courses);
         dispatch({type:"AllUsersCoursesSuccess" ,payload : data.courses});
