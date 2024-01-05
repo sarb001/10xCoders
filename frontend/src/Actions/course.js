@@ -69,8 +69,8 @@ export const AllUsersCourses = () => async(dispatch) => {
             },
             withCredentials: true
         })
-        console.log(' user data except course  --',data.courses);
-        dispatch({type:"AllUsersCoursesSuccess" ,payload : data.courses});
+        console.log(' user data except course  --',data.newcourse);
+        dispatch({type:"AllUsersCoursesSuccess" ,payload : data.newcourse});
 
     } catch (error) {
         dispatch({type:"AllUsersCoursesFailed" ,payload: error.response.data.message})

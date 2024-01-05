@@ -101,7 +101,7 @@ export const GetAllUserCourses    = async(req,res) => {
          const loggedUserid = req.user?._id;
          const user = await User.findById(loggedUserid);
 
-        const courses = await Course.find({ creator : { 
+        const newcourse = await Course.find({ creator : { 
                 $ne :  user
             } 
         }).populate('creator');
@@ -109,7 +109,7 @@ export const GetAllUserCourses    = async(req,res) => {
         res.status(200).json({
             success : true,
             message : " All Courses Fetched Successfully ",
-            courses
+            newcourse
         })
     } catch (error) {
         return res.status(500).json({
