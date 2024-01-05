@@ -100,7 +100,7 @@ export const getcourseReducer = createReducer({
 })
 
 export const exceptloggedcourseReducer = createReducer({
-    courses : []
+    newcourse : []
 },{
     // all Users RequestCourses 
     AllUsersCoursesRequest : (state) => {
@@ -109,7 +109,7 @@ export const exceptloggedcourseReducer = createReducer({
     AllUsersCoursesSuccess : (state,action) => {
         console.log('expect reducer before- ',action.payload);
         state.loading = false;
-        state.courses = action.payload;
+        state.newcourse = action.payload;
         console.log('expect reducer after - ',action.payload);
     },
     AllUsersCoursesFailed : (state) => {
