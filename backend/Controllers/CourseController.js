@@ -105,7 +105,6 @@ export const AllCourses    = async(req,res) => {
 
 export const GetAllUserCourses    = async(req,res) => {
     try {
-
         if(!req.user){
             return res.status(401).json({message : " UnAuthorized Error "});
         };
@@ -124,6 +123,7 @@ export const GetAllUserCourses    = async(req,res) => {
             newcourse
         })
     } catch (error) {
+        console.log('error in get al -',error);
         return res.status(500).json({
             success : false,
             message: error.message
