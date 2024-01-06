@@ -27,9 +27,6 @@ const AllCourse = () => {
        console.log('buying price  1-',price);
      }
 
-     if(loading){
-      return  <h1> <Loader /> </h1>
-    }
 
   return (
     <div>
@@ -42,8 +39,8 @@ const AllCourse = () => {
               <div className="right-section">
                   <h3> Browsing  All Courses </h3>
                   <div className="courselist">
-                  
-                    {allcourses?.map((item) => (
+                    {  loading && <p>  <Loader /> </p> }
+                    {allcourses && allcourses?.map((item) => (
                         <div className = 'course-container' key = {item._id}> 
                             <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
                           objectFit:'cover',display:'block'
