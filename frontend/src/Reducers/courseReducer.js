@@ -33,9 +33,9 @@ export const getcourseReducer = createReducer(initialState,
             },
             AllCoursesSuccess : (state,action) => {
                 console.log('all courses before success -',action.payload);
-                console.log('all courses loading  2 -',state.loading);
                 state.loading = false;
                 state.courses = action.payload;
+                console.log('all courses loading  2 -',state.loading);
                 console.log('all courses after  ssuccess -',action.payload);
             },
             AllCoursesFailed : (state,action) => {
@@ -115,9 +115,9 @@ export const exceptloggedcourseReducer = createReducer(initialState,{
     },
     AllUsersCoursesSuccess : (state,action) => {
         console.log('expect reducer before- ',action.payload);
-        console.log('expect reducer 2 - ',  state.loading);
         state.loading = false;
         state.newcourse = action.payload;
+        console.log('expect reducer 2 - ',  state.loading);
         console.log('expect reducer after - ',action.payload);
     },
     AllUsersCoursesFailed : (state) => {

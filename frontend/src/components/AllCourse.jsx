@@ -8,14 +8,14 @@ import Loader from './Loader';
 
 const AllCourse = () => {
 
-  const { isAuthenticated , user , loading } = useSelector((state) => state.user);
+  const { isAuthenticated , user  } = useSelector((state) => state.user);
   console.log('user in all course -',user);
   console.log('Auth in all course -',isAuthenticated);
 
    const  dispatch = useDispatch();    
 
-    const allcourses  = useSelector(state => state.allusers?.courses);
-    console.log('allcourses front 11 -',allcourses);
+    const  {courses  , loading }  = useSelector(state => state.allusers);
+    console.log('allcourses front 11 -',courses);
 
      useEffect(() => {
         dispatch(AllCourses())
@@ -41,7 +41,7 @@ const AllCourse = () => {
                   <div className="courselist">
                       { loading ? <p>  <Loader /> </p> : (
                         <>  
-                        {allcourses?.map((item) => (
+                        {courses?.map((item) => (
                             <div className = 'course-container' key = {item._id}> 
                                 <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
                               objectFit:'cover',display:'block'
