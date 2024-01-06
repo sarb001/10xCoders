@@ -11,6 +11,9 @@ import crypto from 'crypto';
 
 export const Createcourse  = async(req,res) => {
     try {
+        if(!req.user){
+            return res.status(401).json({message : " UnAuthorized Course Error "});
+        };
 
           const { title , price  , description  } = req.body;
           console.log('course title -',title);
@@ -23,7 +26,7 @@ export const Createcourse  = async(req,res) => {
                   message  : " Provide All Fieldsss "
                 })
             }
-            const user = await User.findById(req.user._id);
+            const user = await User.findById(req.user?._id);
 
                const  file = req.file;
                console.log('file backend --',file);
@@ -80,6 +83,7 @@ export const Createcourse  = async(req,res) => {
 
 export const AllCourses    = async(req,res) => {
     try {
+
         const courses = await Course.find({}).populate('creator');
         console.log('all courses backend- ',courses);
         res.status(200).json({
@@ -98,6 +102,11 @@ export const AllCourses    = async(req,res) => {
 
 export const GetAllUserCourses    = async(req,res) => {
     try {
+
+        if(!req.user){
+            return res.status(401).json({message : " UnAuthorized Error "});
+        };
+
          const loggedUserid = req.user?._id;
          const user = await User.findById(loggedUserid);
 
