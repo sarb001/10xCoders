@@ -26,7 +26,10 @@ export const Createcourse  = async(req,res) => {
                   message  : " Provide All Fieldsss "
                 })
             }
-            const user = await User.findById(req.user?._id);
+            console.log('user id before -');
+            const userid = req.user?._id;
+            console.log('user id after -',userid);
+            const user = await User.findById(userid);
 
                const  file = req.file;
                console.log('file backend --',file);
