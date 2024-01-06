@@ -22,6 +22,7 @@ export const courseReducer = createReducer(initialState,{
         },
         CreateCourseFailed : (state,action)  => {
              state.loading = false;
+             state.error  =  action.payload
         },
 })
 
@@ -41,6 +42,7 @@ export const getcourseReducer = createReducer(initialState,
             AllCoursesFailed : (state,action) => {
                 console.log('all courses loading  3 -',state.loading);
                 state.loading = false;
+                state.error  =  action.payload
             },
        // users
 
@@ -53,6 +55,7 @@ export const getcourseReducer = createReducer(initialState,
             },
             MyCoursesFailed : (state,action) => {
                 state.loading = false;
+                state.error  =  action.payload
             },
 
 
@@ -67,6 +70,7 @@ export const getcourseReducer = createReducer(initialState,
             },
             CourseLecturesFailed : (state,action) => {
              state.loading = false;
+             state.error  =  action.payload
             },
 
             // Delete Course
@@ -80,6 +84,7 @@ export const getcourseReducer = createReducer(initialState,
             },
             DeleteCourseFailed : (state,action) => {
                state.loading = false;
+               state.error  =  action.payload
             },
 
             //     // Add Lecture 
@@ -92,6 +97,7 @@ export const getcourseReducer = createReducer(initialState,
             },
             AddLectureFailed : (state,action)  => {
                 state.loading = false;
+                state.error  =  action.payload
             },
 
                 //Delete Lecture        
@@ -104,6 +110,7 @@ export const getcourseReducer = createReducer(initialState,
             },
             DeleteLectureFailed : (state,action)  => {
                 state.loading = false;
+                state.error  =  action.payload
             }
 })
 
@@ -123,5 +130,6 @@ export const exceptloggedcourseReducer = createReducer(initialState,{
     AllUsersCoursesFailed : (state) => {
         console.log('expect reducer 3- ',state.loading);
         state.loading = false;
+        state.error  =  action.payload
     },
 })

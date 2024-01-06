@@ -54,6 +54,14 @@ export const userReducer = createReducer(initialState ,{
      },
 
      LoadUserRequest : (state) => {
-         state.loading = true
-     }, 
+         state.loading = true;
+     },
+     LoadUserSuccess : (state,action) => {
+        state.loading = false,
+        state.user = action.payload;
+    },
+    LoadUserFailed : (state,action) => {
+        state.loading = false,
+        state.error  =  action.payload
+    }, 
 });

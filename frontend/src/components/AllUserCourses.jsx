@@ -91,39 +91,39 @@ const AllUserCourses = () => {
                   {  loading  ? <Loader /> : (
                     <>
                        {newcourse?.map((item) => (
-                      <div className = 'course-container' key = {item._id}> 
-                          <img src =  {item.courseposter.url}
-                          style = {{width:'100%', height:'220px',
-                          objectFit:'cover',display:'block'
-                         ,borderRadius:'25px'}} />
-                     
-                        <span id = "course-detail">
-                          <span> Title - {item.title} </span>
-                          <span> Price - {item.price} </span>
-                          <span> Creator - {item.creator.name} </span>
-                          <span> Lectures - {item.lectures.length} </span>
-                          <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
-                          
-                          <span>
-                                 
-                                   {item.order?.status === "paid" ? ( 
-                                   <> 
-                                      <Link to = {`/course/${item._id}`}>
-                                         <button className = "view detail"> View Details </button>
-                                      </Link>
-                                   </>) : (
-                                   <>
-                                    <button onClick = {()  => BuyingCourseHandler(item._id)}
-                                     className = "view detail"> Buy Now  </button>
-                                   </>)}
+                          <div className = 'course-container' key = {item._id}> 
+                              <img src =  {item.courseposter.url}
+                              style = {{width:'100%', height:'220px',
+                              objectFit:'cover',display:'block'
+                            ,borderRadius:'25px'}} />
+                        
+                            <span id = "course-detail">
+                              <span> Title - {item.title} </span>
+                              <span> Price - {item.price} </span>
+                              <span> Creator - {item.creator.name} </span>
+                              <span> Lectures - {item.lectures.length} </span>
+                              <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
+                              
+                              <span>
+                                    
+                                      {item.order?.status === "paid" ? ( 
+                                      <> 
+                                          <Link to = {`/course/${item._id}`}>
+                                            <button className = "view detail"> View Details </button>
+                                          </Link>
+                                      </>) : (
+                                      <>
+                                        <button onClick = {()  => BuyingCourseHandler(item._id)}
+                                        className = "view detail"> Buy Now  </button>
+                                      </>)}
 
+                                </span>
+                            
+                              {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
+                              </div>
                             </span>
-                         
-                          {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
-                          </div>
-                        </span>
 
-                      </div>
+                          </div>
                         ))}
                     </>
                   ) }
