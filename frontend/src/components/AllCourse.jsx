@@ -39,34 +39,36 @@ const AllCourse = () => {
               <div className="right-section">
                   <h3> Browsing  All Courses </h3>
                   <div className="courselist">
-                    {  loading && <p>  <Loader /> </p> }
-                    {allcourses && allcourses?.map((item) => (
-                        <div className = 'course-container' key = {item._id}> 
-                            <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
-                          objectFit:'cover',display:'block'
-                          ,borderRadius:'25px'}} />
-                      
-                          <span id = "course-detail">
-                            <span> Title - {item.title} </span>
-                            <span> Price - {item.price} </span>
-                            <span> Creator - {item.creator.name} </span>
-                            <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
-                              <span>
-                                {!isAuthenticated ? (
-                                <> 
-                                  <button className = "view detail"  
-                                  > Login First 
-                                  </button>
-                              
-                                </>): ""
-                                }
-                                  </span>
-                            {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
+                      { loading ? <p>  <Loader /> </p> : (
+                        <>  
+                        {allcourses?.map((item) => (
+                            <div className = 'course-container' key = {item._id}> 
+                                <img src =  {item.courseposter.url}  style = {{width:'100%', height:'220px',
+                              objectFit:'cover',display:'block'
+                              ,borderRadius:'25px'}} />
+                          
+                              <span id = "course-detail">
+                                <span> Title - {item.title} </span>
+                                <span> Price - {item.price} </span>
+                                <span> Creator - {item.creator.name} </span>
+                                <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
+                                  <span>
+                                    {!isAuthenticated ? (
+                                    <> 
+                                      <button className = "view detail"  
+                                      > Login First 
+                                      </button>
+                                  
+                                    </>): ""
+                                    }
+                                      </span>
+                                {/* <button onClick={() => deleteHandler(item._id)}> Delete  Course  </button> */}
+                                </div>
+                              </span>
                             </div>
-                          </span>
-                        </div>
-                    ))}
-                  
+                        ))}
+                        </>
+                      )}
                   </div>
               </div>
 

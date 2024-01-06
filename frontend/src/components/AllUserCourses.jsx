@@ -78,10 +78,6 @@ const AllUserCourses = () => {
         razor.open();
     }
 
-    if(loading){
-      return  <h1> <Loader /> </h1>
-    }
-
   return (
   <div className="home container">
         <div className="left-section">
@@ -92,7 +88,9 @@ const AllUserCourses = () => {
           <h2> All  User Cases  </h2>
             
                  <div className="courselist">
-                   {newcourse?.map((item) => (
+                  {  loading  ? <Loader /> : (
+                    <>
+                       {newcourse?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}
                           style = {{width:'100%', height:'220px',
@@ -126,7 +124,10 @@ const AllUserCourses = () => {
                         </span>
 
                       </div>
-                   ))}
+                        ))}
+                    </>
+                  ) }
+                
                  </div>
         </div>
   </div>
