@@ -1,7 +1,14 @@
 import { createReducer } from "@reduxjs/toolkit"
 
+const initialState = {
+    loading : true,
+    courses: [],
+    Lectures : [],
+    newcourse : []
+}
 
-export const courseReducer = createReducer({},{
+
+export const courseReducer = createReducer(initialState,{
       // create Course Request 
 
         CreateCourseRequest : (state,action)  => {
@@ -18,20 +25,21 @@ export const courseReducer = createReducer({},{
         },
 })
 
-export const getcourseReducer = createReducer({
-    courses: [],Lectures : []
-},
+export const getcourseReducer = createReducer(initialState,
 {   
             AllCoursesRequest : (state,action) => {
                 state.loading = true;
+                console.log('all courses loading  1 -',state.loading);
             },
             AllCoursesSuccess : (state,action) => {
                 console.log('all courses before success -',action.payload);
+                console.log('all courses loading  2 -',state.loading);
                 state.loading = false;
                 state.courses = action.payload;
                 console.log('all courses after  ssuccess -',action.payload);
             },
             AllCoursesFailed : (state,action) => {
+                console.log('all courses loading  3 -',state.loading);
                 state.loading = false;
             },
        // users
@@ -99,20 +107,21 @@ export const getcourseReducer = createReducer({
             }
 })
 
-export const exceptloggedcourseReducer = createReducer({
-    newcourse : []
-},{
+export const exceptloggedcourseReducer = createReducer(initialState,{
     // all Users RequestCourses 
     AllUsersCoursesRequest : (state) => {
         state.loading = true;
+        console.log('expect reducer before 1- ',  state.loading);
     },
     AllUsersCoursesSuccess : (state,action) => {
         console.log('expect reducer before- ',action.payload);
+        console.log('expect reducer 2 - ',  state.loading);
         state.loading = false;
         state.newcourse = action.payload;
         console.log('expect reducer after - ',action.payload);
     },
     AllUsersCoursesFailed : (state) => {
+        console.log('expect reducer 3- ',state.loading);
         state.loading = false;
     },
 })

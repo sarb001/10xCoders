@@ -2,7 +2,11 @@
 
 import { createReducer } from "@reduxjs/toolkit";
 
-export const userReducer = createReducer({} ,{
+const initialState = {
+  loading : true,
+}
+
+export const userReducer = createReducer(initialState ,{
 
     // Register Account 
     GetRegisterRequest : (state,action) => {
