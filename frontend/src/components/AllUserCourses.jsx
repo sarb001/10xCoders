@@ -7,13 +7,19 @@ import Sidebar from './Sidebar';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/App.css' ;
 import axios from 'axios';
+import Loader from './Loader';
 
 const AllUserCourses = () => {
 
-   const navigate = useNavigate();
-   const courses   = useSelector(state => state.usercourse?.newcourse);
+  
+  const { isAuthenticated , user } = useSelector((state) => state.user);
+  console.log('user in except course -',user);
+  console.log('Auth in except course -',isAuthenticated);
 
-    console.log('  except course -',courses);
+   const navigate = useNavigate();
+   const { newcourse , loading }   = useSelector(state => state.usercourse);
+
+    console.log('  except course -',newcourse);
     const  dispatch = useDispatch();
     
     const course  = useSelector(state => state.user?.course);
@@ -72,6 +78,10 @@ const AllUserCourses = () => {
         razor.open();
     }
 
+    if(loading){
+      return  <h1> <Loader /> </h1>
+    }
+
   return (
   <div className="home container">
         <div className="left-section">
@@ -82,7 +92,7 @@ const AllUserCourses = () => {
           <h2> All  User Cases  </h2>
             
                  <div className="courselist">
-                   {courses?.map((item) => (
+                   {newcourse?.map((item) => (
                       <div className = 'course-container' key = {item._id}> 
                           <img src =  {item.courseposter.url}
                           style = {{width:'100%', height:'220px',
@@ -95,8 +105,8 @@ const AllUserCourses = () => {
                           <span> Creator - {item.creator.name} </span>
                           <span> Lectures - {item.lectures.length} </span>
                           <div style = {{display:'grid',margin:'3%',gridTemplateColumns:'1fr 1fr'}}>
-                            <span>
-                              
+                          
+                          <span>
                                  
                                    {item.order?.status === "paid" ? ( 
                                    <> 

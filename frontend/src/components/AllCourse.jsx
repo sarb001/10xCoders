@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AllCourses } from '../Actions/course';
 import { LoadUser } from '../Actions/User';
+import Loader from './Loader';
 
 const AllCourse = () => {
 
-  const { isAuthenticated , user } = useSelector((state) => state.user);
+  const { isAuthenticated , user , loading } = useSelector((state) => state.user);
+  console.log('user in all course -',user);
+  console.log('Auth in all course -',isAuthenticated);
 
    const  dispatch = useDispatch();    
 
@@ -23,6 +26,10 @@ const AllCourse = () => {
        console.log('buying course- 1',id);
        console.log('buying price  1-',price);
      }
+
+     if(loading){
+      return  <h1> <Loader /> </h1>
+    }
 
   return (
     <div>
