@@ -70,9 +70,11 @@ export const AllUsersCourses = () => async(dispatch) => {
             withCredentials: true
         })
         console.log(' user data except course  --',data.newcourse);
+        toast.success('Courses Fetched all');
         dispatch({type:"AllUsersCoursesSuccess" ,payload : data.newcourse});
-
+        
     } catch (error) {
+        toast.error(error);
         dispatch({type:"AllUsersCoursesFailed" ,payload: error.response.data.message})
     }
 }

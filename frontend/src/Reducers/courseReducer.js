@@ -127,7 +127,7 @@ export const exceptloggedcourseReducer = createReducer(initialState,{
         console.log('expect reducer 2 - ',  state.loading);
         console.log('expect reducer after - ',action.payload);
     },
-    AllUsersCoursesFailed : (state) => {
+    AllUsersCoursesFailed : (state,action) => {
         console.log('expect reducer 3- ',state.loading);
         state.loading = false;
         state.error  =  action.payload
