@@ -102,14 +102,17 @@ export const AllCourses    = async(req,res) => {
 
 export const GetAllUserCourses    = async(req,res) => {
     try {
+        if(!req.user){
+            return res.status(401).json({message : " UnAuthorized "});    
+          }
 
          const loggedUserid = req.user?._id;
          const user = await User.findById(loggedUserid);
 
-        const newcourse = await Course.find({ creator : { 
-                $ne :  user
-            } 
-        }).populate('creator');
+            const newcourse = await Course.find({ creator : { 
+                    $ne :  user
+                } 
+            }).populate('creator');
 
        return  res.status(200).json({
             success : true,
@@ -134,7 +137,7 @@ export const GetLoggedUserCourse = async(req,res) => {
           const loggeduser = req.user._id;
           const user = await User.findById(loggeduser);
 
-          // find user inside  which is   equal to creator id 
+          // find user inside  which is   equal to creator id(creator) 
           const courses = await Course.find({
              creator : {
                  $in : user
