@@ -132,7 +132,7 @@ export const  Logout = async(req,res) => {
 
 export const MyProfile = async(req,res) => {
     try {
-        const user  = await User.findById(req.body.user?._id);
+        const user  = await User.findById(req.user?._id);
         
         return res.status(200).json({
             success : true,
