@@ -109,11 +109,11 @@ export const AllCourses    = async(req,res) => {
 
 export const GetAllUserCourses    = async(req,res) => {
     try {
-        if(!req.user?._id){
+        if(!req.body.user?._id){
             return res.status(401).json({message : " UnAuthorized "});    
           }
 
-         const loggedUserid = req.user?._id;
+         const loggedUserid = req.body.user?._id;
          const user = await User.findById(loggedUserid);
 
             const newcourse = await Course.find({ creator : { 
