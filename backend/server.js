@@ -34,8 +34,8 @@ const  PORT = process.env.PORT;
 
 cloudinary.config({
       cloud_name : process.env.CLOUD_NAME,
-      api_key    : process.env.RAZORPAY_KEY_ID,
-      api_secret : process.env.RAZORPAY_KEY_SECRET,
+      api_key    : process.env.CLOUDINARY_API_KEY,
+      api_secret : process.env.CLOUDINARY_API_SECRET,
 })
 
  export var instance = new Razorpay({
