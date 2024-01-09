@@ -109,7 +109,7 @@ export const AllCourses    = async(req,res) => {
 
 export const GetAllUserCourses    = async(req,res) => {
     try {
-        if(!req.user){
+        if(!req.user?._id){
             return res.status(401).json({message : " UnAuthorized "});    
           }
 
