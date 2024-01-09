@@ -12,6 +12,13 @@ import crypto from 'crypto';
 export const Createcourse  = async(req,res) => {
     try {
 
+        if(!req.user){
+            return res.status(401).json({
+                success : false,
+                message : " UnAuthorized User "
+            })
+        }
+
           const { title , price  , description  } = req.body;
           console.log('course title -',title);
           console.log('course price -',price);
