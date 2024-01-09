@@ -5,7 +5,7 @@ import User from '../models/User.js';
 export const isAuthenticated = async(req,res,next) => {
 
         console.log('auth started ');
-        const  token = req.cookies.token;
+        const {token} = req.cookies;
         if(!token){ 
             return res.status(401).send("Access denied...No token provided...");
         }
