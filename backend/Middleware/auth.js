@@ -14,7 +14,7 @@ export const isAuthenticated = async(req,res,next) => {
             console.log('decodeod -',decoded);
             req.user = await User.findById(decoded._id);
             console.log('auth passedp');
-            next();
+            return next();
 
         } catch (error) {
             console.log('error --',error);

@@ -20,13 +20,13 @@ connectDb();
 
 app.use(express.json({limit : '50mb'}));
 app.use(express.urlencoded({extended :true}));
+app.use(cookieParser());
 
 app.use(cors({
       origin : 'https://10x-coders-frontend.vercel.app',
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE"],
 }))
-app.use(cookieParser());
 
 
 const  PORT = process.env.PORT;
