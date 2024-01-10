@@ -6,10 +6,13 @@ export const isAuthenticated = async(req,res,next) => {
 
         console.log('auth started ');
         const {token} = req.cookies;
+        
+        console.log(' token fetched ');
         if(!token){ 
             return res.status(401).send("Access denied...No token provided...");
         }
         try {
+            console.log(' inside try catch ');
             const decoded =  jwt.verify(token,process.env.TOKEN_SECRET);
             console.log('decodeod -',decoded);
             req.user = await User.findById(decoded._id);
