@@ -95,9 +95,9 @@ export const Login    = async(req,res) => {
             secure: true,
             expires : new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
             httpOnly: true,
-            sameSite : 'none'
         }).json({
             success : true,
+            message : " User Logged Inn ",
             user,
             token
         })
