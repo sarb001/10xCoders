@@ -60,6 +60,9 @@ export const LoadUser = () => async(dispatch) => {
     try {
         dispatch({type:"LoadUserRequest"});
         const {data} = await axios.get(`${BACKEND_URL}/api/v1/me`, {
+            headers:{
+                'Content-Type' : 'application/json',
+            },
             withCredentials: true
         });
         // console.log('loaded user-',{data});
@@ -77,9 +80,9 @@ export const BuyCourse  = (id) => async(dispatch) => {
         dispatch({type:"BuySpecificCourseRequest"});
         const {data} = await axios.get(`${BACKEND_URL}/api/v1/payment/${id}`, 
         {
-          headers:{
-             'Content-Type' : 'application/json',
-         },
+            headers:{
+                'Content-Type' : 'application/json',
+            },
             withCredentials: true
         });
         console.log(' Buying Course here - ',{data});

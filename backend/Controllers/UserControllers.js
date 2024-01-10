@@ -101,6 +101,7 @@ export const Login    = async(req,res) => {
             user,
             token
         })
+        console.log('cookie Settleddd ');
 
     } catch (error) {
         console.log('error in login -',error);
