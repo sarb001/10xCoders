@@ -4,6 +4,7 @@ import { connectDb } from './Database/Db.js';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
+import bodyParser from 'body-parser';
 import Razorpay from 'razorpay';
 import cors from 'cors';
 
@@ -21,6 +22,7 @@ connectDb();
 app.use(express.json({limit : '50mb'}));
 app.use(express.urlencoded({extended :true}));
 app.use(cookieParser());
+app.use(bodyParser.json());
 
 app.use(cors({
       origin : 'https://10x-coders-frontend.vercel.app',
