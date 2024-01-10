@@ -91,7 +91,7 @@ export const Login    = async(req,res) => {
         const token = await user.generateToken();
         console.log('token generated -',token);
 
-        res.status(200).cookie('token',token, {
+        res.cookie('token',token, {
             secure: true,
             expires : new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
             httpOnly: true,
