@@ -7,8 +7,9 @@ export default defineConfig({
   server : {
     proxy : {
       '/api' : {
-        target : 'https://one0xcourses-backend.onrender.com',
-        changeOrigin :true
+        target : 'https://one0xcourses-backend.onrender.com/api',
+        changeOrigin :true,
+        rewrite : (path) => path.replace(/^\/api/,''),
        }
     }
   }
