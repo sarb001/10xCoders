@@ -92,9 +92,11 @@ export const Login    = async(req,res) => {
         console.log('token generated -',token);
 
         res.status(200).cookie('token',token, {
+            sameSite : 'none',
             secure: true,
             expires : new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
             httpOnly: true,
+            
         }).json({
             success : true,
             message : " User Logged Inn ",

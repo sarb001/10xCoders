@@ -1,13 +1,13 @@
 import axios from 'axios';
 import  { toast } from 'react-toastify' ;
 
-const BACKEND_URL = 'https://one0xcourses-backend.onrender.com'
+// const BACKEND_URL = 'https://one0xcourses-backend.onrender.com'
 
 
 export const userRegister = (name,email,password,profilepic) => async(dispatch) => {
     try {
         dispatch({type:"GetRegisterRequest"});
-        const {data} = await axios.post(`${BACKEND_URL}/api/v1/register` ,
+        const {data} = await axios.post(`/api/v1/register` ,
         {name,email,password,profilepic},
         {
             headers:{
@@ -27,7 +27,7 @@ export const LoginUser = (email,password) => async(dispatch) => {
     try {
         dispatch({type:"LoggedUserRequest"})
         
-        const {data} = await axios.post(`${BACKEND_URL}/api/v1/login`,
+        const {data} = await axios.post(`/api/v1/login`,
         {email,password},
         {
             headers:{
@@ -47,7 +47,7 @@ export const LoginUser = (email,password) => async(dispatch) => {
 export const Logout = () => async(dispatch) => {
     try {
         dispatch({type:"LogOutRequest"});
-        const data = await axios.get(`${BACKEND_URL}/api/v1/loggingout`);
+        const data = await axios.get(`/api/v1/loggingout`);
         console.log('loggedOut Data -',data);
         toast.success(' LoggedOut Successfully ');
         dispatch({type:"LogOutSuccess", payload : data.user});
@@ -59,7 +59,7 @@ export const Logout = () => async(dispatch) => {
 export const LoadUser = () => async(dispatch) => {
     try {
         dispatch({type:"LoadUserRequest"});
-        const {data} = await axios.get(`${BACKEND_URL}/api/v1/me`, {
+        const {data} = await axios.get(`/api/v1/me`, {
             headers:{
                 'Content-Type' : 'application/json',
             },
@@ -78,7 +78,7 @@ export const BuyCourse  = (id) => async(dispatch) => {
         console.log('id in  action -',id);
         
         dispatch({type:"BuySpecificCourseRequest"});
-        const {data} = await axios.get(`${BACKEND_URL}/api/v1/payment/${id}`, 
+        const {data} = await axios.get(`/api/v1/payment/${id}`, 
         {
             headers:{
                 'Content-Type' : 'application/json',
@@ -99,7 +99,7 @@ export const PaymentVerification = (id) => async(dispatch) => {
     try {
             console.log(' course id in payment verify -',id);
             dispatch({type:"VerifyPaymentCourseRequest"});
-            const {data} = await axios.post(`${BACKEND_URL}/api/v1/paymentverification/${id}`, 
+            const {data} = await axios.post(`/api/v1/paymentverification/${id}`, 
             {
               headers:{
                  'Content-Type' : 'application/json',
