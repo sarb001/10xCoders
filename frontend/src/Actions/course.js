@@ -8,7 +8,7 @@ export  const CreateCourse = (myForm) => async(dispatch) => {
     try {
          dispatch({type:"CreateCourseRequest"});
          console.log(' myForm frontend --',myForm);
-         const data = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/v1/createcourse`, myForm
+         const data = await axios.post(`/api/v1/createcourse`, myForm
          ,{
             headers:{
                 'Content-Type' : 'multipart/form-data',
@@ -29,7 +29,7 @@ export  const CreateCourse = (myForm) => async(dispatch) => {
 export const AllCourses = () => async(dispatch) => {
     try {
         dispatch({type:"AllCoursesRequest"});
-        const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/v1/allcourse`,{
+        const { data } = await axios.get(`/api/v1/allcourse`,{
             headers : {
                 'Content-Type' :  'application/json'
             }
@@ -45,7 +45,7 @@ export const AllCourses = () => async(dispatch) => {
 export const MyAllCourses = () => async(dispatch) => {
     try {
         dispatch({type:"MyCoursesRequest"});
-        const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/v1/mycourses`,{
+        const { data } = await axios.get(`/api/v1/mycourses`,{
             headers : {
                 'Content-Type' :  'application/json'
             }
@@ -62,7 +62,7 @@ export const MyAllCourses = () => async(dispatch) => {
 export const AllUsersCourses = () => async(dispatch) => {
     try {
         dispatch({type:"AllUsersCoursesRequest"});
-        const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/v1/usercourses`,{
+        const { data } = await axios.get(`/api/v1/usercourses`,{
             headers : {
                 'Content-Type' :  'application/json'
             },
@@ -82,7 +82,7 @@ export const CourseLectures = (id) => async(dispatch) => {
     try {
         dispatch({type:"CourseLecturesRequest"});
 
-        const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/v1/course/${id}`,{
+        const {data} = await axios.get(`/api/v1/course/${id}`,{
             headers : {
                 'Content-Type' : 'application/json'
             }
@@ -97,7 +97,7 @@ export const CourseLectures = (id) => async(dispatch) => {
 export const DeleteMyCourse = (id) => async(dispatch) => {
     try {
         dispatch({type:"DeleteCourseRequest"});
-        const { data } = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/v1/course/${id}`,{
+        const { data } = await axios.delete(`/api/v1/course/${id}`,{
             headers: {
                 'Content-Type' : 'application/json'
             }
@@ -112,7 +112,7 @@ export const DeleteMyCourse = (id) => async(dispatch) => {
 export const AddMyLecture = (id,formdata) => async(dispatch) => {
     try {
         dispatch({type:"AddLectureRequest"});
-        const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/v1/course/${id}`,
+        const { data } = await axios.post(`/api/v1/course/${id}`,
             formdata,{
             headers: {
                 'Content-Type' : 'multipart/form-data',
@@ -132,7 +132,7 @@ export const AddMyLecture = (id,formdata) => async(dispatch) => {
 export const DeleteMyLecture = (courseId,lectureId) => async(dispatch) => {
     try {
         dispatch({type:"DeleteLectureRequest"});
-        const { data } = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/v1/lecture?courseId=${courseId}&lectureId=${lectureId}`,
+        const { data } = await axios.delete(`/api/v1/lecture?courseId=${courseId}&lectureId=${lectureId}`,
         {
             headers: {
                 'Content-Type' : 'application/json'
