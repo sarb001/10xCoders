@@ -11,8 +11,9 @@ export const isAuthenticated = async(req,res,next) => {
         if(!token){ 
             return res.status(401).send("Access denied...No token provided...");
         }
+        console.log(' inside try catch 1');
         try {
-            console.log(' inside try catch ');
+            console.log(' inside try catch token',process.env.TOKEN_SECRET);
             const decoded =  jwt.verify(token,process.env.TOKEN_SECRET);
             console.log('decodeod -',decoded);
             req.user = await User.findById(decoded._id);
