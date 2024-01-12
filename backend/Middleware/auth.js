@@ -9,11 +9,11 @@ export const isAuthenticated = async(req,res,next) => {
         // console.log('req in back -',req);
         console.log('req in cookies final -',req.cookies);
         
-        console.log(' token fetched ');
+        console.log(' token fetched 1 ');
         if(!token){ 
             return res.status(401).send("Access denied...No token provided...");
         }
-        console.log(' token nott fetched ');
+        console.log(' token  fetched 2 ');
         console.log(' inside try catch 1');
         try {
             console.log(' inside try catch token',process.env.TOKEN_SECRET);
