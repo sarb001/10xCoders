@@ -6,7 +6,7 @@ export const isAuthenticated = async(req,res,next) => {
 
         console.log('auth started ');
         const token = req.cookies['token'];
-        // console.log('req in back -',req);
+        console.log('req in back -',token);
         console.log('req in cookies final -',req.cookies);
         
         console.log(' token fetched 1 ');
