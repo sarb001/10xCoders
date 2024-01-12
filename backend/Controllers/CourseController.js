@@ -110,7 +110,7 @@ export const AllCourses    = async(req,res) => {
 export const GetAllUserCourses    = async(req,res) => {
     try {
         console.log('inside getalluser course ');
-        console.log('req.body --',req);
+        // console.log('req.body --',req);
         if(!req.user?._id){
             return res.status(401).json({message : " UnAuthorized "});    
           }

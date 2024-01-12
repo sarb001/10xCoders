@@ -5,7 +5,7 @@ import User from '../models/User.js';
 export const isAuthenticated = async(req,res,next) => {
 
         console.log('auth started ');
-        console.log('auth started 1 req',req);
+        // console.log('auth started 1 req',req);
         
             const token = req.cookies?.token;
             console.log('token for auth-',token);

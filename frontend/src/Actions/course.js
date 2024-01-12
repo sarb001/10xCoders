@@ -9,12 +9,13 @@ export  const CreateCourse = (myForm) => async(dispatch) => {
          dispatch({type:"CreateCourseRequest"});
          console.log(' myForm frontend --',myForm);
          const data = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/createcourse`, myForm
-         ,{
+           ,{
             headers:{
                 'Content-Type' : 'multipart/form-data',
              },
-             withCredentials : true
-         })
+            },
+            {  withCredentials : true });
+
          console.log('create course - action -',data.message);
          toast.success(' Course Created Successfully ');
          dispatch({type:"CreateCourseSuccess",payload : data.message });
@@ -62,12 +63,15 @@ export const MyAllCourses = () => async(dispatch) => {
 export const AllUsersCourses = () => async(dispatch) => {
     try {
         dispatch({type:"AllUsersCoursesRequest"});
-        const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/usercourses`,{
+        const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/usercourses`,
+            {
             headers : {
                 'Content-Type' :  'application/json'
+            }
             },
-            withCredentials: true
-        })
+             {
+             withCredentials: true
+             })
         console.log(' user data except course  --',data.newcourse);
         toast.success('Courses Fetched all');
         dispatch({type:"AllUsersCoursesSuccess" ,payload : data.newcourse});
