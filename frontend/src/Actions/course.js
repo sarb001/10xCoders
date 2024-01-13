@@ -67,11 +67,9 @@ export const AllUsersCourses = () => async(dispatch) => {
             {
             headers : {
                 'Content-Type' :  'application/json'
-            }
             },
-             {
-             withCredentials: true
-             })
+            withCredentials: true
+            })
         console.log(' user data except course  --',data.newcourse);
         toast.success('Courses Fetched all');
         dispatch({type:"AllUsersCoursesSuccess" ,payload : data.newcourse});
