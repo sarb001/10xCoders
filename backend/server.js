@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.use(cors({
-      origin : 'https://10x-coders-frontend.vercel.app',
+      origin : process.env.FRONTEND_URL_ORIGIN,
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE"],
 }))
