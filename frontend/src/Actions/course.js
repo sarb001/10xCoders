@@ -14,7 +14,7 @@ export  const CreateCourse = (myForm) => async(dispatch) => {
                 'Content-Type' : 'multipart/form-data',
              },
             },
-            {  withCredentials : true });
+            {  withCredentials : 'include' });
 
          console.log('create course - action -',data.message);
          toast.success(' Course Created Successfully ');
@@ -69,7 +69,7 @@ export const AllUsersCourses = () => async(dispatch) => {
                 'Content-Type' :  'application/json'
              },
            },
-           { withCredentials: true });
+           { withCredentials: 'include' });
         console.log(' user data except course  --',data.newcourse);
         toast.success('Courses Fetched all');
         dispatch({type:"AllUsersCoursesSuccess" ,payload : data.newcourse});
