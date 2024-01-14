@@ -65,11 +65,11 @@ export const AllUsersCourses = () => async(dispatch) => {
         dispatch({type:"AllUsersCoursesRequest"});
         const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/usercourses`,
             {
-            headers : {
+             headers : {
                 'Content-Type' :  'application/json'
-            },
-            withCredentials: true
-            })
+             },
+           },
+           { withCredentials: true });
         console.log(' user data except course  --',data.newcourse);
         toast.success('Courses Fetched all');
         dispatch({type:"AllUsersCoursesSuccess" ,payload : data.newcourse});
