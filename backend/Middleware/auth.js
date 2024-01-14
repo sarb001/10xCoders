@@ -9,6 +9,7 @@ export const isAuthenticated = async(req,res,next) => {
         
             const token = req.cookies?.token;
             console.log('token for auth-',token);
+            console.log('req is -',req);
 
              console.log(' token fetched 1 ');
             if(!token){ 
