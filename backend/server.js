@@ -18,17 +18,15 @@ dotenv.config({path:'../backend/config.env'});
 connectDb();
 
 // middlewars
-
-app.use(express.json({limit : '50mb'}));
-app.use(express.urlencoded({extended :true}));
-app.use(cookieParser());
-app.use(bodyParser.json());
-
 app.use(cors({
       origin : process.env.FRONTEND_URL_ORIGIN,
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE"],
 }))
+
+app.use(express.json({limit : '50mb'}));
+app.use(express.urlencoded({extended :true}));
+app.use(cookieParser());
 
 
 const  PORT = process.env.PORT;
