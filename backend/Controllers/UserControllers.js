@@ -91,19 +91,18 @@ export const Login    = async(req,res) => {
         const token = await user.generateToken();
         console.log('token generated -',token);
 
-        res.status(200).cookie('token',token, {
+        res.cookie('token',token, {
             secure: true,
             expires : new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
             httpOnly: false,
             sameSite : 'none',
-            
-        }).json({
-            success : true,
-            message : " User Logged Inn ",
-            user,
-            token
+        });
+        console.log('cookie Set');
+        res.json({
+            token,
+            user
         })
-        console.log('cookie Settleddd ');
+        console.log('Response Set');
 
     } catch (error) {
         console.log('error in login -',error);
